@@ -64,7 +64,7 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
-' > /home/vagrant/agorakube/hosts
+' > /home/vagrant/ike-core/hosts
 
 echo '
 ---
@@ -119,8 +119,8 @@ data_path: "/var/agorakube"
 etcd_data_directory: "/var/lib/etcd"
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
-' > /home/vagrant/agorakube/group_vars/all.yaml
-cd /home/vagrant/agorakube
+' > /home/vagrant/ike-core/group_vars/all.yaml
+cd /home/vagrant/ike-core
 sudo ansible-playbook agorakube.yaml
 cp /root/.kube/config /var/kubeconfig/config
 SCRIPT
