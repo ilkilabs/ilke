@@ -3,7 +3,7 @@ $script = <<-SCRIPT
 echo "
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBTj+4Tjx2Az14spFKaD1rkxrhQSaybNDQOS9P7jGk3OaubL8qWTXVr69n4xu56PDCe06g4XOlpXkLNUOVr5CKOyP+9Eyw41V9de4DDEaPhidFtOULTubzYJ4tyhwysFnB/vq75TfoCgI6uYHl4tcSZqQB6g/4C2TGuFWj/T0CzlE6hxNzRy16udyfMxH7YZ445238Wtn96RxfJdkINgB+6h0jGRh1j8OuuIwZdUa1e4W+p53JGizXCRySAtZPxlNyaT2SxqOpfXShp+KqhIG8N7HPgCMdBHNXFy2zticR/tWjdWOPsuro0z8SZY7EgZD3PfgKD88BkdaG4B50RPgt pierre@DESKTOP-BT28R5N
 " >> /home/vagrant/.ssh/authorized_keys
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube/core/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-hosts.sh)
 SCRIPT
 
 $script2 = <<-SCRIPT
@@ -38,7 +38,7 @@ tLPRCasq7fw/jx3UnZlYAx5JiSgSl6wcr+eF+JDLLfZn4ExEqcwN03WHCXPPqede
 " >> /home/vagrant/ssh-private-key.pem
 chmod 0400 /home/vagrant/ssh-private-key.pem
 cd /home/vagrant/
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube/core/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-deploy.sh)
 echo '
 [deploy]
 kubernetes ansible_connection=local
@@ -62,7 +62,7 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
-' > /home/vagrant/agorakube/hosts
+' > /home/vagrant/ike-core/hosts
 
 echo '
 ---
@@ -118,9 +118,9 @@ data_path: "/var/agorakube"
 etcd_data_directory: "/var/lib/etcd"
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
-' > /home/vagrant/agorakube/group_vars/all.yaml
-cd /home/vagrant/agorakube
-sudo ansible-playbook agorakube.yaml
+' > /home/vagrant/ike-core/group_vars/all.yaml
+cd /home/vagrant/ike-core
+sudo ansible-playbook ike-core.yaml
 cp /root/.kube/config /var/kubeconfig/config
 SCRIPT
 
