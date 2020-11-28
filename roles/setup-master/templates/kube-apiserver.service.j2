@@ -52,7 +52,9 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kube-apiserver \
   --service-account-lookup=true \
   --profiling=false \
   --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt \
-  --proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key
+  --proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key \
+  --service-account-issuer=kubernetes.default.svc \
+  --service-account-signing-key-file=/etc/kubernetes/pki/sa/sa.key
 Restart=on-failure
 RestartSec=5
 
