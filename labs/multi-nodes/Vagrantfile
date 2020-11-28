@@ -121,7 +121,7 @@ etcd_data_directory: "/var/lib/etcd"
 
 ' > /home/vagrant/ike-core/group_vars/all.yaml
 cd /home/vagrant/ike-core
-sudo ansible-playbook agorakube.yaml
+sudo ansible-playbook ike-core.yaml
 cp /root/.kube/config /var/kubeconfig/config
 SCRIPT
 
