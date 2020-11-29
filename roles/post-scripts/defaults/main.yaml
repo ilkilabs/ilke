@@ -20,4 +20,5 @@ enable_persistence: True
 enable_monitoring: True
 dashboard_admin_user: administrator
 dashboard_admin_password: P@ssw0rd
-ingress_nginx_release: v0.34.0
+# ingress_nginx_release is used to specify the nginx release to install. Usefull for installation, AND UPGRADES
+ingress_nginx_release: v0.41.2
