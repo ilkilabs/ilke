@@ -13,6 +13,14 @@
 - name: Deploy CoreDNS to K8S
   include_tasks: coredns.yaml
 
+- name: Install MetalLB Layer2
+  include_tasks: metallb_l2.yaml
+  when: enable_metallb_layer2
+
+- name: Install Metrics-Server
+  include_tasks: metrics-server.yaml
+  when: enable_metrics_server
+
 - name: Install ingress (traefik)
   include_tasks: traefik.yaml
   when: ingress_controller == 'traefik'
@@ -25,17 +33,9 @@
   include_tasks: nginx.yaml
   when: ingress_controller == 'nginx'
 
-- name: Install MetalLB Layer2
-  include_tasks: metallb_l2.yaml
-  when: enable_metallb_layer2
-
 - name: Install K8S Default Dashboard
   include_tasks: default_dashboard.yaml
   when: k8s_dashboard
-
-- name: Install Metrics-Server
-  include_tasks: metrics-server.yaml
-  when: enable_metrics_server
 
 - name: Install openebs for persistence
   include_tasks: openebs.yaml
