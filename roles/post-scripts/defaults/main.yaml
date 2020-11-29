@@ -10,7 +10,8 @@ cluster_cidr: 10.33.0.0/16
 enable_metrics_server: True
 # Calico
 #calico_mtu: 1440
-# calico_mtu: 0  = auto-detect MTU. Configure calico_mtu manually for better performances
+# calico_mtu: 0  = auto-detect MTU. Configure calico_mtu manually for better performances.
+# Calico is configured to ues VXLan Cross-subnet. VxLAN add a 50-bytes header, so if you configure manually MTU, minus the max size by 50: eg 1500 => 1450
 calico_mtu: 0
 enable_metallb_layer2: True
 metallb_layer2_ips: 10.100.200.10-10.100.200.250
