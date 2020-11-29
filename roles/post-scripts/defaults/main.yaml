@@ -20,3 +20,4 @@ enable_persistence: True
 enable_monitoring: True
 dashboard_admin_user: administrator
 dashboard_admin_password: P@ssw0rd
+ingress_nginx_release: v0.34.0
