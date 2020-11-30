@@ -51,9 +51,9 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Ingress Controller Traefik v2 & HA-Proxy & Nginx (Default)
 * Container Runtime: Containerd (Default) & Docker
 * Certificats: Self Signed PKI using OpenSSL
-* Storage: OpenEBS
+* Storage: OpenEBS (Jiva and HostPath)
 * Monitoring: Prometheus/Grafana/node-Exporter
-* CNI plugin: Kube-router, Calico
+* CNI plugin: Kube-router, Calico (VxLAN Cross-Subnet)
 * MetalLB (L2/ARP mode for external LB)
 * Metrics-Server
 * Kubernetes-Dashboard
