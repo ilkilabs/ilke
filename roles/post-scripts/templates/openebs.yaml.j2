@@ -103,7 +103,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: maya-apiserver
@@ -276,7 +276,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner
@@ -347,7 +347,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: snapshot-controller
@@ -478,7 +478,7 @@ spec:
       # e.g. label the storage nodes with - "openebs.io/nodegroup"="storage-node"
       # kubectl label node <node-name> "openebs.io/nodegroup"="storage-node"
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       hostNetwork: true
       containers:
@@ -582,7 +582,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: node-disk-operator
@@ -654,7 +654,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: admission-webhook
@@ -713,7 +713,7 @@ spec:
         openebs.io/version: 1.12.0
     spec:
       nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner-hostpath
