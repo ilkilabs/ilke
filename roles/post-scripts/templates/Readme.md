@@ -60,6 +60,6 @@ NDM
 Add to all Deployments, DaemonSet
 
 nodeSelector:
-        "kubernetes.io/role": "storage"
+        "node-role.kubernetes.io/storage": "true"
 ```
 * configure_storage_openebs.yaml.j2: Configure Data Plane (StoragePools and StorageClass)
