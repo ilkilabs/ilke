@@ -16,10 +16,10 @@
   changed_when: false
   with_items: "{{ groups['workers'] }}"
 
-#- name: Label Storage Nodes
-#  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }} node-role.kubernetes.io/storage= --overwrite"
-#  changed_when: false
-#  with_items: "{{ groups['storage'] }}"
+- name: Label Storage Nodes
+  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }} node-role.kubernetes.io/storage= --overwrite"
+  changed_when: false
+  with_items: "{{ groups['storage'] }}"
 
 - name: Label Master Nodes
   command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/master= --overwrite"
@@ -35,3 +35,11 @@
   when:
     - item in groups['masters']
     - item not in groups['workers']
+
+- name: Make hosts with worker or storage role Schedulabe
+  command: |
+    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
+    taint nodes {{ item }} node-role.kubernetes.io/master=true:NoSchedule- --overwrite
+  changed_when: false
+  with_items: "{{ groups['masters'] }}"
+  when: item in groups['workers'] or item in groups['storage']
