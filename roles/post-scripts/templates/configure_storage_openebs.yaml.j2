@@ -24,7 +24,7 @@ metadata:
         value: "{{ jiva_fs_type }}"
       - name: ReplicaNodeSelector
         value: |-
-            kubernetes.io/role: storage
+            node-role.kubernetes.io/storage: true
 provisioner: openebs.io/provisioner-iscsi
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
