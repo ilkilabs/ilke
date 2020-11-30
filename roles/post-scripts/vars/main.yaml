@@ -1,5 +1,5 @@
 ---
 pki_path: "{{ data_path }}/pki"
-number_workers: "{{ groups['workers'] | length }}"
-replicas_openebs: "{{ number_workers if number_workers < '3' else '3' }}"
+number_storage: "{{ groups['storage'] | length }}"
+replicas_openebs: "{{ number_storage if number_storage < '3' else '3' }}"
 #replicas_openebs: "{{ groups['workers'] | length }}"
