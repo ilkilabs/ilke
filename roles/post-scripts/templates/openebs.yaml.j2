@@ -102,6 +102,8 @@ spec:
         openebs.io/component-name: maya-apiserver
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: maya-apiserver
@@ -273,6 +275,8 @@ spec:
         openebs.io/component-name: openebs-provisioner
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner
@@ -342,6 +346,8 @@ spec:
         openebs.io/component-name: openebs-snapshot-operator
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: snapshot-controller
@@ -575,6 +581,8 @@ spec:
         openebs.io/component-name: ndm-operator
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: node-disk-operator
@@ -645,6 +653,8 @@ spec:
         openebs.io/component-name: admission-webhook
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: admission-webhook
@@ -702,6 +712,8 @@ spec:
         openebs.io/component-name: openebs-localpv-provisioner
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "kubernetes.io/role": "storage"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner-hostpath
