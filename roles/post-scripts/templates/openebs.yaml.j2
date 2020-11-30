@@ -471,8 +471,8 @@ spec:
       #
       # e.g. label the storage nodes with - "openebs.io/nodegroup"="storage-node"
       # kubectl label node <node-name> "openebs.io/nodegroup"="storage-node"
-      #nodeSelector:
-      #  "openebs.io/nodegroup": "storage-node"
+      nodeSelector:
+        "node-role.kubernetes.io/role=": "storage"
       serviceAccountName: openebs-maya-operator
       hostNetwork: true
       containers:
