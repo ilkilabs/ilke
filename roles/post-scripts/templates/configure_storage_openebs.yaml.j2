@@ -5,7 +5,7 @@ metadata:
   name: default-storage-pool-jiva
   type: hostdir
 spec:
-  path: "/var/storage-openebs"
+  path: "{{ openebs_io_base_dir }}"
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
