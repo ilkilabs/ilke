@@ -170,10 +170,6 @@ kind: Deployment
 metadata:
   name: prometheus
   namespace: monitoring
-{% if enable_persistence %}
-  labels:
-    openebs.io/target-affinity: ike-monitoring
-{% endif %}
 spec:
   selector:
     matchLabels:
@@ -182,6 +178,9 @@ spec:
     metadata:
       labels:
         app: prometheus
+{% if enable_persistence %}
+        openebs.io/target-affinity: ike-monitoring
+{% endif %}
     spec:
       serviceAccountName: prometheus
       containers:
