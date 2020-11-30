@@ -12,17 +12,17 @@
     - "{{ groups['workers'] }}"
 
 - name: Label Woker Nodes
-  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  kubernetes.io/role=worker --overwrite"
+  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/worker= --overwrite"
   changed_when: false
   with_items: "{{ groups['workers'] }}"
 
 - name: Label Storage Nodes
-  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }} kubernetes.io/role=storage --overwrite"
+  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }} node-role.kubernetes.io/storage= --overwrite"
   changed_when: false
   with_items: "{{ groups['storage'] }}"
 
 - name: Label Master Nodes
-  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  kubernetes.io/role=master --overwrite"
+  command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/master= --overwrite"
   changed_when: false
   with_items: "{{ groups['masters'] }}"
 
