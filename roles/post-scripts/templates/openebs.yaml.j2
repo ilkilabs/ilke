@@ -102,6 +102,8 @@ spec:
         openebs.io/component-name: maya-apiserver
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: maya-apiserver
@@ -141,7 +143,7 @@ spec:
         # If OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG is false then OpenEBS default
         # storageclass and storagepool will not be created.
         - name: OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
-          value: "true"
+          value: "false"
         # OPENEBS_IO_INSTALL_DEFAULT_CSTOR_SPARSE_POOL decides whether default cstor sparse pool should be
         # configured as a part of openebs installation.
         # If "true" a default cstor sparse pool will be configured, if "false" it will not be configured.
@@ -155,35 +157,35 @@ spec:
         #   value: "true"
         # OPENEBS_IO_BASE_DIR is used to configure base directory for openebs on host path.
         # Where OpenEBS can store required files. Default base path will be /var/openebs
-        # - name: OPENEBS_IO_BASE_DIR
-        #   value: "/var/openebs"
+        - name: OPENEBS_IO_BASE_DIR
+          value: "{{ openebs_io_base_dir }}"
         # OPENEBS_IO_CSTOR_TARGET_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor volume pod.
         # The default path used is /var/openebs/sparse
-        #- name: OPENEBS_IO_CSTOR_TARGET_DIR
-        #  value: "/var/openebs/sparse"
+        - name: OPENEBS_IO_CSTOR_TARGET_DIR
+          value: "{{ openebs_io_base_dir }}/sparse"
         # OPENEBS_IO_CSTOR_POOL_SPARSE_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor pool pod. This ENV is also used to indicate the location
         # of the sparse devices.
         # The default path used is /var/openebs/sparse
-        #- name: OPENEBS_IO_CSTOR_POOL_SPARSE_DIR
-        #  value: "/var/openebs/sparse"
+        - name: OPENEBS_IO_CSTOR_POOL_SPARSE_DIR
+          value: "{{ openebs_io_base_dir }}/sparse"
         # OPENEBS_IO_JIVA_POOL_DIR can be used to specify the hostpath
         # to be used for default Jiva StoragePool loaded by OpenEBS
         # The default path used is /var/openebs
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
-        #- name: OPENEBS_IO_JIVA_POOL_DIR
-        #  value: "/var/openebs"
+        - name: OPENEBS_IO_JIVA_POOL_DIR
+          value: "{{ openebs_io_base_dir }}"
         # OPENEBS_IO_LOCALPV_HOSTPATH_DIR can be used to specify the hostpath
         # to be used for default openebs-hostpath storageclass loaded by OpenEBS
         # The default path used is /var/openebs/local
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
-        #- name: OPENEBS_IO_LOCALPV_HOSTPATH_DIR
-        #  value: "/var/openebs/local"
+        - name: OPENEBS_IO_LOCALPV_HOSTPATH_DIR
+          value: "{{ openebs_io_base_dir }}/local"
         - name: OPENEBS_IO_JIVA_CONTROLLER_IMAGE
           value: "openebs/jiva:1.12.0"
         - name: OPENEBS_IO_JIVA_REPLICA_IMAGE
@@ -207,7 +209,7 @@ spec:
         # OPENEBS_IO_ENABLE_ANALYTICS if set to true sends anonymous usage
         # events to Google Analytics
         - name: OPENEBS_IO_ENABLE_ANALYTICS
-          value: "true"
+          value: "false"
         - name: OPENEBS_IO_INSTALLER_TYPE
           value: "openebs-operator"
         # OPENEBS_IO_ANALYTICS_PING_INTERVAL can be used to specify the duration (in hours)
@@ -273,6 +275,8 @@ spec:
         openebs.io/component-name: openebs-provisioner
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner
@@ -342,6 +346,8 @@ spec:
         openebs.io/component-name: openebs-snapshot-operator
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: snapshot-controller
@@ -471,8 +477,8 @@ spec:
       #
       # e.g. label the storage nodes with - "openebs.io/nodegroup"="storage-node"
       # kubectl label node <node-name> "openebs.io/nodegroup"="storage-node"
-      #nodeSelector:
-      #  "openebs.io/nodegroup": "storage-node"
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       hostNetwork: true
       containers:
@@ -515,7 +521,7 @@ spec:
         # specify the directory where the sparse files need to be created.
         # if not specified, then sparse files will not be created.
         - name: SPARSE_FILE_DIR
-          value: "/var/openebs/sparse"
+          value: "{{ openebs_io_base_dir }}/sparse"
         # Size(bytes) of the sparse file to be created.
         - name: SPARSE_FILE_SIZE
           value: "10737418240"
@@ -575,6 +581,8 @@ spec:
         openebs.io/component-name: ndm-operator
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: node-disk-operator
@@ -645,6 +653,8 @@ spec:
         openebs.io/component-name: admission-webhook
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
         - name: admission-webhook
@@ -702,6 +712,8 @@ spec:
         openebs.io/component-name: openebs-localpv-provisioner
         openebs.io/version: 1.12.0
     spec:
+      nodeSelector:
+        "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
       containers:
       - name: openebs-provisioner-hostpath

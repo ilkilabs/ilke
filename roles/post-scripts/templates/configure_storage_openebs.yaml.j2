@@ -1,0 +1,30 @@
+---
+apiVersion: openebs.io/v1alpha1
+kind: StoragePool
+metadata:
+  name: default-storage-pool-jiva
+  type: hostdir
+spec:
+  path: "{{ openebs_io_base_dir }}"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: default-jiva
+  annotations:
+    openebs.io/cas-type: jiva
+    cas.openebs.io/config: |
+      - name: ReplicaCount
+        value: "{{ replicas_openebs }}"
+      - name: StoragePool
+        value: default-storage-pool-jiva
+      - name: VolumeMonitor
+        value: ON
+      - name: FSType
+        value: "{{ jiva_fs_type }}"
+      - name: ReplicaNodeSelector
+        value: |-
+            node-role.kubernetes.io/storage: true
+provisioner: openebs.io/provisioner-iscsi
+reclaimPolicy: Delete
+volumeBindingMode: Immediate

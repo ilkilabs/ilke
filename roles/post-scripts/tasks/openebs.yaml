@@ -30,12 +30,12 @@
 
 - name: Render templates
   template:
-    dest: "{{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml"
-    src: "storage_class_jiva_openebs.yaml.j2"
+    dest: "{{ openebs_tempdir.path }}/configure_storage_openebs.yaml"
+    src: "configure_storage_openebs.yaml.j2"
   changed_when: false
 
 - name: Apply templates
-  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ openebs_tempdir.path }}/configure_storage_openebs.yaml
   register: apply_openebs_sc
   changed_when: >
     apply_openebs_sc.stdout is search("created")

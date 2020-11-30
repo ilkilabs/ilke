@@ -4,5 +4,5 @@
     state: absent
     path: /usr/local/bin/kubernetes
   when:
-  - ansible_hostname in groups['workers']
+  - ansible_hostname in groups['workers'] or ansible_hostname in groups['storage']
   - ansible_hostname not in groups['masters']
