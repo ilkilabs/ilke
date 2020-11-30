@@ -120,6 +120,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: prometheus-data
   namespace: monitoring
+  labels:
+    openebs.io/target-affinity: ike-monitoring
 spec:
   accessModes:
     - ReadWriteOnce
@@ -168,6 +170,10 @@ kind: Deployment
 metadata:
   name: prometheus
   namespace: monitoring
+{% if enable_persistence %}
+  labels:
+    openebs.io/target-affinity: ike-monitoring
+{% endif %}
 spec:
   selector:
     matchLabels:
