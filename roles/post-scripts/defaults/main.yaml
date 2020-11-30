@@ -23,3 +23,4 @@ dashboard_admin_password: P@ssw0rd
 # ingress_nginx_release is used to specify the nginx release to install. Usefull for installation, AND UPGRADES
 ingress_nginx_release: v0.41.2
 openebs_io_base_dir: /var/openebs
+jiva_fs_type: ext4
