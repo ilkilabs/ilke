@@ -28,21 +28,21 @@
   delay: 10
   run_once: true
 
-- name: Render templates
-  template:
-    dest: "{{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml"
-    src: "storage_class_jiva_openebs.yaml.j2"
-  changed_when: false
+#- name: Render templates
+#  template:
+#    dest: "{{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml"
+#    src: "storage_class_jiva_openebs.yaml.j2"
+#  changed_when: false
 
-- name: Apply templates
-  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml
-  register: apply_openebs_sc
-  changed_when: >
-    apply_openebs_sc.stdout is search("created")
-    or apply_openebs_sc.stdout is search("configured")
+#- name: Apply templates
+#  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ openebs_tempdir.path }}/storage_class_jiva_openebs.yaml
+#  register: apply_openebs_sc
+#  changed_when: >
+#    apply_openebs_sc.stdout is search("created")
+#    or apply_openebs_sc.stdout is search("configured")
 
-- name: Cleanup tempdir
-  file:
-    state: absent
-    path: "{{ openebs_tempdir.path }}"
-  changed_when: false
+#- name: Cleanup tempdir
+#  file:
+#    state: absent
+#    path: "{{ openebs_tempdir.path }}"
+#  changed_when: false
