@@ -12,6 +12,7 @@ kind: StorageClass
 metadata:
   name: default-jiva
   annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
     openebs.io/cas-type: jiva
     cas.openebs.io/config: |
       - name: ReplicaCount
