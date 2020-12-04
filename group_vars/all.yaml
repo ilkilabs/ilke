@@ -29,6 +29,7 @@ ike_base_components:
     release: v3.4.14
     update: False
     check: True
+    data_path: /var/lib/etcd
   kubernetes:
     release: v1.19.3
     update: False
@@ -86,7 +87,7 @@ encrypt_etcd_keys:
 
 # Data Directory
 #data_path: "/var/agorakube"
-etcd_data_directory: "/var/lib/etcd"
+#etcd_data_directory: "/var/lib/etcd"
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
 

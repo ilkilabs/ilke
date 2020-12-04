@@ -12,10 +12,10 @@
 #    - compliance-checks
     - install-kubectl
     - generate-certs
-#- hosts: etcd
-#  become: true
-#  roles:
-#    - setup-etcd
+- hosts: etcd
+  become: true
+  roles:
+    - setup-etcd
 #- hosts: masters
 #  become: true
 #  roles:
