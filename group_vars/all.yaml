@@ -6,14 +6,26 @@ locality_name: "Pairs"
 country_name: "FR"
 root_ca_common_name: "Kubernetes"
 expiry: "+3650d" # Default validity duration for PKI certificates.
+
 # PKI management parameters
 rotate_certificats: False # This parameter is used to renew K8S PKI certificats
+
 # Components version
+ike_base_components:
+  etcd:
+    release: v3.4.14
+    update: False
+    check: True
+  kubernetes:
+    release: v1.19.3
+    update: False
+#
 etcd_release: v3.4.14
-kubernetes_release: v1.19.4
+#kubernetes_release: v1.19.4
 delete_previous_k8s_install: False
 delete_etcd_install: False
 check_etcd_install: True
+#
 # IPs-CIDR Configurations
 network_cni_plugin: calico
 cluster_cidr: 10.33.0.0/16
@@ -22,28 +34,31 @@ kubernetes_service: 10.32.0.1
 cluster_dns_ip: 10.32.0.10
 service_node_port_range: 30000-32000
 enable_metallb_layer2: True # If set to true, install metlab LB on your K8S cluster. This enable Service type LoadBalancer
-metallb_layer2_ips: 10.10.20.50-10.10.20.250 # Set Exeternal IP pool used by Service Type LoabBalancer "FistIP-LastIP". A CIDR is also supported
+metallb_layer2_ips: 10.10.20.50-10.10.20.250 # Set Exeternal IP pool used by Service Type LoabBalancer "FistIP-LastIP"
 metallb_secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
+
 # Custom features
 runtime: containerd
 ingress_controller: nginx
-populate_etc_hosts: True
+ike_populate_etc_hosts: True
 k8s_dashboard: True
 enable_metrics_server: True
 enable_persistence: True
 openebs_io_base_dir: /var/openebs
-io_local_host_path: /var/local-hostpath
 enable_monitoring: True
 dashboard_admin_user: administrator
 dashboard_admin_password: P@ssw0rd
+
 # Security
 encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:
     secret: 1fJcKt6vBxMt+AkBanoaxFF2O6ytHIkETNgQWv4b/+Q=
+
 # Data Directory
 data_path: "/var/agorakube"
 etcd_data_directory: "/var/lib/etcd"
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
+
 

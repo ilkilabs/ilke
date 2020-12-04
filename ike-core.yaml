@@ -11,29 +11,29 @@
   roles:
     - compliance-checks
     - install-kubectl
-    - generate-certs
-- hosts: etcd
-  become: true
-  roles:
-    - setup-etcd
-- hosts: masters
-  become: true
-  roles:
-    - setup-master
-    - configure-kubeconfig
-    - install-cni
-    - install-runtimes
-    - setup-worker
-- hosts: workers,storage
-  become: true
-  roles:
-  - install-cni
-  - install-runtimes
-  - setup-worker
-- hosts: deploy
-  become: true
-  roles:
-    - install-kubectl
-    - configure-kubeconfig
-    - post-scripts
-    - show-info
+#    - generate-certs
+#- hosts: etcd
+#  become: true
+#  roles:
+#    - setup-etcd
+#- hosts: masters
+#  become: true
+#  roles:
+#    - setup-master
+#    - configure-kubeconfig
+#    - install-cni
+#    - install-runtimes
+#    - setup-worker
+#- hosts: workers,storage
+#  become: true
+#  roles:
+#  - install-cni
+#  - install-runtimes
+#  - setup-worker
+#- hosts: deploy
+#  become: true
+#  roles:
+#    - install-kubectl
+#    - configure-kubeconfig
+#    - post-scripts
+#    - show-info
