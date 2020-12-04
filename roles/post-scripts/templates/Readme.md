@@ -56,8 +56,9 @@ NDM
         - name: SPARSE_FILE_DIR
           value: "{{ openebs_io_base_dir }}/sparse"
 
-
+```
 Add to all Deployments, DaemonSet
+
 ```
 tolerations:
     - key: "NoSchedulabe"
@@ -66,4 +67,5 @@ tolerations:
 nodeSelector:
         "node-role.kubernetes.io/storage": "true"
 ```
+
 * configure_storage_openebs.yaml.j2: Configure Data Plane (StoragePools and StorageClass)
