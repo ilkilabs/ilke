@@ -32,6 +32,7 @@ k8s_dashboard: True
 enable_metrics_server: True
 enable_persistence: True
 openebs_io_base_dir: /var/openebs
+io_local_host_path: /var/local-hostpath
 enable_monitoring: True
 dashboard_admin_user: administrator
 dashboard_admin_password: P@ssw0rd
