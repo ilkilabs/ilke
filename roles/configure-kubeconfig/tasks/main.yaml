@@ -3,6 +3,7 @@
   file:
     path: /root/.kube
     state: directory
+
 - name: Inject Kubeconfig
   copy:
     src: "{{ pki_path }}/kubeconfigs/admin/admin.conf"

@@ -12,6 +12,7 @@
 #    - compliance-checks
     - install-kubectl
     - generate-certs
+    - configure-kubeconfig
 - hosts: etcd
   become: true
   roles:
@@ -21,7 +22,7 @@
   roles:
     - setup-master
 #    - configure-kubeconfig
-#    - install-cni
+    - install-cni
 #    - install-runtimes
 #    - setup-worker
 #- hosts: workers,storage
