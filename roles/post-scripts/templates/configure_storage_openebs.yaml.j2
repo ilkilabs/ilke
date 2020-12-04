@@ -25,6 +25,18 @@ metadata:
       - name: ReplicaNodeSelector
         value: |-
             node-role.kubernetes.io/storage: true
+      - name: ReplicaTolerations
+        value: |-
+          t1:
+            key: "NoSchedulabe"
+            operator: "Exists"
+            effect: "NoSchedule"
+      - name: TargetTolerations
+        value: |-
+          t1:
+            key: "NoSchedulabe"
+            operator: "Exists"
+            effect: "NoSchedule"
 provisioner: openebs.io/provisioner-iscsi
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
