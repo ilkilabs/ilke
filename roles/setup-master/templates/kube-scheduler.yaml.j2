@@ -1,4 +1,4 @@
-{% if  (kubernetes_release | replace('v','')) is version('1.19.0', '<') %}
+{% if  (ike_base_components.kubernetes.release | replace('v','')) is version('1.19.0', '<') %}
 algorithmSource:
   provider: DefaultProvider
 apiVersion: kubescheduler.config.k8s.io/v1alpha1

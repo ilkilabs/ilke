@@ -16,10 +16,10 @@
   become: true
   roles:
     - setup-etcd
-#- hosts: masters
-#  become: true
-#  roles:
-#    - setup-master
+- hosts: masters
+  become: true
+  roles:
+    - setup-master
 #    - configure-kubeconfig
 #    - install-cni
 #    - install-runtimes

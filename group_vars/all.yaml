@@ -27,12 +27,12 @@ ike_pki:
 ike_base_components:
   etcd:
     release: v3.4.14
-    update: False
-    check: True
+    update: false
+    check: true
     data_path: /var/lib/etcd
   kubernetes:
-    release: v1.19.3
-    update: False
+    release: v1.19.4
+    update: false
 #
 #etcd_release: v3.4.14
 #kubernetes_release: v1.19.4
@@ -79,7 +79,7 @@ dashboard_admin_user: administrator
 dashboard_admin_password: P@ssw0rd
 
 # Security
-encrypt_etcd_keys:
+ike_encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:

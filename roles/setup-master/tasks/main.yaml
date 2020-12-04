@@ -1,8 +1,10 @@
 ---
 - name: Import certs
   include_tasks: import-certs.yaml
+
 - name: Clean previous install of K8S
   include_tasks: clean-previous-k8s-install.yaml
-  when: delete_previous_k8s_install
+  when: ike_base_components.kubernetes.update | bool == True
+
 - name: Include Setup
   include_tasks: setup-master.yaml
