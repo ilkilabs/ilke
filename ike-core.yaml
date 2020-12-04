@@ -24,7 +24,7 @@
 #    - configure-kubeconfig
     - install-cni
     - install-runtimes
-#    - setup-worker
+    - setup-worker
 #- hosts: workers,storage
 #  become: true
 #  roles:

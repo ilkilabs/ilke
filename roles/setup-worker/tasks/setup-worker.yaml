@@ -9,7 +9,7 @@
   package:
     name: "{{ iscsi_package_name }}"
     state: latest
-  when: enable_persistence
+  when: ike_features.storage.enabled | bool == True
 
 - name: Ensure iscsid is running and enabled
   systemd:
@@ -17,7 +17,7 @@
     state: started
     enabled: yes
     daemon_reload: yes
-  when: enable_persistence
+  when: ike_features.storage.enabled | bool == True
 
 - name: Create /etc/kubernetes/manifests directory
   file:
@@ -27,7 +27,7 @@
 
 - name: Download Kubernetes node binaries
   unarchive:
-    src: https://dl.k8s.io/{{ kubernetes_release }}/kubernetes-node-linux-amd64.tar.gz
+    src: https://dl.k8s.io/{{ ike_base_components.kubernetes.release }}/kubernetes-node-linux-amd64.tar.gz
     dest: /usr/local/bin
     remote_src: yes
     creates: /usr/local/bin/kubernetes/node/bin/kubelet

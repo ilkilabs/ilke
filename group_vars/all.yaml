@@ -60,7 +60,9 @@ ike_network:
     enabled: True
     ip_range: 10.10.20.50-10.10.20.250
     secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
-
+  kube_proxy:
+    mode: ipvs
+    algorithm: rr
 #network_cni_plugin: calico
 #cluster_cidr: 10.33.0.0/16
 #service_cluster_ip_range: 10.32.0.0/24
@@ -73,11 +75,15 @@ ike_network:
 
 # Custom features
 #runtime: containerd
+ike_features:
+  storage:
+    enabled: true
+
 ingress_controller: nginx
 ike_populate_etc_hosts: True
 k8s_dashboard: True
 enable_metrics_server: True
-enable_persistence: True
+#enable_persistence: True
 openebs_io_base_dir: /var/openebs
 enable_monitoring: True
 dashboard_admin_user: administrator
@@ -93,6 +99,7 @@ ike_encrypt_etcd_keys:
 # Data Directory
 #data_path: "/var/agorakube"
 #etcd_data_directory: "/var/lib/etcd"
+
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
 
