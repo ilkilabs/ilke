@@ -33,6 +33,11 @@ ike_base_components:
   kubernetes:
     release: v1.19.4
     update: false
+  container:
+    engine: containerd
+# release : Only Supported if container engine is set to docker
+    release: ""
+#    update: false
 #
 #etcd_release: v3.4.14
 #kubernetes_release: v1.19.4
@@ -67,7 +72,7 @@ ike_network:
 #metallb_secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
 
 # Custom features
-runtime: containerd
+#runtime: containerd
 ingress_controller: nginx
 ike_populate_etc_hosts: True
 k8s_dashboard: True

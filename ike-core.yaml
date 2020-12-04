@@ -23,7 +23,7 @@
     - setup-master
 #    - configure-kubeconfig
     - install-cni
-#    - install-runtimes
+    - install-runtimes
 #    - setup-worker
 #- hosts: workers,storage
 #  become: true
