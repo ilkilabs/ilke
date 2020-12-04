@@ -102,6 +102,10 @@ spec:
         openebs.io/component-name: maya-apiserver
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -275,6 +279,10 @@ spec:
         openebs.io/component-name: openebs-provisioner
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -350,6 +358,10 @@ spec:
         openebs.io/component-name: openebs-snapshot-operator
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -478,6 +490,10 @@ spec:
         openebs.io/component-name: ndm
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       # By default the node-disk-manager will be run on all kubernetes nodes
@@ -604,6 +620,10 @@ spec:
         openebs.io/component-name: ndm-operator
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -676,6 +696,10 @@ spec:
         openebs.io/component-name: admission-webhook
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -735,6 +759,10 @@ spec:
         openebs.io/component-name: openebs-localpv-provisioner
         openebs.io/version: 2.3.0
     spec:
+      tolerations:
+      - key: "NoSchedulabe"
+        operator: "Exists"
+        effect: "NoSchedule"
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator

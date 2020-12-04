@@ -1,6 +1,6 @@
 ---
-- name: Include label workers
-  include_tasks: label-workers.yaml
+- name: Include label hosts
+  include_tasks: label-hosts.yaml
 
 - name: Include Tasks Calico
   include_tasks: calico.yaml
