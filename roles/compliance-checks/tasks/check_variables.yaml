@@ -1,8 +1,8 @@
 ---
-- name: Check delete_previous_k8s_install variable
-  fail:
-    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
-  when: (delete_previous_k8s_install | string) not in ['True','False']
+#- name: Check delete_previous_k8s_install variable
+#  fail:
+#    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
+#  when: (delete_previous_k8s_install | string) not in ['True','False']
 
 - name: Check runtime variable
   fail:

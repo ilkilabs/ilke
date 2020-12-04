@@ -23,10 +23,10 @@
   openssl_csr:
     path: "{{ pki_path }}/ca-root/root-ca.csr"
     privatekey_path: "{{ pki_path }}/ca-root/root-ca.key"
-    common_name: "{{ root_ca_common_name }}"
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    common_name: "{{ ike_pki.infos.root_cn }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     basic_constraints: ['CA:TRUE']
 
 - name: Generate an OpenSSL certificate signed with your own CA certificate
@@ -35,8 +35,8 @@
     privatekey_path: "{{ pki_path }}/ca-root/root-ca.key"
     csr_path: "{{ pki_path }}/ca-root/root-ca.csr"
     provider: selfsigned
-    selfsigned_not_after: "{{ expiry }}"
-    force: "{{ rotate_certificats }}"
+    selfsigned_not_after: "{{ ike_pki.infos.expirity }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
 
 - name: Make intermediate ca dir
   file:
@@ -62,9 +62,9 @@
     path: "{{ pki_path }}/intermediate/{{ item.name }}.csr"
     privatekey_path: "{{ pki_path }}/intermediate/{{ item.name }}.key"
     common_name: "{{ item.cn }}"
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     basic_constraints: ['CA:TRUE']
   loop:
     - { cn: 'kubernetes-ca', name: 'ca' }
@@ -78,7 +78,7 @@
     ownca_path: "{{ pki_path }}/ca-root/root-ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/ca-root/root-ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   with_items:
     - front-proxy-ca
     - ca
@@ -121,9 +121,9 @@
     path: "{{ pki_path }}/end/kube-etcd.csr"
     privatekey_path: "{{ pki_path }}/end/kube-etcd.key"
     common_name: kube-etcd
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     key_usage:
       - digitalSignature
       - keyEncipherment
@@ -137,9 +137,9 @@
     path: "{{ pki_path }}/end/kube-etcd-healthcheck-client.csr"
     privatekey_path: "{{ pki_path }}/end/kube-etcd-healthcheck-client.key"
     common_name: kube-etcd-healthcheck-client
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     key_usage:
       - digitalSignature
       - keyEncipherment
@@ -151,9 +151,9 @@
     path: "{{ pki_path }}/end/kube-apiserver-etcd-client.csr"
     privatekey_path: "{{ pki_path }}/end/kube-apiserver-etcd-client.key"
     common_name: kube-apiserver-etcd-client
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     organization_name: 'system:masters'
     key_usage:
       - digitalSignature
@@ -166,9 +166,9 @@
     path: "{{ pki_path }}/end/kube-etcd-peer.csr"
     privatekey_path: "{{ pki_path }}/end/kube-etcd-peer.key"
     common_name: kube-etcd-peer
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     organization_name: 'system:masters'
     key_usage:
       - digitalSignature
@@ -185,7 +185,7 @@
     ownca_path: "{{ pki_path }}/intermediate/etcd/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/etcd/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   with_items:
     - kube-etcd
     - kube-etcd-peer
@@ -197,9 +197,9 @@
     path: "{{ pki_path }}/end/kube-apiserver-kubelet-client.csr"
     privatekey_path: "{{ pki_path }}/end/kube-apiserver-kubelet-client.key"
     common_name: kube-apiserver-kubelet-client
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     organization_name: 'system:masters'
     key_usage:
       - digitalSignature
@@ -212,9 +212,9 @@
     path: "{{ pki_path }}/end/kube-apiserver.csr"
     privatekey_path: "{{ pki_path }}/end/kube-apiserver.key"
     common_name: kube-apiserver
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     key_usage:
       - digitalSignature
       - keyEncipherment
@@ -229,7 +229,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   with_items:
     - kube-apiserver
     - kube-apiserver-kubelet-client
@@ -239,9 +239,9 @@
     path: "{{ pki_path }}/end/front-proxy-client.csr"
     privatekey_path: "{{ pki_path }}/end/front-proxy-client.key"
     common_name: front-proxy-client
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     key_usage:
       - digitalSignature
       - keyEncipherment
@@ -255,7 +255,7 @@
     ownca_path: "{{ pki_path }}/intermediate/front-proxy-ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/front-proxy-ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
 
 - name: Create kube-configs dir
   file:
@@ -285,9 +285,9 @@
     path: "{{ pki_path }}/kubeconfigs/admin/admin.csr"
     privatekey_path: "{{ pki_path }}/kubeconfigs/admin/admin.key"
     common_name: kubernetes-admin
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     organization_name: 'system:masters'
 
 - name: Generate CSR for controller-manager and scheduler X.509
@@ -295,9 +295,9 @@
     path: "{{ pki_path }}/kubeconfigs/{{ item }}/{{ item }}.csr"
     privatekey_path: "{{ pki_path }}/kubeconfigs/{{ item }}/{{ item }}.key"
     common_name: system:kube-{{ item }}
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     use_common_name_for_san: False
   with_items:
     - controller-manager
@@ -310,7 +310,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   register: admin_certificate
 
 - name: Generate an OpenSSL certificate signed for controller-manager end-certificates
@@ -320,7 +320,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   register: controllermanager_certificate
 
 
@@ -331,7 +331,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   register: scheduler_certifiate
 
 - name: File generation of kubeconfig configuration for [admin] 1/4
@@ -461,9 +461,9 @@
     path: "{{ pki_path }}/kubeconfigs/kubelet/{{ item }}/kubelet.csr"
     privatekey_path: "{{ pki_path }}/kubeconfigs/kubelet/{{ item }}/kubelet.key"
     common_name: "system:node:{{ item }}"
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     organization_name: 'system:nodes'
     use_common_name_for_san: False
     subject_alt_name: "DNS:{{ item }}"
@@ -479,7 +479,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   with_items:
     - "{{ groups['masters'] }}"
     - "{{ groups['workers'] }}"
@@ -563,9 +563,9 @@
     path: "{{ pki_path }}/kubeconfigs/proxier/{{ item }}/proxier.csr"
     privatekey_path: "{{ pki_path }}/kubeconfigs/proxier/{{ item }}/proxier.key"
     common_name: "system:kube-proxy"
-    state_or_province_name: "{{ state_or_province_name }}"
-    locality_name: "{{ locality_name }}"
-    country_name: "{{ country_name }}"
+    state_or_province_name: "{{ ike_pki.infos.state }}"
+    locality_name: "{{ ike_pki.infos.locality }}"
+    country_name: "{{ ike_pki.infos.country }}"
     use_common_name_for_san: False
     subject_alt_name: "DNS:{{ item }}"
   with_items:
@@ -580,7 +580,7 @@
     ownca_path: "{{ pki_path }}/intermediate/ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/intermediate/ca.key"
     provider: ownca
-    force: "{{ rotate_certificats }}"
+    force: "{{ ike_pki.management.rotate_certificats }}"
   with_items:
     - "{{ groups['masters'] }}"
     - "{{ groups['workers'] }}"
