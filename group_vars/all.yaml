@@ -48,6 +48,7 @@ ike_base_components:
 # IPs-CIDR Configurations
 ike_network:
   cni_plugin: calico
+  mtu: 0
   cidr:
     pod: 10.33.0.0/16
     service: 10.32.0.0/24
@@ -78,16 +79,32 @@ ike_network:
 ike_features:
   storage:
     enabled: true
-
-ingress_controller: nginx
+    jiva:
+      data_path: /var/openebs
+      fs_type: ext4
+    hostpath:
+      data_path: /var/local-hostpath
+  dashboard:
+    enabled: true
+  metrics_server:
+    enabled: true
+  ingress:
+    controller: nginx
+  monitoring:
+    enabled: true
+    persistent: true
+    admin:
+      user: administrator
+      password: P@ssw0rd
+#ingress_controller: nginx
 ike_populate_etc_hosts: True
-k8s_dashboard: True
-enable_metrics_server: True
+#k8s_dashboard: True
+#enable_metrics_server: True
 #enable_persistence: True
-openebs_io_base_dir: /var/openebs
-enable_monitoring: True
-dashboard_admin_user: administrator
-dashboard_admin_password: P@ssw0rd
+#openebs_io_base_dir: /var/openebs
+#enable_monitoring: True
+#dashboard_admin_user: administrator
+#dashboard_admin_password: P@ssw0rd
 
 # Security
 ike_encrypt_etcd_keys:

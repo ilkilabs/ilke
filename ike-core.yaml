@@ -25,16 +25,16 @@
     - install-cni
     - install-runtimes
     - setup-worker
-#- hosts: workers,storage
-#  become: true
-#  roles:
-#  - install-cni
-#  - install-runtimes
-#  - setup-worker
-#- hosts: deploy
-#  become: true
-#  roles:
+- hosts: workers,storage
+  become: true
+  roles:
+  - install-cni
+  - install-runtimes
+  - setup-worker
+- hosts: deploy
+  become: true
+  roles:
 #    - install-kubectl
 #    - configure-kubeconfig
-#    - post-scripts
+    - post-scripts
 #    - show-info
