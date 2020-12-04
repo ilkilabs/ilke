@@ -1,6 +1,6 @@
 ---
 advertise_masters: 10.10.0.3
-kubernetes_service: 1.2.3.4
+#kubernetes_service: 1.2.3.4
 
 #state_or_province_name: "Ile-De-France"
 #locality_name: "Paris"
@@ -9,5 +9,5 @@ kubernetes_service: 1.2.3.4
 #expiry: "+3650d"
 #data_path: "/var/agorakube"
 #rotate_certificats: False
-rotate_private_keys: False
+#rotate_private_keys: False
 #rotate_token_certificats: False
