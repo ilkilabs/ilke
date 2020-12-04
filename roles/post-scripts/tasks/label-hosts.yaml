@@ -31,9 +31,9 @@
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
     taint nodes {{ item }} NoSchedulabe=true:NoSchedule --overwrite
   changed_when: false
-  with_items: 
-  - groups['masters']
-  - groups['storage']
+  with_items:
+  - "{{ groups['masters'] }}"
+  - "{{ groups['storage'] }}"
   when:
     - item not in groups['workers']
 
@@ -43,4 +43,6 @@
     taint nodes {{ item }} NoSchedulabe=true:NoSchedule- --overwrite
   changed_when: false
   with_items:
-  - groups['worker']
+  - "{{ groups['masters'] }}"
+  - "{{ groups['storage'] }}"
+  when: item in groups['workers']
