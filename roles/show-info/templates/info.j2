@@ -1,13 +1,13 @@
 
 
 #################################################################
-###            AgoreKube Installation Information             ###
+###    ILKI KUBERNETES ENGINE Installation Information        ###
 #################################################################
 
 
-Thank you for using AgoraKube to deploy and manage your Kubernetes installation.
+Thank you for using ILKI KUBERNETES ENGINE to deploy and manage your Kubernetes installation.
 
-This file (agorakube-info.txt) is stored in root home directory for your reference.
+This file (ike-info.txt) is stored in root home directory for your reference.
 
 #############################################################
 
@@ -16,7 +16,7 @@ This file (agorakube-info.txt) is stored in root home directory for your referen
 ##################
 Kubectl config file is located at: /root/.kube/config
 
-{% if k8s_dashboard %}
+{% if ike_features.dashboard.enabled | bool == True %}
 ########################
 # Kubernetes Dashboard #
 ########################

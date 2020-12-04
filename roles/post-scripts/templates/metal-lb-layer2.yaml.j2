@@ -17,11 +17,11 @@ data:
     - name: default
       protocol: layer2
       addresses:
-      - {{ metallb_layer2_ips }}
+      - {{ ike_network.external_loadbalancing.ip_range }}
 ---
 apiVersion: v1
 data:
-  secretkey: "{{ metallb_secret_key }}"
+  secretkey: "{{ ike_network.external_loadbalancing.secret_key }}"
 kind: Secret
 metadata:
   name: memberlist

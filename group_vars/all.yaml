@@ -86,10 +86,12 @@ ike_features:
       data_path: /var/local-hostpath
   dashboard:
     enabled: true
+    generate_admin_token: true
   metrics_server:
     enabled: true
   ingress:
     controller: nginx
+    release: v0.41.2
   monitoring:
     enabled: true
     persistent: true

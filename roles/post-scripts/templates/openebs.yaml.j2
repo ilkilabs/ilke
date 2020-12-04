@@ -162,34 +162,34 @@ spec:
         # OPENEBS_IO_BASE_DIR is used to configure base directory for openebs on host path.
         # Where OpenEBS can store required files. Default base path will be /var/openebs
         - name: OPENEBS_IO_BASE_DIR
-          value: "{{ openebs_io_base_dir }}"
+          value: "{{ ike_features.storage.jiva.data_path }}"
         # OPENEBS_IO_CSTOR_TARGET_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor volume pod.
         # The default path used is /var/openebs/sparse
         - name: OPENEBS_IO_CSTOR_TARGET_DIR
-          value: "{{ openebs_io_base_dir }}/sparse"
+          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
         # OPENEBS_IO_CSTOR_POOL_SPARSE_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor pool pod. This ENV is also used to indicate the location
         # of the sparse devices.
         # The default path used is /var/openebs/sparse
         - name: OPENEBS_IO_CSTOR_POOL_SPARSE_DIR
-          value: "{{ openebs_io_base_dir }}/sparse"
+          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
         # OPENEBS_IO_JIVA_POOL_DIR can be used to specify the hostpath
         # to be used for default Jiva StoragePool loaded by OpenEBS
         # The default path used is /var/openebs
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
         - name: OPENEBS_IO_JIVA_POOL_DIR
-          value: "{{ openebs_io_base_dir }}"
+          value: "{{ ike_features.storage.jiva.data_path }}"
         # OPENEBS_IO_LOCALPV_HOSTPATH_DIR can be used to specify the hostpath
         # to be used for default openebs-hostpath storageclass loaded by OpenEBS
         # The default path used is /var/openebs/local
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
         - name: OPENEBS_IO_LOCALPV_HOSTPATH_DIR
-          value: "{{ openebs_io_base_dir }}/local"
+          value: "{{ ike_features.storage.jiva.data_path }}/local"
         - name: OPENEBS_IO_JIVA_CONTROLLER_IMAGE
           value: "openebs/jiva:2.3.0"
         - name: OPENEBS_IO_JIVA_REPLICA_IMAGE
@@ -554,7 +554,7 @@ spec:
         # specify the directory where the sparse files need to be created.
         # if not specified, then sparse files will not be created.
         - name: SPARSE_FILE_DIR
-          value: "{{ openebs_io_base_dir }}/sparse"
+          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
         # Size(bytes) of the sparse file to be created.
         - name: SPARSE_FILE_SIZE
           value: "10737418240"

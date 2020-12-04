@@ -113,7 +113,7 @@ subjects:
 - kind: ServiceAccount
   name: prometheus
   namespace: monitoring
-{% if enable_persistence %}
+{% if ike_features.monitoring.persistent | bool == True %}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -178,7 +178,7 @@ spec:
     metadata:
       labels:
         app: prometheus
-{% if enable_persistence %}
+{% if ike_features.monitoring.persistent | bool == True  %}
         openebs.io/target-affinity: ike-monitoring
 {% endif %}
     spec:
@@ -200,7 +200,7 @@ spec:
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/prometheus
-{% if enable_persistence %}
+{% if ike_features.monitoring.persistent | bool == True %}
         - name: prometheus-data
           mountPath: /prometheus
       initContainers:
@@ -215,7 +215,7 @@ spec:
       - name: prometheus-config
         configMap:
          name: prometheus-config
-{% if enable_persistence %}
+{% if ike_features.monitoring.persistent | bool == True %}
       - name: prometheus-data
         persistentVolumeClaim:
             claimName: prometheus-data
@@ -255,9 +255,9 @@ spec:
         - containerPort: 3000
         env:
           - name: GF_SECURITY_ADMIN_USER
-            value: "{{ dashboard_admin_user }}"
+            value: "{{ ike_features.monitoring.admin.user }}"
           - name: GF_SECURITY_ADMIN_PASSWORD
-            value: "{{ dashboard_admin_password }}"
+            value: "{{ ike_features.monitoring.admin.password }}"
           - name: GF_USERS_ALLOW_SIGN_UP
             value: "false"
         volumeMounts:

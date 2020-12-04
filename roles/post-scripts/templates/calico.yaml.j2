@@ -15,7 +15,7 @@ data:
   # Configure the MTU to use for workload interfaces and tunnels.
   # By default, MTU is auto-detected, and explicitly setting this field should not be required.
   # You can override auto-detection by providing a non-zero value.
-  veth_mtu: "{{ calico_mtu }}"
+  veth_mtu: "{{ ike_network.mtu }}"
 
   # The CNI network configuration to install on each node. The special
   # values in this config will be automatically populated.
@@ -3673,7 +3673,7 @@ spec:
             # chosen from this range. Changing this value after installation will have
             # no effect. This should fall within `--cluster-cidr` in Kubeadm.
             - name: CALICO_IPV4POOL_CIDR
-              value: "{{ cluster_cidr }}"
+              value: "{{ ike_network.cidr.pod }}"
             # Disable file logging so `kubectl logs` works.
             - name: CALICO_DISABLE_FILE_LOGGING
               value: "true"

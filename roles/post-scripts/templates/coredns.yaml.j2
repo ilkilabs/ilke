@@ -57,7 +57,7 @@ data:
       log
       health
       ready
-      kubernetes cluster.local {{ service_cluster_ip_range }} {{ cluster_cidr }} {
+      kubernetes cluster.local {{ ike_network.cidr.service }} {{ ike_network.cidr.pod }} {
         pods insecure
         fallthrough in-addr.arpa ip6.arpa
         ttl 30
@@ -169,7 +169,7 @@ metadata:
 spec:
   selector:
     k8s-app: kube-dns
-  clusterIP: {{cluster_dns_ip}} 
+  clusterIP: {{ ike_network.service_ip.coredns }} 
   ports:
   - name: dns
     port: 53
