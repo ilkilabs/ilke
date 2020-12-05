@@ -11,10 +11,10 @@ authorization:
   mode: Webhook
 clusterDomain: "cluster.local"
 clusterDNS:
-  - "{{cluster_dns_ip}}"
+  - "{{ ike_network.service_ip.coredns }}"
 eventRecordQPS: 5
 makeIPTablesUtilChains: true
-podCIDR: "{{ cluster_cidr }}"
+podCIDR: "{{ ike_network.cidr.pod }}"
 protectKernelDefaults: true
 readOnlyPort: 0
 {% if ansible_distribution == "Ubuntu" %}

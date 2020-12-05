@@ -1,12 +1,12 @@
 [Unit]
-Description=Kubernetes API Server {{ kubernetes_release }}
+Description=Kubernetes API Server {{ ike_base_components.kubernetes.release }}
 Documentation=https://github.com/kubernetes/kubernetes
 {% set etcd_servers = [] %}
 {% for host in groups['etcd']  %}
 {{ etcd_servers.append( "https://"+hostvars[host].ansible_host+":2379" ) }}
 {% endfor %}
 {% set enabled_admission_plugins = [] %}
-{% for plugin in kube_apiserver_enable_admission_plugins  %}
+{% for plugin in ike_kube_apiserver_enable_admission_plugins  %}
 {{ enabled_admission_plugins.append( plugin ) }}
 {% endfor %}
 [Service]
@@ -36,8 +36,8 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kube-apiserver \
   --kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key \
   --kubelet-https=true \
   --runtime-config=api/all=true \
-  --service-cluster-ip-range={{service_cluster_ip_range}} \
-  --service-node-port-range={{service_node_port_range}} \
+  --service-cluster-ip-range={{ ike_network.cidr.service }} \
+  --service-node-port-range={{ ike_network.nodeport.range }} \
   --tls-cert-file=/etc/kubernetes/pki/apiserver.crt \
   --service-account-key-file=/etc/kubernetes/pki/sa/sa.pub \
   --tls-private-key-file=/etc/kubernetes/pki/apiserver.key \

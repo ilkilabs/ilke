@@ -4,43 +4,43 @@
 
 - name: Include Tasks Calico
   include_tasks: calico.yaml
-  when: network_cni_plugin == 'calico'
+  when: ike_network.cni_plugin == 'calico'
 
 - name: Include Tasks Kube-router
   include_tasks: kube-router.yaml
-  when: network_cni_plugin == 'kube-router'
+  when: ike_network.cni_plugin == 'kube-router'
 
 - name: Deploy CoreDNS to K8S
   include_tasks: coredns.yaml
 
 - name: Install MetalLB Layer2
   include_tasks: metallb_l2.yaml
-  when: enable_metallb_layer2
+  when: ike_features.storage.enabled | bool == True
 
 - name: Install Metrics-Server
   include_tasks: metrics-server.yaml
-  when: enable_metrics_server
+  when: ike_features.metrics_server.enabled | bool == True
 
 - name: Install ingress (traefik)
   include_tasks: traefik.yaml
-  when: ingress_controller == 'traefik'
+  when: ike_features.ingress.controller == 'traefik'
 
 - name: Install ingress (haproxy)
   include_tasks: haproxy.yaml
-  when: ingress_controller == 'haproxy'
+  when: ike_features.ingress.controller == 'haproxy'
 
 - name: Install ingress (nginx)
   include_tasks: nginx.yaml
-  when: ingress_controller == 'nginx'
+  when: ike_features.ingress.controller == 'nginx'
 
 - name: Install K8S Default Dashboard
   include_tasks: default_dashboard.yaml
-  when: k8s_dashboard
+  when: ike_features.dashboard.enabled | bool == True
 
 - name: Install openebs for persistence
   include_tasks: openebs.yaml
-  when: enable_persistence
+  when: ike_features.storage.enabled | bool == True
 
 - name: Install Monitoring
   include_tasks: monitoring.yaml
-  when: enable_monitoring
+  when: ike_features.monitoring.enabled | bool == True

@@ -1,8 +1,8 @@
 ---
-- name: Check delete_previous_k8s_install variable
-  fail:
-    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
-  when: (delete_previous_k8s_install | string) not in ['True','False']
+#- name: Check delete_previous_k8s_install variable
+#  fail:
+#    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
+#  when: (delete_previous_k8s_install | string) not in ['True','False']
 
 - name: Check runtime variable
   fail:
@@ -21,8 +21,8 @@
 
 - name: Check Populate /etc/hosts
   fail:
-    msg: "Populate /etc/hosts variable is set to : {{ populate_etc_hosts }} ! Supported values are : True, False"
-  when: (populate_etc_hosts | string)  not in ['True','False']
+    msg: "Populate /etc/hosts variable is set to : {{ ike_populate_etc_hosts }} ! Supported values are : True, False"
+  when: (ike_populate_etc_hosts | string)  not in ['True','False']
 
 - name: Check k8s_dashboard
   fail:
