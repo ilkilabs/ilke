@@ -2,7 +2,7 @@
 ---
 ike:
   global:
-    data_path: /var/ik2
+    data_path: /var/ike
 
 ike_pki:
   infos:
