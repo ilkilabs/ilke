@@ -294,11 +294,12 @@ This section is used to custom the PKI used for your deployment and manage Certi
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ike_pki.infos.state` | Version of etcd component | <ul><li> **3.3.X** or **3.4.X** </li><br/><li>  **v3.4.10** *(default)* </li></ul>|
-| `ike_pki.infos.state` | Version of kubernetes components | <ul><li> **1.15.X**, **1.16.X**, **1.17.X**, **1.18.X** or **1.19.X** </li><br/><li>  **1.19.0** *(default)* </li></ul>|
-| `ike_pki.infos.state` | Deletion of previous installations of Kubernetes | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
-| `ike_pki.infos.state` | Deletion of previous installations of ETCD | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
-| `ike_pki.infos.state` | Print ETCD Status | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
+| `ike_pki.infos.state` | State or province name added to PKI CSR | **Ile-De-France** *(default)* |
+| `ike_pki.infos.locality` | Locality added to PKI CSR | **Paris** *(default)* |
+| `ike_pki.infos.country` | Country added to PKI CSR | **FR** *(default)* |
+| `ike_pki.infos.root_cn` | CommonName used for Root CA | **ILKI Kubernetes Engine** *(default)* |
+| `ike_pki.infos.expirity` | Expirity for all PKI certificats | **+3650d** (default - 10 years)|
+| `ike_pki.management.rotate_certificats` | Boolean used to rotate certificates | **False** (default)|
 
 ### IPs-CIDR Configurations
 
