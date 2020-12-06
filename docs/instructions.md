@@ -355,11 +355,26 @@ This section allows you to configure your K8S cluster network settings.
 | `ike_network.kube_proxy.algorithm` | Default ClusterIP loadBalancing Algorithm : rr,lc,dh,sh,sed,nq. Only supported if IPVS | **rr** *(default Round-Robin)* |
 
 
-Parameters for Agorakube datas storage :
+## IKE features
+
+This section allows you to configure your K8S features.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `data_path` | Path to Agorakube datas directory | <ul><li> **Depend on your deployment** </li><br/><li> **"/var/agorakube"** *(default)* </li></ul> |
+| `ike_features.storage.enabled` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.storage.jiva.data_path` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.storage.jiva.fs_type` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.storage.hostpath.data_path` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.dashboard.enabled` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.dashboard.generate_admin_token` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.metrics_server.enabled` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.ingress.controller` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.ingress.release` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.monitoring.enabled` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.monitoring.persistent` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.monitoring.admin.user` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.monitoring.admin.password` | Path to Agorakube datas directory | **False** *(default)* |
+
 
 Parameters for etcd data location, and backups
 
