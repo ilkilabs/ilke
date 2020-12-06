@@ -1,49 +1,31 @@
 # ILKI KUBERNETES ENGINE Core
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Filkilab%2Fagorakube.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Filkilab%2Fagorakube?ref=badge_shield)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3104/badge)](https://bestpractices.coreinfrastructure.org/projects/3104)
 
-
-<p align="center">
-<img src="./images/agorakube-logo.svg" width="450" alt="Agorakube" title="Agorakube" />
-</p>
-<p>
-<img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubernetes/certified-kubernetes/versionless/color/certified-kubernetes-color.svg?sanitize=true" width="100" alt="k8s-conformance-v1.16" title="https://github.com/cncf/k8s-conformance/tree/master/v1.16/agorakube"/>
-<img src="https://raw.githubusercontent.com/cncf/artwork/master/other/cncf-landscape/stacked/color/cncf-landscape-stacked-color.svg?sanitize=true" width="100" alt="Agorakube is a cncf landscap project" title="Agorakube is a cncf landscap project"/>
-</p>
 
 This project is aimed to provide the simplest way to install kubernetes on AMD-64 bare-metal, virtual & Cloud environments.
 Currently, Ubuntu 18.04 & 20.04,  Centos 7 and Debian 10  are supported, but several other operating systems will be available soon.
 
-Official documentation is available at [Agorakube Website](https://agorakube.ilkilabs.io/)
-
 Master branch is stable.
-
-Read this in [French](https://github.com/ilkilab/agorakube/blob/core/docs/translations/FR/README.fr.md)
-
-Since November 2019, [Agorakube](https://agorakube.ilkilabs.io/) has been certified by the "Kubernetes Conformance Program" and is a project of [the cncf landscape](https://landscape.cncf.io/selected=agora-kube).
-
-[![asciicast](https://asciinema.org/a/Y58GrrJG3gPM6GvKsSMCZevbX.svg)](https://asciinema.org/a/Y58GrrJG3gPM6GvKsSMCZevbX)
 
 ## Table of Contents
 
-This is a list of points that will be explained in this Readme file for the [AgoraKube](https://agorakube.ilkilabs.io/) project :
+This is a list of points that will be explained in this Readme file for the IKE project :
 
-- [What is AgoraKube](#what-is-agoraKube)
+- [What is IKE](#what-is-ike)
 - [How to install](#how-to-install)
 - [How to give feedback](#how-to-give-feedback)
 - [How to contribute](#how-to-contribute)
 - [Community](#community)
 - [Licensing](#licensing)
 
-## What is AgoraKube
+## What is IKE
 
-[AgoraKube](https://agorakube.ilkilabs.io/) is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19).
+IKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19).
 
-By its symplicity, [AgoraKube](https://agorakube.ilkilabs.io/) provide a good way to deploy and manage K8S Clusters.
+By its symplicity, IKE provide a good way to deploy and manage K8S Clusters.
 
-[AgoraKube](https://agorakube.ilkilabs.io/) is based on Ansible scripts that install and configure Kubernetes components (control plane and data plane) quickly on bare-metal / VMs / Cloud Instances, as systemd services.
+IKE is based on Ansible scripts that install and configure Kubernetes components (control plane and data plane) quickly on bare-metal / VMs / Cloud Instances, as systemd services.
 
 This distribution is also adaptive by offering the opportunity to customize your deployment and fit to your needs : 
 * OS : Ubuntu-18.04/20.04-amd64 and Centos 7.X-amd64, Debian-10-amd64 
@@ -84,7 +66,7 @@ To deploy your K8S cluster follow these [instructions](docs/instructions.md).
 ## How to give feedback
 
 Every feedback is very welcome via the
-[GitHub site](https://github.com/ilkilab/agorakube)
+[GitHub site](https://github.com/ilkilab/ike-core)
 as issues or pull (merge) requests.
 
 You can also give use vulnerability reports by this way.
@@ -95,11 +77,11 @@ See our [Code Of Conduct](https://github.com/ilkilab/agorakube/blob/core/CODE_OF
 
 ## Community
 
-Join Agorakube's community for discussion and ask questions : [Agorakube's Slack](http://slack.agorakube.ilkilabs.io/)
+Join IKE's community for discussion and ask questions : [IKE's Slack](http://slack.agorakube.ilkilabs.io/)
 
 Channels :
 - **#general** - For general purpose (news, events...)
-- **#developpers** - For people who contribute to Agorakube by developing features
+- **#developpers** - For people who contribute to IKE by developing features
 - **#end-users** - For end users who want to give us feedbacks
 - **#random** - As its name suggests, for random discussions :)
 
