@@ -1,5 +1,5 @@
 # Table of Contents
-This is a list of points that will be explained in this instructions file for the [AgoraKube](https://agorakube.ilkilabs.io/) project :
+This is a list of points that will be explained in this instructions file for the IKE project :
 
 - [High-level Architecture](#high-level-architecture)
 - [Prerequisites](#prerequisites)
@@ -13,18 +13,19 @@ This is a list of points that will be explained in this instructions file for th
 
 # High-level Architecture
 
-Below a diagram of the high-level architecture deployed by [AgoraKube](https://agorakube.ilkilabs.io/) :
+Below a diagram of the high-level architecture deployed by IKE :
 ![Architecture](../images/AgoraKube_diagram.png)
 
 **Notes :** This distibution is aimed to be customizable so you can choose : 
  - Where the **etcd** will be deployed (with the master or not) 
- - The number of **master** nodes to deploy (from 1 to many)
- - The number of **etcd** nodes to deploy (from 1 to many)
+ - The number of **master** nodes to deploy (from 1 to many - 5 nodes for production)
+ - The number of **etcd** nodes to deploy (from 1 to many - 5 nodes for production)
  - The number of **worker** nodes to deploy (from 1 to many)
+ - The number of **storage** nodes to deploy (from 0 to many - 3 nodes for production needs)
  
  # Prerequisites
 
-This section explains what are the prerequisites to install [AgoraKube](https://agorakube.ilkilabs.io/) in your environment.
+This section explains what are the prerequisites to install IKE in your environment.
 
 ## OS
 
@@ -32,16 +33,19 @@ Below the OS currently supported on all the machines :
   - Ubuntu 18.04 & 20.04 - amd64
   - Centos 7 - amd64
   - Debian 10 - amd64
-  
+
+## Network
+
+- Full network connectivity between all machines in the cluster (public or private network is fine)
+- Full internet access
+- Unique hostname, MAC address, and product_uuid for every node. See here for more [details](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node).
+- Certain ports are open on your machines. See here for more [details](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports).
+
 ## Node Sizing
 
 Below the sizing prerequisites for all the nodes (master and worker) :
 - 2 GB or more of RAM per machine
 - 2 CPUs or more
-- Full network connectivity between all machines in the cluster (public or private network is fine)
-- Full internet access
-- Unique hostname, MAC address, and product_uuid for every node. See here for more [details](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node).
-- Certain ports are open on your machines. See here for more [details](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports).
 - Swap disabled. You MUST disable swap in order for the kubelet to work properly.
 
 Below the sizing prerequisites for the deployment machine :
