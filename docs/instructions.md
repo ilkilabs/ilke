@@ -5,7 +5,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Prerequisites](#prerequisites)
 - [Nodes Setup](#nodes-setup)
 - [K8S Cluster Configuration](#k8s-cluster-configuration)
-- [Agorakube Parameters](#agorakube-parameters)
+- [IKE Parameters](#agorakube-parameters)
 - [Kubernetes deployment](#kubernetes-deployment)
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
@@ -215,7 +215,7 @@ etcd_data_directory: "/var/lib/etcd"
 
 **Note :** You can also modify the IPs-CIDR if you want.
 
-# Agorakube Parameters
+# IKE Parameters
 
 Below  you can find all the parameters you can use in this file, section by section.
 
