@@ -67,7 +67,7 @@ We actually configure the proper VM size for your master depending on the number
 
 # Nodes Setup
 
-This section explains how to setup notes before deploying Kubernetes Clusters with [AgoraKube](https://agorakube.ilkilabs.io/).
+This section explains how to setup notes before deploying Kubernetes Clusters with IKE.
 
 ## Deployment node
 
