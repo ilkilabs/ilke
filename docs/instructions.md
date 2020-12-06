@@ -71,11 +71,21 @@ This section explains how to setup notes before deploying Kubernetes Clusters wi
 
 ## Deployment node
 
-The deployment node is an Ansible server which contains all Ansible roles and variables used to deploy and configure Kubernetes Clusters with [AgoraKube](https://agorakube.ilkilabs.io/) distribution.
+The deployment node is an Ansible server which contains all Ansible roles and variables used to deploy and configure Kubernetes Clusters with IKE distribution.
 
-- Connect to the deployment node and run the following command :
+The prerequisites are:
+- SSH Server (like openssh-server)
+- Python3 & pip3
+- Ansible
+- netaddr
+- git
+- curl
+
+Then clone or download the git branch / release you want to use.
+
+You can run the following command to automatically install those packages and clone the latest stable IKE distribution:
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube-core/master/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-deploy.sh)
 ```
 
 
@@ -86,10 +96,11 @@ The K8S nodes will host all the components needed for a Kubernetes cluster Contr
 The prerequisites are:
 - SSH Server (like openssh-server)
 - Python3
+- curl
 
 You can run the following command to automatically install those packages :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/aike-core/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-hosts.sh)
 ```
 
 ## SSH keys creation
@@ -165,6 +176,8 @@ The **storage** section contains information about the storage nodes (K8S Storag
 The **etc_hosts** section contains a list of DNS entries that will be injected to /etc/hosts files of all hosts. Use it only if you don't have DNS server.
 
 The **all:vars** section contains information about how to connect to K8S nodes.
+
+The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can be Master IP as well if no LB available.
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
 **ansible_user** User used as service account by Agorakube to connect to all nodes. **User must be sudoer**.
