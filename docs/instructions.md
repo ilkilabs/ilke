@@ -301,7 +301,7 @@ This section is used to custom the PKI used for your deployment and manage Certi
 | `ike_pki.infos.expirity` | Expirity for all PKI certificats | **+3650d** (default - 10 years)|
 | `ike_pki.management.rotate_certificats` | Boolean used to rotate certificates | **False** (default)|
 
-## Components Section
+## Main K8S Components Section
 
 This section is used to custom K8S main components that will be deployed.
 
@@ -335,14 +335,25 @@ This section allows you to configure your Container Engine taht will be deployed
 | `ike_base_components.container.release` | Release of Container Engine to install - Supported only if `ike_base_components.container.engine` set to *docker*  | If **""** install latest release *(default)* |
 | `ike_base_components.container.update` | Update current Container Engine release to `ike_base_components.container.release` | **Will be available soon** (No effect) |
 
-### Other parameters sections
+## Network Settings
 
-Parameters for etcd :
+This section allows you to configure your K8S cluster network settings.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `encrypt_etcd_keys` | Encryption keys used for etcd - Dictionary format | <ul><li> **Depend on your deployment** </li><br/><li>  **1fJcKt6vBxMt+AkBanoaxFF2O6ytHIkETNgQWv4b/+Q=** *(default)* </li></ul> |
-| `check_etcd_install` | Display ETCD infos | <ul><li> **True** (Default) </li><br/><li>  False </li></ul> |
+| `ike_network.cni_plugin` | CNI plugin used to enable K8S hosts Networking | **calico** *(default)*, kube-router |
+| `ike_network.mtu` | MTU for CNI plugin. Auto-MTU if set to **0**. Only used if `ike_network.cni_plugin` is set to **calico** | **0** *(default)* |
+| `ike_network.cidr.pod` | PODs CIDR network | **10.33.0.0/16** *(default)* |
+| `ike_network.cidr.service` | Service CIDR network | **10.32.0.0/24** *(default)* |
+| `ike_network.service_ip.kubernetes` | ClusterIP of *default.kubernetes* service. Should be the first IP available in `ike_network.cidr.service` | **10.32.0.1** *(default)* |
+| `ike_network.service_ip.coredns` | ClusterIP of *kube-system.kube-dns* service. | **10.32.0.10** *(default)* |
+| `ike_network.nodeport.range` | Range of allowed ports usable by NodePort services | **30000-32000** *(default)* |
+| `ike_network.external_loadbalancing.enabled` | Enable External LoadBalancing in ARP mode. Working only if On-Prem deployments | **False** *(default)* |
+| `ike_network.external_loadbalancing.ip_range` | IPs Range, or CIDR used by External LoadBalancer to assign External IPs  | **10.10.20.50-10.10.20.250** *(default range)* |
+| `ike_network.external_loadbalancing.secret_key` | Security Key : Generate a custom key with : `openssl rand -base64 128` | **a default insecure key** *(Change it !)* |
+| `ike_network.kube_proxy.mode` | Kube-Proxy mode. iptables/ipvs. IPVS > IPTABLES | **ipvs** *(default)* |
+| `ike_network.kube_proxy.algorithm` | Default ClusterIP loadBalancing Algorithm : rr,lc,dh,sh,sed,nq. Only supported if IPVS | **rr** *(default Round-Robin)* |
+
 
 Parameters for Agorakube datas storage :
 
