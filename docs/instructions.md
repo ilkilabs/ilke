@@ -151,7 +151,7 @@ worker3  ansible_host=10.10.20.6
 worker4 ansible_host=10.10.20.20
 
 [all:vars]
-advertise_masters=10.10.20.4
+advertise_masters=10.10.20.40
 #advertise_masters=kubernetes.localcluster.lan
 
 # SSH connection settings
@@ -177,7 +177,7 @@ The **etc_hosts** section contains a list of DNS entries that will be injected t
 
 The **all:vars** section contains information about how to connect to K8S nodes.
 
-The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can be Master IP as well if no LB available.
+The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
 **ansible_user** User used as service account by Agorakube to connect to all nodes. **User must be sudoer**.
