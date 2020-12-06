@@ -280,29 +280,25 @@ ike_encrypt_etcd_keys:
 
 Below  you can find all the parameters you can use in this file, section by section.
 
-### Certificates section
+### Global Section
 
-This section is used to custom certificates information.
-
-| Parameter | Description | Values |
-| --- | --- | --- |
-| `root_ca_common_name` | Certificate authority name | <ul><li> **Depend on your deployment** </li><br/><li>  **ilkilabs** *(default)* </li></ul>|
-| `country_name` | Country where the certificate is issued | <ul><li> **Depend on your deployment** </li><br/><li>  **FR** *(default)* </li></ul>|
-| `state_or_province_name` | State where the certificate is issued | <ul><li> **Depend on your deployment** </li><br/><li>  **Ile-de-France** *(default)* </li></ul>|
-| `locality_name` | City where the certificate is issued | <ul><li> **Depend on your deployment** </li><br/><li>  **Paris** *(default)* </li></ul>|
-| `expiry` | Certificate lifetime in hours | <ul><li> **Depend on your needs** </li><br/><li>  **87600h** *(default)* </li></ul>|
-| `rotate_certificats` | Rotate certificates for your cluster | <ul><li> **false** *(default)* </li><br/><li>  **true** </li></ul>|
-### Components version section
-
-This section is used to custom the components version of your deployment.
+This section is used to custom global IKE settings.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `etcd_release` | Version of etcd component | <ul><li> **3.3.X** or **3.4.X** </li><br/><li>  **v3.4.10** *(default)* </li></ul>|
-| `kubernetes_release` | Version of kubernetes components | <ul><li> **1.15.X**, **1.16.X**, **1.17.X**, **1.18.X** or **1.19.X** </li><br/><li>  **1.19.0** *(default)* </li></ul>|
-| `delete_previous_k8s_install` | Deletion of previous installations of Kubernetes | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
-| `delete_etcd_install` | Deletion of previous installations of ETCD | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
-| `check_etcd_install` | Print ETCD Status | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
+| `ike.global.data_path` | Path where IKE saves all config/pik/service files on deploy machine | **/var/ike/** *(default)* |
+
+### Certificates & PKI section
+
+This section is used to custom the PKI used for your deployment and manage Certificates lifecycle.
+
+| Parameter | Description | Values |
+| --- | --- | --- |
+| `ike_pki.infos.state` | Version of etcd component | <ul><li> **3.3.X** or **3.4.X** </li><br/><li>  **v3.4.10** *(default)* </li></ul>|
+| `ike_pki.infos.state` | Version of kubernetes components | <ul><li> **1.15.X**, **1.16.X**, **1.17.X**, **1.18.X** or **1.19.X** </li><br/><li>  **1.19.0** *(default)* </li></ul>|
+| `ike_pki.infos.state` | Deletion of previous installations of Kubernetes | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
+| `ike_pki.infos.state` | Deletion of previous installations of ETCD | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
+| `ike_pki.infos.state` | Print ETCD Status | <ul><li> **true** </li><br/><li>  **false** *(default)* </li></ul>|
 
 ### IPs-CIDR Configurations
 
