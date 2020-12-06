@@ -280,7 +280,7 @@ ike_encrypt_etcd_keys:
 
 Below  you can find all the parameters you can use in this file, section by section.
 
-### Global Section
+## Global Section
 
 This section is used to custom global IKE settings.
 
@@ -288,7 +288,7 @@ This section is used to custom global IKE settings.
 | --- | --- | --- |
 | `ike.global.data_path` | Path where IKE saves all config/pik/service files on deploy machine | **/var/ike/** *(default)* |
 
-### Certificates & PKI section
+## Certificates & PKI section
 
 This section is used to custom the PKI used for your deployment and manage Certificates lifecycle.
 
@@ -301,36 +301,39 @@ This section is used to custom the PKI used for your deployment and manage Certi
 | `ike_pki.infos.expirity` | Expirity for all PKI certificats | **+3650d** (default - 10 years)|
 | `ike_pki.management.rotate_certificats` | Boolean used to rotate certificates | **False** (default)|
 
-### IPs-CIDR Configurations
+## Components Section
 
-This section is used to custom network configurations of your deployment.
+This section is used to custom K8S main components that will be deployed.
 
-**Note :** It will depend on the CNI plugin used.
+### ETCD
 
-| Parameter | Description | Values |
-| --- | --- | --- |
-| `cluster_cidr` | CIDR used for all pods deployed in your cluster | <ul><li> **Depend on your deployment** </li><br/><li>  **10.33.0.0/16** *(default)* </li></ul>|
-| `service_cluster_ip_range` | CIDR used for all services deployed in your cluster | <ul><li> **Depend on your deployment** </li><br/><li>   **10.32.0.0/16** *(default)* </li></ul>|
-| `kubernetes_service` | IP used for Kubernetes service of your cluster. **Must be** the first IP of your service CIDR ! | <ul><li> **Depend on your deployment** </li><br/><li>  **10.32.0.1** *(default)* </li></ul>|
-| `cluster_dns_ip` | IP used for DNS services deployed in your cluster | <ul><li> **Depend on your deployment** </li><br/><li>  **10.32.0.10** *(default)* </li></ul>|
-| `service_node_port_range` | Range of ports used for all NodePort services deployed in your cluster | <ul><li> **depend on your deployment** </li><br/><li>   **30000-32767** *(default)* </li></ul>|
-| `cni_release` | CNI release to use | <ul><li>  **0.8.6** *(default)* </li></ul>|
-| `enable_metallb_layer2` | Enable MetalLB. This add Service type LoadBalancer support to Kubernetes | <ul><li> **Depend on your deployment** </li><br/><li>  **True** *(default)* </li></ul>|
-| `metallb_layer2_ips` | IP range used by LoadBalancer Service  | <ul><li> **Depend on your deployment** </li><br/><li>  **10.100.200.10-10.100.200.250** *(default)* </li></ul>|
-| `metallb_secret_key` | metallb_secret_key is generated with command : openssl rand -base64 128 | <ul><li> **Depend on your deployment** </li></ul>|
-
-### Custom features section
-
-This section is used to defined all custom features of your deployment.
+This section allows you to configure your ETCD deployment.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `runtime` | Container runtime used in your deployment | <ul><li> **containerd** *(default)* </li><br/><li>  **docker**  </li></ul>|
-| `network_cni_plugin` | CNI plugin used in your deployment | <ul><li> **calico** </li><br/><li>  **kube-router** *(default)* </li></ul>|
-| `ingress_controller` | Ingress Controller used in your deployment | <ul><li> **traefik** *(default)* </li><br/><li>  **ha-proxy**  </li><br/><li>  **nginx**  </li><br/><li>  **none**  </li></ul>|
-| `populate_etc_hosts` | Populate */etc/hosts* file of all your nodes in the cluster | <ul><li> **no** </li><br/><li>  **yes** *(default)* </li></ul>|
-| `k8s_dashboard` | Deploy Kubernetes dashboard in your cluster | <ul><li> **false** </li><br/><li>  **true** *(default)* </li></ul>|
+| `ike_base_components.etcd.release` | ETCD release that will be installed on etcd hosts | **v3.4.14** *(default)* |
+| `ike_base_components.etcd.update` | Update current ETCD release to `ike_base_components.etcd.release` | **False** *(default)* |
+| `ike_base_components.etcd.check` | Check ETCD cluster Status/Size/Health/Leader when running ike run | **True** *(default)* |
+| `ike_base_components.etcd.data_path` | Path where ETCD save data on ETCD hosts | **/var/lib/etcd** *(default)* |
 
+### Kubernetes
+
+This section allows you to configure your Kubernetes deployment.
+
+| Parameter | Description | Values |
+| --- | --- | --- |
+| `ike_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.19.4** *(default)* |
+| `ike_base_components.kubernetes.update` | Update current Kubernetes release to `ike_base_components.kubernetes.release` | **False** *(default)* |
+
+### Container Engine
+
+This section allows you to configure your Container Engine taht will be deployed on all Master/Worker/Storage hosts.
+
+| Parameter | Description | Values |
+| --- | --- | --- |
+| `ike_base_components.container.engine`  | Container Engine to install (Containerd or Docker) on all Master/Worker/Storage hosts |  **containerd** *(default)*, or docker |
+| `ike_base_components.container.release` | Release of Container Engine to install - Supported only if `ike_base_components.container.engine` set to *docker*  | If **""** install latest release *(default)* |
+| `ike_base_components.container.update` | Update current Container Engine release to `ike_base_components.container.release` | **Will be available soon** (No effect) |
 
 ### Other parameters sections
 
