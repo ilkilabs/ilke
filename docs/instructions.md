@@ -43,16 +43,27 @@ Below the OS currently supported on all the machines :
 
 ## Node Sizing
 
-Below the sizing prerequisites for all the nodes (master and worker) :
-- 2 GB or more of RAM per machine
-- 2 CPUs or more
-- Swap disabled. You MUST disable swap in order for the kubelet to work properly.
+Node sizing indicated here is for production environment. You can custom it according to sweet your needs.
 
-Below the sizing prerequisites for the deployment machine :
-- 2 GB or more of RAM
-- 1 CPU or more
-- Full network connectivity between all machines in the cluster (public or private network is fine)
-- Full internet access
+ETCD and MASTER are actually installed on the same Host, but it is a best-practice to install them on separate hosts.
+
+| IKE Type | no HA or all-in-one | no-production | production |
+| --- | --- | --- | --- |
+| MASTER | 1 | 3 | 5 |
+| ETCD | 1 | 3 | 5 |
+| WORKER | 1 | X | X |
+| STORAGE | 0 - 1 | 3 | 3+ |
+
+We actually configure the proper VM size for your master depending on the number of nodes (Workers + Storage) in your cluster
+
+| nodes | Master Size |
+| --- | --- |
+| 1-5 | 1 CPU - 3,75 Go RAM |
+| 6-10 | 2 CPU - 7,50 Go RAM |
+| 11-100 | 4 CPU - 15 Go RAM |
+| 101-250 | 8 CPU - 30 Go RAM |
+| 251-500 | 16 CPU - 60 Go RAM |
+| more than 500 | 32 CPU - 120 Go RAM |
 
 # Nodes Setup
 
