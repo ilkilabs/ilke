@@ -84,17 +84,17 @@ bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube-core/master/s
 The K8S nodes will host all the components needed for a Kubernetes cluster Control and Data planes.
 
 The prerequisites are:
-- SSH Server (like Openssh)
-- Python2
+- SSH Server (like openssh-server)
+- Python3
 
 You can run the following command to automatically install those packages :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube-core/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilab/aike-core/master/setup-hosts.sh)
 ```
 
 ## SSH keys creation
 
-[Agorakube](https://agorakube.ilkilabs.io/) is using Ansible to deploy Kubernetes. You have to configure SSH keys to ensure the communication between the deploy machine and the others.
+IKE is using Ansible to deploy Kubernetes. You have to configure SSH keys to ensure the communication between the deploy machine and the others.
 
 On the deploy machine, create the SSH keys :
 ```
@@ -108,46 +108,48 @@ ssh-copy-id -i .ssh/id_rsa.pub yourUser@IP_OF_THE_HOST
 ```
 You have to execute this command for each node of your cluster
 
-Once your ssh keys have been pushed to all nodes, modify the file "agorakube/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that Agorakube will use to connect to all nodes
+Once your ssh keys have been pushed to all nodes, modify the file "ike/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
 
 # K8S Cluster Configuration
 
-[AgoraKube](https://agorakube.ilkilabs.io/) enables an easy way to deploy and manage customizable K8S clusters.
+IKE enables an easy way to deploy and manage customizable K8S clusters.
 
 ## Inventory file
 
 The first file to modify is ["./hosts"](../hosts). This file contains all architecture information about your K8S Cluster.
 
-**All K8S servers names must be filled in by their FQDN.**
+**All K8S servers names must be filled in by their hostname**. You can run ```hostname -s``` to get it.
 
 The next Sample deploys K8S components in HA mode on 6 nodes (3 **etcd/masters** nodes, 3 **workers** nodes) :
 
 ```
 [deploy]
-master1 ansible_connection=local
+worker1 ansible_connection=local
 
 [masters]
-master1  ansible_host=10.10.20.3
-master2  ansible_host=10.10.20.13
-master3  ansible_host=10.10.20.23
+worker1  ansible_host=10.10.20.4
 
 [etcd]
-master1  ansible_host=10.10.20.3
-master2  ansible_host=10.10.20.13
-master3  ansible_host=10.10.20.23
+worker1  ansible_host=10.10.20.4
 
 [workers]
-worker1  ansible_host=10.10.20.4
 worker2  ansible_host=10.10.20.5
 worker3  ansible_host=10.10.20.6
 
+[storage]
+worker4 ansible_host=10.10.20.20
+
 [all:vars]
-advertise_ip_masters=10.10.20.3
+advertise_masters=10.10.20.4
+#advertise_masters=kubernetes.localcluster.lan
 
 # SSH connection settings
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 ansible_user=vagrant
 ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
+
+[etc_hosts]
+#kubernetes.localcluster.lan ansible_host=10.10.20.4
 ```
 
 The **deploy** section contains information about how to connect to the deployment machine.
@@ -158,6 +160,10 @@ The **masters** section contains information about the masters nodes (K8S Contro
 
 The **workers** section contains information about the workers nodes (K8S Data Plane).
 
+The **storage** section contains information about the storage nodes (K8S Storage Plane ).
+
+The **etc_hosts** section contains a list of DNS entries that will be injected to /etc/hosts files of all hosts. Use it only if you don't have DNS server.
+
 The **all:vars** section contains information about how to connect to K8S nodes.
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
@@ -167,61 +173,92 @@ The **SSH Connection settings** section contain information about the SSH connex
 
 The [../group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
 
-Sample file will deploy **containerd** as container runtime, **flannel** as CNI plugin and **coredns** as DNS service : 
+Sample file will deploy **containerd** as container runtime, **calico** as CNI plugin and enable all IKE features (storage, dashboard, monitoring, LB, ingress, ....).
 
 ```
 ---
-# PKI info
-state_or_province_name: "Ile-De-France"
-locality_name: "Paris"
-country_name: "FR"
-root_ca_common_name: "kubernetes"
-expiry: "+3650d" # Default validity duration for PKI certificates.
+ike:
+  global:
+    data_path: /var/ike
 
-# PKI management parameters
-rotate_certificats: False # This parameter is used to renew K8S PKI certificats
-rotate_token_certificats: False # This parameter renew Service Account Token certs.
+ike_pki:
+  infos:
+    state: "Ile-De-France"
+    locality: "Paris"
+    country: "FR"
+    root_cn: "ILKI Kubernetes Engine"
+    expirity: "+3650d"
+  management:
+    rotate_certificats: false
 
-# Components version
-etcd_release: v3.4.9
-kubernetes_release: v1.18.6
-delete_previous_k8s_install: False
-delete_etcd_install: False
-check_etcd_install: True
+ike_base_components:
+  etcd:
+    release: v3.4.14
+    update: false
+    check: true
+    data_path: /var/lib/etcd
+  kubernetes:
+    release: v1.19.4
+    update: false
+  container:
+    engine: containerd
+# release : Only Supported if container engine is set to docker
+    release: ""
+#    update: false
 
-# IPs-CIDR Configurations
-cluster_cidr: 10.33.0.0/16
-service_cluster_ip_range: 10.32.0.0/24
-kubernetes_service: 10.32.0.1
-cluster_dns_ip: 10.32.0.10
-service_node_port_range: 30000-32000
-cni_release: 0.8.6
-enable_metallb_layer2: True # If set to true, install metlab LB on your K8S cluster. This enable Service type LoadBalancer
-metallb_layer2_ips: 10.100.200.10-10.100.200.250 # Set Exeternal IP pool used by Service Type LoabBalancer "FistIP-LastIP"
-# metallb_secret_key is generated with command : openssl rand -base64 128
-metallb_secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
+ike_network:
+  cni_plugin: calico
+  mtu: 0
+  cidr:
+    pod: 10.33.0.0/16
+    service: 10.32.0.0/24
+  service_ip:
+    kubernetes: 10.32.0.1 
+    coredns: 10.32.0.10
+  nodeport:
+    range: 30000-32000
+  external_loadbalancing:
+    enabled: True
+    ip_range: 10.10.20.50-10.10.20.250
+    secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
+  kube_proxy:
+    mode: ipvs
+    algorithm: rr
 
-# Custom features
-runtime: containerd
-ingress_controller: nginx
-populate_etc_hosts: True
-k8s_dashboard: True
-enable_metrics_server: True
-enable_persistence: True
-enable_monitoring: True
-dashboard_admin_user: administrator
-dashboard_admin_password: P@ssw0rd
+ike_features:
+  storage:
+    enabled: true
+    jiva:
+      data_path: /var/openebs
+      fs_type: ext4
+    hostpath:
+      data_path: /var/local-hostpath
+  dashboard:
+    enabled: true
+    generate_admin_token: true
+  metrics_server:
+    enabled: true
+  ingress:
+    controller: nginx
+    release: v0.41.2
+  monitoring:
+    enabled: true
+    persistent: true
+    admin:
+      user: administrator
+      password: P@ssw0rd
+
+ike_populate_etc_hosts: True
+
 # Security
-encrypt_etcd_keys:
+ike_encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:
     secret: 1fJcKt6vBxMt+AkBanoaxFF2O6ytHIkETNgQWv4b/+Q=
 
-# Data Directory
-data_path: "/var/agorakube"
-etcd_data_directory: "/var/lib/etcd"
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
+
 ```
 
 **Note :** You can also modify the IPs-CIDR if you want.
