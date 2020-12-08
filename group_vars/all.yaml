@@ -1,4 +1,3 @@
-
 ---
 ike:
   global:
@@ -50,28 +49,28 @@ ike_network:
 
 ike_features:
   storage:
-    enabled: true
+    enabled: false
     jiva:
       data_path: /var/openebs
       fs_type: ext4
     hostpath:
       data_path: /var/local-hostpath
   dashboard:
-    enabled: true
-    generate_admin_token: true
+    enabled: false
+    generate_admin_token: false
   metrics_server:
-    enabled: true
+    enabled: false
   ingress:
     controller: nginx
     release: v0.41.2
   monitoring:
-    enabled: true
-    persistent: true
+    enabled: false
+    persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: True
+ike_populate_etc_hosts: false
 
 # Security
 ike_encrypt_etcd_keys:
@@ -81,5 +80,3 @@ ike_encrypt_etcd_keys:
     secret: 1fJcKt6vBxMt+AkBanoaxFF2O6ytHIkETNgQWv4b/+Q=
 
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
-
-
