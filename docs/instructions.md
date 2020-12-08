@@ -375,28 +375,12 @@ This section allows you to configure your K8S features.
 | `ike_features.monitoring.admin.user` | Path to Agorakube datas directory | **False** *(default)* |
 | `ike_features.monitoring.admin.password` | Path to Agorakube datas directory | **False** *(default)* |
 
-
-Parameters for etcd data location, and backups
-
-| Parameter | Description | Values |
-| --- | --- | --- |
-| `etcd_data_directory` | Directory to store etcd data on **etcd members** | <ul><li> **/var/lib/etcd/** (default) </li><br/></ul> |
-| `custom_etcd_backup_dir` | Directory where etcd leader backups are stored on **deploy** node | <ul><li> **{{data_path}}/backups_etcd/** (default if not defined) </li><br/></ul> |
-| `restoration_snapshot_file` | Path to the etcd snapshot on **deploy** node | <ul><li> **not defined** (default) </li><br/></ul> |
-
-
-Monitoring Settings
-
-| Parameter | Description | Values |
-| --- | --- | --- |
-| `enable_monitoring` | Deploy monitoring - Warrning : **Rook Must be enabled !** | <ul><li> **False** (default) </li><br/><li>  **true** </li></ul> |
-
 # Kubernetes deployment
 
 Once all configuration files are set, run the following command to launch the Ansible playbook that will deploy the pre-configured Kubernetes cluster :
 
 ```
-sudo ansible-playbook agorakube.yaml
+sudo ansible-playbook ike-core.yaml
 ```
 
 # Create pod<a name="create-pod" />
