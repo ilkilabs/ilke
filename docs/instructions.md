@@ -402,6 +402,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: busybox-sleep
+  namespace: default
 spec:
   containers:
   - name: busybox
