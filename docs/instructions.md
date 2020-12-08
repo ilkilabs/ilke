@@ -361,19 +361,19 @@ This section allows you to configure your K8S features.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ike_features.storage.enabled` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.storage.jiva.data_path` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.storage.jiva.fs_type` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.storage.hostpath.data_path` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.dashboard.enabled` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.dashboard.generate_admin_token` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.metrics_server.enabled` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.ingress.controller` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.ingress.release` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.monitoring.enabled` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.monitoring.persistent` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.monitoring.admin.user` | Path to Agorakube datas directory | **False** *(default)* |
-| `ike_features.monitoring.admin.password` | Path to Agorakube datas directory | **False** *(default)* |
+| `ike_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
+| `ike_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebse** *(default)* |
+| `ike_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
+| `ike_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
+| `ike_features.dashboard.enabled` | Enable Kubernetes dashboard | **False** *(default)* |
+| `ike_features.dashboard.generate_admin_token` | Generate a default admin user + save token to /root/.kube/dashboardamin on Deploy node | **False** *(default)* |
+| `ike_features.metrics_server.enabled` | Enable Metrics-Server | **False** *(default)* |
+| `ike_features.ingress.controller` | Ingress Controller to install : nginx, ha-proxy, traefik | **nginx** *(default)* |
+| `ike_features.ingress.release` | Ingress controller release to install. Only used if `ike_features.ingress.controller` set to "nginx" | **False** *(default)* |
+| `ike_features.monitoring.enabled` | Enable Monitoring | **False** *(default)* |
+| `ike_features.monitoring.persistent` | Persist Monitoring Data | **False** *(default)* |
+| `ike_features.monitoring.admin.user` | Default Grafana admin user | **administrator** *(default)* |
+| `ike_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
 
 # Kubernetes deployment
 
