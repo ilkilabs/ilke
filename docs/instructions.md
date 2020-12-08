@@ -375,6 +375,15 @@ This section allows you to configure your K8S features.
 | `ike_features.monitoring.admin.user` | Default Grafana admin user | **administrator** *(default)* |
 | `ike_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
 
+## IKE other settings
+This section allows you to configure some other settings
+
+| Parameter | Description | Values |
+| --- | --- | --- |
+| `ike_populate_etc_hosts` | Add to all hostname/IPs of IKE Cluster to /etc/hosts file of all hosts. Use it only if you don't have DNS server. | **False** *(default)* |
+| `ike_encrypt_etcd_keys` | Array of keys/algorith used to crypt/decrypt data in etcd? Generate with : `head -c 32 /dev/urandom | base64` | **changeME !** *(default)* |
+| `restoration_snapshot_file` | ETCD backup path to be restored | **none** *(default)* |
+
 # Kubernetes deployment
 
 Once all configuration files are set, run the following command to launch the Ansible playbook that will deploy the pre-configured Kubernetes cluster :
