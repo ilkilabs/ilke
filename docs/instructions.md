@@ -241,6 +241,7 @@ ike_network:
 ike_features:
   storage:
     enabled: true
+    release: "2.4.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
@@ -362,6 +363,7 @@ This section allows you to configure your K8S features.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ike_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
+| `ike_features.storage.release` | OpenEBS release to be installed | **2.4.0** *(default)* |
 | `ike_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebse** *(default)* |
 | `ike_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
 | `ike_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
