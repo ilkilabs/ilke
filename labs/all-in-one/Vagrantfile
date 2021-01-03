@@ -118,6 +118,7 @@ ike_network:
 ike_features:
   storage:
     enabled: true
+    release: "2.4.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
