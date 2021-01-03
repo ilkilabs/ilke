@@ -21,7 +21,7 @@ This is a list of points that will be explained in this Readme file for the IKE 
 
 ## What is IKE
 
-IKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19).
+IKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20).
 
 By its symplicity, IKE provide a good way to deploy and manage K8S Clusters.
 
@@ -33,7 +33,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Ingress Controller Traefik v2 & HA-Proxy & Nginx (Default)
 * Container Runtime: Containerd (Default) & Docker
 * Certificats: Self Signed PKI using OpenSSL
-* Storage: OpenEBS (Jiva and HostPath)
+* Storage: OpenEBS (Jiva and HostPath). **Today storage is not available for K8S V1.20.X**
 * Monitoring: Prometheus/Grafana/node-Exporter
 * CNI plugin: Kube-router, Calico (VxLAN Cross-Subnet)
 * MetalLB (L2/ARP mode for external LB)
