@@ -9,6 +9,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Kubernetes deployment](#kubernetes-deployment)
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
+- [Storage Benchmark](#storage-benchmark)
 
 
 # High-level Architecture
@@ -540,8 +541,8 @@ spec:
   ==================
   = Dbench Summary =
   ==================
-  Random Read/Write IOPS: 147/300. BW: 16.4MiB/s / 29.2MiB/s
-  Average Latency (usec) Read/Write: 26397.57/13089.65
-  Sequential Read/Write: 120MiB/s / 120MiB/s
-  Mixed Random Read/Write IOPS: 179/59
+  Random Read/Write IOPS: 1148/1572. BW: 54.6MiB/s / 47.8MiB/s
+  Average Latency (usec) Read/Write: 3678.07/2544.32
+  Sequential Read/Write: 78.2MiB/s / 68.7MiB/s
+  Mixed Random Read/Write IOPS: 938/315
   ```
