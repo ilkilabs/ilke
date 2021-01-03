@@ -426,5 +426,122 @@ Run the following command to verify if the deployed pod is running:
 ```
 kubectl get pods
 ```
+# Storage Benchmark
 
+You can Benchmark your IKE Storage Class as follow:
 
+* Create a falie named "benchmarckStorage.yaml" with the followinf content:
+
+```
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dbench
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: benchmarck-openebs
+spec:
+  template:
+    spec:
+      containers:
+      - name: dbench
+        image: openebs/perf-test:latest
+        imagePullPolicy: IfNotPresent
+        env:
+
+          ## storage mount point on which testfiles are created
+
+          - name: DBENCH_MOUNTPOINT
+            value: /data
+
+          ##########################################################
+          # I/O PROFILE COVERAGE FOR SPECIFIC PERF CHARACTERISTICS #
+          ##########################################################
+
+          ## quick: {read, write} iops, {read, write} bw (all random)
+          ## detailed: {quick}, {read, write} latency & mixed 75r:25w (all random), {read, write} bw (all sequential)
+          ## custom: a single user-defined job run with params specified in env 'CUSTOM'
+
+          - name: DBENCH_TYPE
+            value: detailed
+
+          ####################################################
+          # STANDARD TUNABLES FOR DBENCH_TYPE=QUICK/DETAILED #
+          ####################################################
+
+          ## active data size for the bench test
+
+          - name: FIO_SIZE
+            value: 1G
+
+          ## use un-buffered i/o (usually O_DIRECT)
+
+          - name: FIO_DIRECT
+            value: '1'
+
+          ## no of independent threads doing the same i/o
+
+          - name: FIO_NUMJOBS
+            value: '1'
+
+          ## space b/w starting offsets on a file in case of parallel file i/o
+
+          - name: FIO_OFFSET_INCREMENT
+            value: 250M
+
+          ## nature of i/o to file. commonly supported: libaio, sync,
+
+          - name: FIO_IOENGINE
+            value: libaio
+
+          ## additional runtime options which will be appended to the above params
+          ## ensure options used are not mutually exclusive w/ above params
+          ## ex: '--group_reporting=1, stonewall, --ramptime=<val> etc..,
+
+          - name: OPTIONS
+            value: ''
+
+          ####################################################
+          # CUSTOM JOB SPEC FOR DBENCH_TYPE=CUSTOM           #
+          ####################################################
+
+          ## this will execute a single job run with the params specified
+          ## ex: '--bs=16k --iodepth=64 --ioengine=sync --size=500M --name=custom --readwrite=randrw --rwmixread=80 --random_distribution=pareto'
+
+          - name: CUSTOM
+            value: ''
+
+        volumeMounts:
+        - name: dbench-pv
+          mountPath: /data
+      restartPolicy: Never
+      volumes:
+      - name: dbench-pv
+        persistentVolumeClaim:
+          claimName: dbench
+  backoffLimit: 4
+```
+
+* Run ```kubectl apply -f benchmarckStorage.yaml``` and check the logs of the ongoing/completed job
+- In case of quick/detailed job types (default is **detailed**), the fio results are parsed and summary provided: 
+
+  ```
+  All tests complete.
+
+  ==================
+  = Dbench Summary =
+  ==================
+  Random Read/Write IOPS: 147/300. BW: 16.4MiB/s / 29.2MiB/s
+  Average Latency (usec) Read/Write: 26397.57/13089.65
+  Sequential Read/Write: 120MiB/s / 120MiB/s
+  Mixed Random Read/Write IOPS: 179/59
+  ```
