@@ -433,6 +433,7 @@ You can Benchmark your IKE Storage Class as follow:
 
 * Create a falie named "benchmarckStorage.yaml" with the followinf content:
 
+Note: You can custom the storageClassName in your PersistentVolumeClaim to Benchmark a specific StorageClass. Default config Benchark the default StorageClass (Jiva volume)
 ```
 ---
 apiVersion: v1
