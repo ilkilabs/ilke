@@ -29,7 +29,7 @@ if [[ $DISTRO == *"ubuntu"* ]]; then
 
 elif [[ $DISTRO == *"centos"* ]]; then
   sudo killall -9 yum
-  sudo yum update -y && sudo yum -y install curl openssh-server git
+  sudo yum update -y && sudo yum install -y curl openssh-server git
   sudo yum -y install python3 python3-pip
   sudo pip3 install ansible
   sudo pip3 install netaddr
