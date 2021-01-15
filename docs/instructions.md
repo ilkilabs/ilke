@@ -212,7 +212,7 @@ ike_base_components:
     check: true
     data_path: /var/lib/etcd
   kubernetes:
-    release: v1.19.4
+    release: v1.20.4
     update: false
   container:
     engine: containerd
@@ -242,7 +242,7 @@ ike_network:
 ike_features:
   storage:
     enabled: true
-    release: "2.4.0"
+    release: "2.5.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
@@ -324,7 +324,7 @@ This section allows you to configure your Kubernetes deployment.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ike_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.19.4** *(default)* |
+| `ike_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.20.4** *(default)* |
 | `ike_base_components.kubernetes.update` | Update current Kubernetes release to `ike_base_components.kubernetes.release` | **False** *(default)* |
 
 ### Container Engine
@@ -364,7 +364,7 @@ This section allows you to configure your K8S features.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ike_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
-| `ike_features.storage.release` | OpenEBS release to be installed | **2.4.0** *(default)* |
+| `ike_features.storage.release` | OpenEBS release to be installed | **2.5.0** *(default)* |
 | `ike_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebse** *(default)* |
 | `ike_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
 | `ike_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
