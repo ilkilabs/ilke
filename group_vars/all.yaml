@@ -20,7 +20,7 @@ ike_base_components:
     check: true
     data_path: /var/lib/etcd
   kubernetes:
-    release: v1.19.6
+    release: v1.20.2
     update: false
   container:
     engine: containerd
@@ -50,7 +50,7 @@ ike_network:
 ike_features:
   storage:
     enabled: false
-    release: "2.4.0"
+    release: "2.5.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
