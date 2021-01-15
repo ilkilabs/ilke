@@ -33,7 +33,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Ingress Controller Traefik v2 & HA-Proxy & Nginx (Default)
 * Container Runtime: Containerd (Default) & Docker
 * Certificats: Self Signed PKI using OpenSSL
-* Storage: OpenEBS (Jiva and HostPath). **Today storage is not available for K8S V1.20.X**
+* Storage: OpenEBS (Jiva and HostPath).
 * Monitoring: Prometheus/Grafana/node-Exporter
 * CNI plugin: Kube-router, Calico (VxLAN Cross-Subnet)
 * MetalLB (L2/ARP mode for external LB)
