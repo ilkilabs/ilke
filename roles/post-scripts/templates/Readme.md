@@ -5,13 +5,17 @@ We use official Ningix-controller yaml file.
 
 We added **{{ ike_features.metrics_server.release }}** variable to chose the correct nginx release to install
 
+## CoreDNS
+
+We use official CoreDNS yaml file.
+We added **{{ ike_features.coredns.replicas }}** variable to chose the correct coredns release to install
+We added **{{ ike_features.coredns.release }}** variable to chose the number of CoreDNS replicas that will be deployed.
+
 ## Nginx
 
 We use official Ningix-controller yaml file.
 
 We added **{{ ike_features.ingress.release }}** variable to chose the correct nginx release to install.
-
-We added **{{ ike_features.ingress.replicas }}** variable to chose the correct number of Ingress Pods to install.
 
 This is useful when installing, and updateting Nginx with IKE
 
