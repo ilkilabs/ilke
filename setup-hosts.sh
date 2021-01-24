@@ -27,7 +27,7 @@ if [[ $DISTRO == *"ubuntu"* ]]; then
 elif [[ $DISTRO == *"centos"* ]]; then
   sudo killall -9 yum
   sudo yum update && sudo yum -y install python3 python3-pip curl openssh-server
-  sudo yum -y install python3 python3-pip
+  sudo yum -y install python3 python3-pip libselinux-python3
 
 elif [[ $DISTRO == *"debian"* ]]; then
   export DEBIAN_FRONTEND=noninteractive
