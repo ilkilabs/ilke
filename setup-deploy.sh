@@ -30,9 +30,9 @@ if [[ $DISTRO == *"ubuntu"* ]]; then
 elif [[ $DISTRO == *"centos"* ]]; then
   sudo killall -9 yum
   sudo yum update -y && sudo yum install -y curl openssh-server git
-  sudo yum -y install python3 python3-pip libselinux-python3
-  sudo pip3 install ansible
-  sudo pip3 install netaddr
+  sudo yum -y install python2.7 python-pip libselinux-python
+  sudo pip install ansible
+  sudo pip install netaddr
   git clone https://github.com/ilkilab/ike-core.git -b master
 
 elif [[ $DISTRO == *"debian"* ]]; then
