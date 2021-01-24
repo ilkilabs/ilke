@@ -84,3 +84,10 @@ nodeSelector:
 ## Traefik
 
 We add {{ ike_features.ingress.release }} variable to select Traefik release to install.
+
+
+## HA-PROXY
+
+We add {{ ike_features.ingress.release }} variable to select HA-PROXY release to install.
+
+{{ ike_features.ingress.release }} sample:   "1.5.O"   Releases are according Docker Hub Tags !
