@@ -1,10 +1,15 @@
 # Notes
 
+## Metrics-Server
+We use official Ningix-controller yaml file.
+
+We added **{{ ike_features.metrics_server.release }}** variable to chose the correct nginx release to install
+
 ## Nginx
 
 We use official Ningix-controller yaml file.
 
-We added **{{ ingress_nginx_release }}** variable to chose the correct nginx release to install.
+We added **{{ ike_features.ingress.release }}** variable to chose the correct nginx release to install.
 
 This is useful when installing, and updateting Nginx with IKE
 
