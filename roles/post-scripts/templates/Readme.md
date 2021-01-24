@@ -80,3 +80,7 @@ nodeSelector:
 ```
 
 * configure_storage_openebs.yaml.j2: Configure Data Plane (StoragePools and StorageClass)
+
+## Traefik
+
+We add {{ ike_features.ingress.release }} variable to select Traefik release to install.
