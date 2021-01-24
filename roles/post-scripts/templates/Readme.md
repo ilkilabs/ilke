@@ -11,6 +11,8 @@ We use official Ningix-controller yaml file.
 
 We added **{{ ike_features.ingress.release }}** variable to chose the correct nginx release to install.
 
+We added **{{ ike_features.ingress.replicas }}** variable to chose the correct number of Ingress Pods to install.
+
 This is useful when installing, and updateting Nginx with IKE
 
 ## Calico
