@@ -31,7 +31,7 @@ elif [[ $DISTRO == *"centos"* ]]; then
   sudo killall -9 yum
   sudo yum update -y && sudo yum install -y curl openssh-server git
   sudo yum -y --enablerepo=extras install epel-release
-  sudo yum -y install python python-pip libselinux-python
+  sudo yum -y install python python-pip libselinux-python python-netaddr
   sudo pip install ansible
   sudo pip install netaddr
   git clone https://github.com/ilkilab/ike-core.git -b master
