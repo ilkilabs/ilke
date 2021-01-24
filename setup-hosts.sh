@@ -26,7 +26,9 @@ if [[ $DISTRO == *"ubuntu"* ]]; then
 
 elif [[ $DISTRO == *"centos"* ]]; then
   sudo killall -9 yum
-  sudo yum -y update && sudo yum -y install python python-pip curl openssh-server libselinux-python
+  sudo yum -y update && sudo yum -y install curl openssh-server
+  sudo yum -y --enablerepo=extras install epel-release
+  sudo yum -y install python python-pip libselinux-python
 
 elif [[ $DISTRO == *"debian"* ]]; then
   export DEBIAN_FRONTEND=noninteractive
