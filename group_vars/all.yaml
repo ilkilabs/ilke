@@ -67,7 +67,7 @@ ike_features:
     release: v0.4.1
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.43.0
   monitoring:
     enabled: false
     persistent: false
