@@ -217,7 +217,7 @@ spec:
       serviceAccountName: traefik-ingress-controller
       containers:
         - name: traefik
-          image: traefik:v2.2
+          image: traefik:{{ ike_features.ingress.release }}
           args:
             - --api.insecure
             - --accesslog
