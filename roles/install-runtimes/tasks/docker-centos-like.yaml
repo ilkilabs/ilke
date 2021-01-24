@@ -4,11 +4,11 @@
     name: ["containerd.io","docker-ce","docker-ce-cli"]
     state: latest
     update_cache: yes
-  when: docker_release|length == 0
+  when: ike_base_components.container.release|length == 0
 
 - name: Install docker in specific release
   package:
     name: ["containerd.io","docker-ce-{{ ike_base_components.container.release }}","docker-ce-cli-{{ ike_base_components.container.release }}"]
     state: present
     update_cache: yes
-  when: docker_release|length > 0
+  when: ike_base_components.container.release|length > 0
