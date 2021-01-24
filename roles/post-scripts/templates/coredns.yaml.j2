@@ -78,7 +78,7 @@ metadata:
     k8s-app: kube-dns
     kubernetes.io/name: "CoreDNS"
 spec:
-  replicas: 2
+  replicas: {{ ike_features.coredns.replicas }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -100,7 +100,7 @@ spec:
         beta.kubernetes.io/os: linux
       containers:
       - name: coredns
-        image: coredns/coredns:1.8.1
+        image: coredns/coredns:{{ ike_features.coredns.release }}
         imagePullPolicy: IfNotPresent
         resources:
           limits:
