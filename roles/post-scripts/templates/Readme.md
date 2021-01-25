@@ -1,9 +1,9 @@
 # Notes
 
 ## Metrics-Server
-We use official Ningix-controller yaml file.
+We use official Metrics-Server yaml file.
 
-We added **{{ ike_features.metrics_server.release }}** variable to chose the correct nginx release to install
+We **will** add **{{ ike_features.metrics_server.release }}** variable to chose the correct Metrics-Server release to install
 
 ## CoreDNS
 
