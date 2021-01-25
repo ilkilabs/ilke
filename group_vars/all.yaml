@@ -64,7 +64,6 @@ ike_features:
     generate_admin_token: false
   metrics_server:
     enabled: false
-    release: v0.4.1
   ingress:
     controller: nginx
     release: v0.43.0
