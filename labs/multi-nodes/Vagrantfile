@@ -53,6 +53,8 @@ worker1  ansible_host=10.10.20.4
 worker2  ansible_host=10.10.20.5
 worker3  ansible_host=10.10.20.6
 
+[storage]
+# worker3  ansible_host=10.10.20.6
 [all:vars]
 advertise_masters=10.10.20.4
 #advertise_masters=kubernetes.localcluster.lan
@@ -80,7 +82,7 @@ ike_pki:
     root_cn: "ILKI Kubernetes Engine"
     expirity: "+3650d"
   management:
-    rotate_certificats: true
+    rotate_certificats: False
 
 ike_base_components:
   etcd:
@@ -104,7 +106,7 @@ ike_network:
     pod: 10.33.0.0/16
     service: 10.32.0.0/24
   service_ip:
-    kubernetes: 10.32.0.1
+    kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
   nodeport:
     range: 30000-32000
@@ -117,8 +119,11 @@ ike_network:
     algorithm: rr
 
 ike_features:
+  coredns:
+    release: "1.8.0"
+    replicas: 2
   storage:
-    enabled: true
+    enabled: false
     release: "2.5.0"
     jiva:
       data_path: /var/openebs
@@ -132,15 +137,15 @@ ike_features:
     enabled: true
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.43.0
   monitoring:
-    enabled: true
-    persistent: true
+    enabled: false
+    persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: True
+ike_populate_etc_hosts: true
 
 # Security
 ike_encrypt_etcd_keys:
