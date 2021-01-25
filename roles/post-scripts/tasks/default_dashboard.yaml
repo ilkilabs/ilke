@@ -2,7 +2,7 @@
 - name: Apply templates
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.3/aio/deploy/recommended.yaml
+    apply -f https://raw.githubusercontent.com/kubernetes/dashboard/{{ ike_features.dashboard.release }}/aio/deploy/recommended.yaml
   register: apply_dashboard
   changed_when: >
     apply_dashboard.stdout is search("created")
