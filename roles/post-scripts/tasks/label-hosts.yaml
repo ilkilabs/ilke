@@ -46,3 +46,4 @@
   - "{{ groups['masters'] }}"
   - "{{ groups['storage'] }}"
   when: item in groups['workers']
+  ignore_errors: yes

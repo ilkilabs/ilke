@@ -1,10 +1,21 @@
 # Notes
 
+## Metrics-Server
+We use official Metrics-Server yaml file.
+
+We **will** add **{{ ike_features.metrics_server.release }}** variable to chose the correct Metrics-Server release to install
+
+## CoreDNS
+
+We use official CoreDNS yaml file.
+We added **{{ ike_features.coredns.replicas }}** variable to chose the correct coredns release to install
+We added **{{ ike_features.coredns.release }}** variable to chose the number of CoreDNS replicas that will be deployed.
+
 ## Nginx
 
 We use official Ningix-controller yaml file.
 
-We added **{{ ingress_nginx_release }}** variable to chose the correct nginx release to install.
+We added **{{ ike_features.ingress.release }}** variable to chose the correct nginx release to install.
 
 This is useful when installing, and updateting Nginx with IKE
 
@@ -69,3 +80,14 @@ nodeSelector:
 ```
 
 * configure_storage_openebs.yaml.j2: Configure Data Plane (StoragePools and StorageClass)
+
+## Traefik
+
+We add {{ ike_features.ingress.release }} variable to select Traefik release to install.
+
+
+## HA-PROXY
+
+We add {{ ike_features.ingress.release }} variable to select HA-PROXY release to install.
+
+{{ ike_features.ingress.release }} sample:   "1.5.O"   Releases are according Docker Hub Tags !

@@ -48,6 +48,9 @@ ike_network:
     algorithm: rr
 
 ike_features:
+  coredns:
+    release: "1.8.0"
+    replicas: 2
   storage:
     enabled: false
     release: "2.5.0"
@@ -63,7 +66,7 @@ ike_features:
     enabled: false
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.43.0
   monitoring:
     enabled: false
     persistent: false

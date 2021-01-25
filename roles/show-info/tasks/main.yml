@@ -2,16 +2,16 @@
 - name: Store info file in /root
   template:
     src: info.j2
-    dest: /root/agorakube-info.txt
+    dest: /root/ike-info.txt
     owner: root
     group: root
     mode: '0640'
 
 - name: Get file content to show to the user
-  command: cat /root/agorakube-info.txt
-  register: agora_info
+  command: cat /root/ike-info.txt
+  register: ike_info
   changed_when: False
 
 - name: Show information to the user
   debug:
-    var: agora_info.stdout_lines
+    var: ike_info.stdout_lines
