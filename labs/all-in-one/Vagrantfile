@@ -126,6 +126,7 @@ ike_features:
   dashboard:
     enabled: true
     generate_admin_token: true
+    release: v2.1.0
   metrics_server:
     enabled: true
   ingress:
