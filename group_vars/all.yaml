@@ -62,6 +62,7 @@ ike_features:
   dashboard:
     enabled: false
     generate_admin_token: false
+    release: v2.1.0
   metrics_server:
     enabled: false
   ingress:
