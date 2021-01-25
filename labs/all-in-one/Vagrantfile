@@ -70,7 +70,6 @@ echo '
 ike:
   global:
     data_path: /var/ike
-
 ike_pki:
   infos:
     state: "Ile-De-France"
@@ -79,8 +78,7 @@ ike_pki:
     root_cn: "ILKI Kubernetes Engine"
     expirity: "+3650d"
   management:
-    rotate_certificats: true
-
+    rotate_certificats: False
 ike_base_components:
   etcd:
     release: v3.4.14
@@ -95,7 +93,6 @@ ike_base_components:
 # release : Only Supported if container engine is set to docker
     release: ""
 #    update: false
-
 ike_network:
   cni_plugin: calico
   mtu: 0
@@ -103,21 +100,23 @@ ike_network:
     pod: 10.33.0.0/16
     service: 10.32.0.0/24
   service_ip:
-    kubernetes: 10.32.0.1
+    kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
   nodeport:
     range: 30000-32000
   external_loadbalancing:
-    enabled: true
-    ip_range: 10.20.20.50-10.20.20.250
+    enabled: True
+    ip_range: 10.10.20.50-10.10.20.250
     secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
   kube_proxy:
     mode: ipvs
     algorithm: rr
-
 ike_features:
+  coredns:
+    release: "1.8.0"
+    replicas: 2
   storage:
-    enabled: true
+    enabled: false
     release: "2.5.0"
     jiva:
       data_path: /var/openebs
@@ -131,23 +130,20 @@ ike_features:
     enabled: true
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.43.0
   monitoring:
-    enabled: true
-    persistent: true
+    enabled: false
+    persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
-
-ike_populate_etc_hosts: True
-
+ike_populate_etc_hosts: true
 # Security
 ike_encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:
     secret: 1fJcKt6vBxMt+AkBanoaxFF2O6ytHIkETNgQWv4b/+Q=
-
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
 ' > /home/vagrant/ike-core/group_vars/all.yaml
