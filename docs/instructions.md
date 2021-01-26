@@ -46,7 +46,7 @@ Below the OS currently supported on all the machines :
 
 Node sizing indicated here is for production environment. You can custom it according to sweet your needs.
 
-ETCD and MASTER are actually installed on the same Host, but it is a best-practice to install them on separate hosts.
+It is a best-practice to install ETCD and MASTERS on separate hosts.
 
 | IKE Type | no HA or all-in-one | no-production | production |
 | --- | --- | --- | --- |
@@ -55,7 +55,7 @@ ETCD and MASTER are actually installed on the same Host, but it is a best-practi
 | WORKER | 1 | X | X |
 | STORAGE | 0 - 1 | 3 | 3+ |
 
-We actually configure the proper VM size for your master depending on the number of nodes (Workers + Storage) in your cluster
+We actually configure the proper VM size for your mMASTER depending on the number of nodes (Workers + Storage) in your cluster
 
 | nodes | Master Size |
 | --- | --- |
@@ -65,6 +65,15 @@ We actually configure the proper VM size for your master depending on the number
 | 101-250 | 8 CPU - 30 Go RAM |
 | 251-500 | 16 CPU - 60 Go RAM |
 | more than 500 | 32 CPU - 120 Go RAM |
+
+We actually configure the proper VM size for your ETCD depending on the number of nodes (Workers + Storage) in your cluster
+
+| nodes | ETCD Size | Notes |
+| --- | --- | --- |
+| 0-50 | 2 CPU - 8 Go RAM | A small cluster serves fewer than 100 clients, fewer than 200 of requests per second, and stores no more than 100MB of data |
+| 50-250 | 4 CPU - 16 Go RAM | A medium cluster serves fewer than 500 clients, fewer than 1,000 of requests per second, and stores no more than 500MB of data |
+| 250-1000 | 8 CPU - 32 Go RAM | A large cluster serves fewer than 1,500 clients, fewer than 10,000 of requests per second, and stores no more than 1GB of data |
+| 1000-3000 | 16 CPU - 64 Go RAM | An xLarge cluster serves more than 1,500 clients, more than 10,000 of requests per second, and stores more than 1GB data |
 
 # Nodes Setup
 
