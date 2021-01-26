@@ -139,7 +139,7 @@ IKE enables an easy way to deploy and manage customizable K8S clusters.
 
 This file alows you to configure default settings for your Ansible server.
 
-**If you are using CentOS-7, make sure to set "interpreter_python = /usr/bin/python2.7" !! **
+**If you are using CentOS-7, make sure to set "interpreter_python = /usr/bin/python2.7" !!** Ansible on CentOS-7 don't fully support Python3. 
 
 
 
