@@ -66,7 +66,7 @@ We actually configure the proper VM size for your mMASTER depending on the numbe
 | 251-500 | 16 CPU - 60 Go RAM |
 | more than 500 | 32 CPU - 120 Go RAM |
 
-We actually configure the proper VM size for your ETCD depending on the number of nodes (Workers + Storage) in your cluster
+We actually configure the proper VM size for your ETCD depending on the number of nodes (Workers + Storage + Masters) in your cluster
 
 | nodes | ETCD Size | Notes |
 | --- | --- | --- |
