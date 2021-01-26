@@ -135,6 +135,14 @@ Once your ssh keys have been pushed to all nodes, modify the file "ike/hosts" to
 
 IKE enables an easy way to deploy and manage customizable K8S clusters.
 
+## ansible.cfg file
+
+This file alows you to configure default settings for your Ansible server.
+
+**If you are using CentOS-7, make sure to set "interpreter_python = /usr/bin/python2.7" !! **
+
+
+
 ## Inventory file
 
 The first file to modify is ["./hosts"](../hosts). This file contains all architecture information about your K8S Cluster.
