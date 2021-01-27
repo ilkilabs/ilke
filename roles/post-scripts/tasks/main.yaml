@@ -44,3 +44,7 @@
 - name: Install Monitoring
   include_tasks: monitoring.yaml
   when: ike_features.monitoring.enabled | bool == True
+
+- name: enable etcd backup cronJob
+  include_tasks: backup-etcd-cronjob.yaml
+  when: ike_base_components.etcd.backup.enabled | bool == True
