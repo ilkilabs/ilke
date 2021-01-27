@@ -13,7 +13,6 @@ data:
     mkdir $BACKUP_ETCD_DIR -p
     etcdctl \
     --endpoints=$(etcdctl --endpoints={{ etcd_initial_cluster|join(',') }}   endpoint status | grep ', true, false,' | awk '{ print $1}' | sed 's/,//g') \
-    endpoint status | grep ', true, false,' | awk '{ print $1}' | sed 's/,//g') \
     snapshot save $BACKUP_ETCD_DIR/snapshot_etcd_cluster.`date +%m-%d-%y_%H-%M-%S`.db
 ---
 apiVersion: batch/v1beta1
@@ -38,9 +37,9 @@ spec:
             - name: ETCDCTL_CACERT
               value: "/etc/ike/etcd/etcd-api.crt/ca.crt"
             - name: ETCDCTL_CERT
-              value: "/etc/ike/etcd/etcdctl.crt/healthcheck-client.crt"
+              value: "/etc/ike/etcd/etcdctl.crt/kube-etcd-healthcheck-client.crt"
             - name: ETCDCTL_KEY
-              value: "/etc/ike/etcd/etcdctl.key/healthcheck-client.key"
+              value: "/etc/ike/etcd/etcdctl.key/kube-etcd-healthcheck-client.key"
             - name: BACKUP_ETCD_DIR
               value: "/var/backup_etcd"
             volumeMounts:
