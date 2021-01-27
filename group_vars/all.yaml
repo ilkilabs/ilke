@@ -19,6 +19,9 @@ ike_base_components:
     update: false
     check: true
     data_path: /var/lib/etcd
+    backup:
+      enabled: true
+      crontab: "*/30 * * * *"
   kubernetes:
     release: v1.20.2
     update: false
