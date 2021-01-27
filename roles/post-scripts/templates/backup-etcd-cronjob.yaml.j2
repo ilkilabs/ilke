@@ -20,6 +20,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: backup-etcd
+  namespace: kube-system
 spec:
   schedule: "{{ ike_base_components.etcd.backup.crontab }}"
   jobTemplate:
