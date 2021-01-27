@@ -67,5 +67,5 @@ spec:
               configMap:
                 name: etcd-healthcheck-client.crt
             - name: etcdctl-key
-              configMap:
-                name: etcd-healthcheck-client.key
+              secret:
+                secretName: etcd-healthcheck-client.key
