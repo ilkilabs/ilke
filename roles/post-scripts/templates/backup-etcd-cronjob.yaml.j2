@@ -1,0 +1,71 @@
+{% set etcd_initial_cluster = [] %}
+{% for host in groups['etcd']  %}
+{{ etcd_initial_cluster.append( "https://"+hostvars[host].ansible_host+":2379" ) }}
+{% endfor %}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: script-backup-etcd
+  namespace: kube-system
+data:
+  backup-etcd.sh: |
+    #!/bin/sh
+    mkdir $BACKUP_ETCD_DIR -p
+    etcdctl \
+    --endpoints=$(etcdctl --endpoints={{ etcd_initial_cluster|join(',') }}   endpoint status | grep ', true, false,' | awk '{ print $1}' | sed 's/,//g') \
+    endpoint status | grep ', true, false,' | awk '{ print $1}' | sed 's/,//g') \
+    snapshot save $BACKUP_ETCD_DIR/snapshot_etcd_cluster.`date +%m-%d-%y_%H-%M-%S`.db
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-etcd
+spec:
+  schedule: "{{ ike_base_components.etcd.backup.crontab }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: backup-etcd
+            image: quay.io/coreos/etcd:{{ ike_base_components.etcd.release }}
+            command: ["/opt/backup_etcd/backup-etcd.sh"]
+            env:
+            - name: ETCDCTL_API
+              value: "3"
+            - name: ETCDCTL_CACERT
+              value: "/etc/ike/etcd/etcd-api.crt/ca.crt"
+            - name: ETCDCTL_CERT
+              value: "/etc/ike/etcd/etcdctl.crt/healthcheck-client.crt"
+            - name: ETCDCTL_KEY
+              value: "/etc/ike/etcd/etcdctl.key/healthcheck-client.key"
+            - name: BACKUP_ETCD_DIR
+              value: "/var/backup_etcd"
+            volumeMounts:
+              - name: etcd-api
+                mountPath: /etc/ike/etcd/etcd-api.crt
+                readOnly: true
+              - name: etcdctl-crt
+                mountPath: /etc/ike/etcd/etcdctl.crt
+                readOnly: true
+              - name: etcdctl-key
+                mountPath: /etc/ike/etcd/etcdctl.key
+                readOnly: true
+              - name: script-backup-etcd
+                mountPath: /opt/backup_etcd/
+                readOnly: false
+          volumes:
+            - name: script-backup-etcd
+              configMap:
+                name: script-backup-etcd
+                defaultMode: 0700
+            - name: etcd-api
+              configMap:
+                name: etcd-ca-crt
+            - name: etcdctl-crt
+              configMap:
+                name: etcd-healthcheck-client.crt
+            - name: etcdctl-key
+              configMap:
+                name: etcd-healthcheck-client.key
