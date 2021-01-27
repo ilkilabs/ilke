@@ -1,19 +1,19 @@
 - name: Update etcd CA crt
-  command: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create configmap etcd-ca.crt --from-file={{ ike.global.data_path }}/pki/intermediate/etcd/ca.crt
+  shell: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create configmap etcd-ca.crt --from-file={{ ike.global.data_path }}/pki/intermediate/etcd/ca.crt -o yaml --dry-run | kubectl apply -f -
   register: apply_etcd_ca
   changed_when: >
     apply_etcd_ca.stdout is search("created")
     or apply_etcd_ca.stdout is search("configured")
 
 - name: Update etcd backup crt
-  command: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create configmap etcd-healthcheck-client.crt --from-file={{ ike.global.data_path }}/pki/end/kube-etcd-healthcheck-client.crt
+  shell: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create configmap etcd-healthcheck-client.crt --from-file={{ ike.global.data_path }}/pki/end/kube-etcd-healthcheck-client.crt -o yaml --dry-run | kubectl apply -f -
   register: apply_etcd_client_crt
   changed_when: >
     apply_etcd_client_crt.stdout is search("created")
     or apply_etcd_client_crt.stdout is search("configured")
 
 - name: Update etcd backup key
-  command: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create secret generic etcd-healthcheck-client.key --from-file={{ ike.global.data_path }}/pki/end/kube-etcd-healthcheck-client.key
+  shell: kubectl -n kube-system --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf create secret generic etcd-healthcheck-client.key --from-file={{ ike.global.data_path }}/pki/end/kube-etcd-healthcheck-client.key -o yaml --dry-run | kubectl apply -f -
   register: apply_etcd_client_key
   changed_when: >
     apply_etcd_client_key.stdout is search("created")
