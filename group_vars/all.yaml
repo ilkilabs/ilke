@@ -24,13 +24,13 @@ ike_base_components:
       crontab: "*/30 * * * *"
       storage:
         enabled: False
+        capacity: 10Gi
         type: ""
         storageclass:
           name: ""
         pv:
           name: ""
         hostpath:
-          capacity: 10Gi
           nodename: ""
           path: /var/backup-etcd
   kubernetes:
