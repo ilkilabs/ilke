@@ -30,8 +30,9 @@ ike_base_components:
         pv:
           name: ""
         hostpath:
+          capacity: 10Gi
           node_label: ""
-          path: /var/etcd-backup
+          path: /var/backup-etcd
   kubernetes:
     release: v1.20.2
     update: false
