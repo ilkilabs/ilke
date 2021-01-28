@@ -14,21 +14,25 @@ ike_pki:
     rotate_certificats: False
 
 ike_base_components:
-  etcd:
+    etcd:
     release: v3.4.14
-    update: false
+    update: False
     check: true
     data_path: /var/lib/etcd
-    storage:
+    backup:
+      enabled: False
+      crontab: "*/30 * * * *"
+      storage:
         capacity: 10Gi
         enabled: False
-        type: "hostpath"
+        type: "storageclass"
         storageclass:
-          name: ""
+          name: "default-jiva"
         persistentvolume:
-          name: ""
+          name: "backup-etcd-hostpath"
+          storageclass: "etcd-backup-hostpath"
         hostpath:
-          nodename: "master1"
+          nodename: "worker1"
           path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
