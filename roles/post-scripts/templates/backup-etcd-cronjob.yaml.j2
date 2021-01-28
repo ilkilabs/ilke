@@ -2,6 +2,7 @@
 {% for host in groups['etcd']  %}
 {{ etcd_initial_cluster.append( "https://"+hostvars[host].ansible_host+":2379" ) }}
 {% endfor %}
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -22,6 +23,8 @@ metadata:
   namespace: kube-system
 spec:
   schedule: "{{ ike_base_components.etcd.backup.crontab }}"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
@@ -104,12 +107,21 @@ spec:
 {% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
   storageClassName: etcd-backup-hostpath
 {% endif %}
+{% if ike_base_components.etcd.backup.storage.type  == "storageclass" %}
+  storageClassName: "{{ ike_base_components.etcd.backup.storage.storageclass.name }}"
+{% endif %}
+{% if ike_base_components.etcd.backup.storage.type  == "persistentvolume" %}
+  storageClassName: "{{ ike_base_components.etcd.backup.storage.persistentvolume.storageclass }}"
+{% endif %}
   resources:
     requests:
       storage: {{ ike_base_components.etcd.backup.storage.capacity }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+{% if ike_base_components.etcd.backup.storage.type  == "persistentvolume" %}
+  volumeName: "{{ ike_base_components.etcd.backup.storage.persistentvolume.name }}"
+{% endif %}
 ---
 {% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
 apiVersion: v1
@@ -126,6 +138,4 @@ spec:
   hostPath:
     path: "{{ ike_base_components.etcd.backup.storage.hostpath.path  }}"
 {% endif %}
-
-
 {% endif %}
