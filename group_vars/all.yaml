@@ -19,20 +19,17 @@ ike_base_components:
     update: false
     check: true
     data_path: /var/lib/etcd
-    backup:
-      enabled: false
-      crontab: "*/30 * * * *"
-      storage:
-        enabled: False
+    storage:
         capacity: 10Gi
-        type: ""
+        enabled: False
+        type: "hostpath"
         storageclass:
           name: ""
-        pv:
+        persistentvolume:
           name: ""
         hostpath:
-          nodename: ""
-          path: /var/backup-etcd
+          nodename: "master1"
+          path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
     update: false
