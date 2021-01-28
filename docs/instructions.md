@@ -334,6 +334,17 @@ This section allows you to configure your ETCD deployment.
 | `ike_base_components.etcd.update` | Update current ETCD release to `ike_base_components.etcd.release` | **False** *(default)* |
 | `ike_base_components.etcd.check` | Check ETCD cluster Status/Size/Health/Leader when running ike run | **True** *(default)* |
 | `ike_base_components.etcd.data_path` | Path where ETCD save data on ETCD hosts | **/var/lib/etcd** *(default)* |
+| `ike_base_components.etcd.backup.enabled` | Enable etcd backup Pod | **False** *(default)* |
+| `ike_base_components.etcd.backup.crontab` | CronTab used to run ETCD Backup | **"*/30 * * * *"** *(default)* |
+| `ike_base_components.etcd.backup.storage.enabled` | Enable persistent Storage for ETCD Backups | **False** *(default)* |
+| `ike_base_components.etcd.backup.storage.capacity` | Storage Size used to store ETCD Backups | **10Gi** *(default)* |
+| `ike_base_components.etcd.backup.storage.type` | Type of Storage to use when `ike_base_components.etcd.backup.storage.enabled` is set to **True** | **hostpath** *(default)*, storageclass, persistentvolume |
+| `ike_base_components.etcd.backup.storage.storageclass.name` | StorageClass name used to store ETCD Backups. Used only if `ike_base_components.etcd.backup.storage.type` is set to **storageclass** | **default-jiva** *(default)* |
+| `ike_base_components.etcd.backup.storage.persistentvolume.name` | PersistentVolume name used to store ETCD Backups. Used only if `ike_base_components.etcd.backup.storage.type` is set to **persistentvolume** | **my-pv-backup-etcd** *(default)* |
+| `ike_base_components.etcd.backup.storage.persistentvolume.storageclass` | StorageClass name used to create persistentvolume set in `ike_base_components.etcd.backup.storage.persistentvolume.name`. Used only if `ike_base_components.etcd.backup.storage.type` is set to **persistentvolume** | **/var/lib/etcd** *(default)* |
+| `ike_base_components.etcd.backup.storage.hostpath.nodename` | K8S node (master/worker/storage) where backups are stored locally. Used only if `ike_base_components.etcd.backup.storage.type` is set to **hostpath** | **master1** *(default)* |
+| `ike_base_components.etcd.backup.storage.hostpath.path` | Path on `ike_base_components.etcd.backup.storage.hostpath.nodename` where ETCD backups are stored | **/var/etcd-backup** *(default)* |
+
 
 ### Kubernetes
 

@@ -14,11 +14,26 @@ ike_pki:
     rotate_certificats: False
 
 ike_base_components:
-  etcd:
+    etcd:
     release: v3.4.14
-    update: false
+    update: False
     check: true
     data_path: /var/lib/etcd
+    backup:
+      enabled: False
+      crontab: "*/30 * * * *"
+      storage:
+        capacity: 10Gi
+        enabled: False
+        type: "storageclass"
+        storageclass:
+          name: "default-jiva"
+        persistentvolume:
+          name: "my-pv-backup-etcd"
+          storageclass: "my-storageclass-name"
+        hostpath:
+          nodename: "master1"
+          path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
     update: false
@@ -40,7 +55,7 @@ ike_network:
   nodeport:
     range: 30000-32000
   external_loadbalancing:
-    enabled: True
+    enabled: False
     ip_range: 10.10.20.50-10.10.20.250
     secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
   kube_proxy:
