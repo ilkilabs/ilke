@@ -16,6 +16,7 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kubelet \
 {% else %}
 ExecStart=/usr/local/bin/kubernetes/node/bin/kubelet \
 {% endif %}
+  --hostname-override={{ ansible_hostname }} \
   --config=/etc/kubernetes/manifests/kubelet-config.yaml \
 {% if ike_base_components.container.engine == 'docker' %}
   --container-runtime=docker \
