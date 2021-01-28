@@ -26,6 +26,21 @@ spec:
     spec:
       template:
         spec:
+          tolerations:
+            # Make sure backup pod gets scheduled on all nodes.
+            - effect: NoSchedule
+              operator: Exists
+            # Mark the pod as a critical add-on for rescheduling.
+            - key: CriticalAddonsOnly
+              operator: Exists
+            - effect: NoExecute
+              operator: Exists
+{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+          nodeSelector:
+            kubernetes.io/hostname: {{ ike_base_components.etcd.backup.storage.hostpath.nodename }}
+{% endif %}
+{% endif %}
           restartPolicy: Never
           containers:
           - name: backup-etcd
@@ -55,6 +70,10 @@ spec:
               - name: script-backup-etcd
                 mountPath: /opt/backup_etcd/
                 readOnly: false
+{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+              - name: backup-etcd-dir
+                mountPath: /var/backup_etcd/
+{% endif %}
           volumes:
             - name: script-backup-etcd
               configMap:
@@ -69,3 +88,44 @@ spec:
             - name: etcdctl-key
               secret:
                 secretName: etcd-healthcheck-client.key
+{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+            - name: backup-etcd-dir
+              persistentVolumeClaim:
+                claimName: backup-etcd
+{% endif %}
+{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backup-etcd
+  namespace: kube-system
+spec:
+{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+  storageClassName: etcd-backup-hostpath
+{% endif %}
+  resources:
+    requests:
+      storage: {{ ike_base_components.etcd.backup.storage.capacity }}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: backup-etcd-hostpath
+  namespace: kube-system
+spec:
+  storageClassName: etcd-backup-hostpath
+  capacity:
+    storage: {{ ike_base_components.etcd.backup.storage.capacity  }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "{{ ike_base_components.etcd.backup.storage.hostpath.path  }}"
+{% endif %}
+
+
+{% endif %}
