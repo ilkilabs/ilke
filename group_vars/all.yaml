@@ -22,6 +22,16 @@ ike_base_components:
     backup:
       enabled: false
       crontab: "*/30 * * * *"
+      storage:
+        enabled: False
+        type: ""
+        storageclass:
+          name: ""
+        pv:
+          name: ""
+        hostpath:
+          node_label: ""
+          path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
     update: false
