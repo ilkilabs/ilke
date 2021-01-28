@@ -31,7 +31,7 @@ ike_base_components:
           name: ""
         hostpath:
           capacity: 10Gi
-          node_label: ""
+          nodename: ""
           path: /var/backup-etcd
   kubernetes:
     release: v1.20.2
