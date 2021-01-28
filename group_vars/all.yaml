@@ -29,10 +29,10 @@ ike_base_components:
         storageclass:
           name: "default-jiva"
         persistentvolume:
-          name: "backup-etcd-hostpath"
-          storageclass: "etcd-backup-hostpath"
+          name: "my-pv-backup-etcd"
+          storageclass: "my-storageclass-name"
         hostpath:
-          nodename: "worker1"
+          nodename: "master1"
           path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
