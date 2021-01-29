@@ -11,12 +11,12 @@ Requires=containerd.service
 {% endif %}
 
 [Service]
-{% if ansible_hostname in groups['masters'] %}
+{% if ansible_fqdn in groups['masters'] %}
 ExecStart=/usr/local/bin/kubernetes/server/bin/kubelet \
 {% else %}
 ExecStart=/usr/local/bin/kubernetes/node/bin/kubelet \
 {% endif %}
-  --hostname-override={{ ansible_hostname }} \
+  --hostname-override={{ ansible_fqdn }} \
   --config=/etc/kubernetes/manifests/kubelet-config.yaml \
 {% if ike_base_components.container.engine == 'docker' %}
   --container-runtime=docker \

@@ -1,4 +1,3 @@
-
 [deploy]
 deploy ansible_connection=local
 
@@ -26,4 +25,3 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
-
