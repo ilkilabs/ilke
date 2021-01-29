@@ -14,7 +14,7 @@ ike_pki:
     rotate_certificats: False
 
 ike_base_components:
-    etcd:
+  etcd:
     release: v3.4.14
     update: False
     check: true
