@@ -16,6 +16,7 @@ ExecStart=/usr/local/bin/kubernetes/node/bin/kube-proxy \
   --ipvs-scheduler={{ ike_network.kube_proxy.algorithm }} \
 {% endif %}
 {% endif %}
+  --hostname-override={{ ansible_hostname }} \
   --config=/etc/kubernetes/manifests/kube-proxy-config.yaml
 Restart=on-failure
 RestartSec=5
