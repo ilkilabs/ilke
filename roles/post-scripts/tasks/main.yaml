@@ -15,7 +15,7 @@
 
 - name: Install MetalLB Layer2
   include_tasks: metallb_l2.yaml
-  when: ike_features.storage.enabled | bool == True
+  when: ike_network.external_loadbalancing.enabled | bool == True
 
 - name: Install Metrics-Server
   include_tasks: metrics-server.yaml
