@@ -147,7 +147,7 @@ This file alows you to configure default settings for your Ansible server.
 
 The first file to modify is ["./hosts"](../hosts). This file contains all architecture information about your K8S Cluster.
 
-**All K8S servers names must be filled in by their hostname**. You can run ```hostname -s``` to get it.
+**All K8S servers names must be filled in by their FQDN**. You can run ```hostname -f``` on your hosts to get it.
 
 The next Sample deploys K8S components in HA mode on 6 nodes (3 **etcd/masters** nodes, 3 **workers** nodes) :
 
