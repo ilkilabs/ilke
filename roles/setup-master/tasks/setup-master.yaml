@@ -10,7 +10,7 @@
 
 - name: Create /var/logs/kubernetes dir
   file:
-    path: /etc/kubernetes/manifests
+    path: /var/log/kubernetes
     state: directory
     recurse: True
 
