@@ -168,7 +168,7 @@ data:
       #  action: drop
       relabel_configs:
         - source_labels: [__meta_kubernetes_namespace]
-          regex: default
+          regex: monitoring
           action: keep
         - source_labels: [__meta_kubernetes_pod_controller_name]
           regex: node-exporter
