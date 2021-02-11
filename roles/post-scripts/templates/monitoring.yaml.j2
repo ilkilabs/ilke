@@ -147,6 +147,7 @@ metadata:
   namespace: monitoring
 data:
   prometheus.yaml: |
+{% raw %}
     global:
       scrape_interval: 10s
       scrape_timeout: 5s
@@ -179,6 +180,7 @@ data:
           regex:
           action: drop
       scheme: http
+{% endraw %}
 ---
 apiVersion: apps/v1
 kind: Deployment
