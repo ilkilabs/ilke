@@ -27,7 +27,7 @@
 
 - name: Create /var/logs/kubernetes directory
   file:
-    path: /var/logs/kubernetes
+    path: /var/log/kubernetes
     state: directory
     recurse: True
 
