@@ -17,6 +17,8 @@ ExecStart=/usr/local/bin/kubernetes/node/bin/kube-proxy \
 {% endif %}
 {% endif %}
   --hostname-override={{ ansible_fqdn }} \
+  --log-dir=/var/log/kubernetes \
+  --logtostderr=false \
   --config=/etc/kubernetes/manifests/kube-proxy-config.yaml
 Restart=on-failure
 RestartSec=5

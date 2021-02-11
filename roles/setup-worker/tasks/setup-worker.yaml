@@ -25,6 +25,12 @@
     state: directory
     recurse: True
 
+- name: Create /var/logs/kubernetes directory
+  file:
+    path: /var/log/kubernetes
+    state: directory
+    recurse: True
+
 - name: Download Kubernetes node binaries
   unarchive:
     src: https://dl.k8s.io/{{ ike_base_components.kubernetes.release }}/kubernetes-node-linux-amd64.tar.gz

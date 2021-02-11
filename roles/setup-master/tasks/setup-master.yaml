@@ -8,6 +8,12 @@
     mode: '644'
     recurse: True
 
+- name: Create /var/logs/kubernetes dir
+  file:
+    path: /var/log/kubernetes
+    state: directory
+    recurse: True
+
 - name: Download Kubernetes server binaries
   unarchive:
     src: https://dl.k8s.io/{{ ike_base_components.kubernetes.release }}/kubernetes-server-linux-amd64.tar.gz
