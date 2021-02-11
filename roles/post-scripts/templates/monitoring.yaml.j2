@@ -30,14 +30,15 @@ spec:
       - name: node-exporter
         image: quay.io/prometheus/node-exporter:v1.0.1
         args:
-          - --path.rootfs=/host
+          - --path.procfs=/host/proc
+          - --path.sysfs=/host/sys
           - --no-collector.arp
           - --no-collector.bcache
           - --no-collector.bonding
           - --no-collector.conntrack
-          # --no-collector.cpu
+          #- --no-collector.cpu
           - --no-collector.cpufreq
-          - --no-collector.diskstats
+          #- --no-collector.diskstats
           - --no-collector.edac
           - --no-collector.entropy
           - --no-collector.filefd
@@ -48,12 +49,12 @@ spec:
           - --no-collector.loadavg
           - --no-collector.mdadm
           #- --no-collector.meminfo
-          - --no-collector.netclass
-          - --no-collector.netdev
-          - --no-collector.netstat
+          #- --no-collector.netclass
+          #- --no-collector.netdev
+          #- --no-collector.netstat
           - --no-collector.nfs
           - --no-collector.nfsd
-          - --no-collector.pressure
+          #- --no-collector.pressure
           - --no-collector.rapl
           - --no-collector.schedstat
           - --no-collector.sockstat
@@ -64,7 +65,7 @@ spec:
           - --no-collector.time
           - --no-collector.timex
           - --no-collector.udp_queues
-          - --no-collector.uname
+          #- --no-collector.uname
           - --no-collector.vmstat
           - --no-collector.xfs
           - --no-collector.zfs
