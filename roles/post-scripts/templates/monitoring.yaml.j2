@@ -31,43 +31,43 @@ spec:
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
-          - --no-collector.arp
-          - --no-collector.bcache
-          - --no-collector.bonding
-          - --no-collector.conntrack
+          #- --no-collector.arp
+          #- --no-collector.bcache
+          #- --no-collector.bonding
+          #- --no-collector.conntrack
           #- --no-collector.cpu
-          - --no-collector.cpufreq
+          #- --no-collector.cpufreq
           #- --no-collector.diskstats
-          - --no-collector.edac
-          - --no-collector.entropy
-          - --no-collector.filefd
+          #- --no-collector.edac
+          #- --no-collector.entropy
+          #- --no-collector.filefd
           #- --no-collector.filesystem
-          - --no-collector.hwmon
-          - --no-collector.infiniband
-          - --no-collector.ipvs
+          #- --no-collector.hwmon
+          #- --no-collector.infiniband
+          #- --no-collector.ipvs
           #- --no-collector.loadavg
-          - --no-collector.mdadm
+          #- --no-collector.mdadm
           #- --no-collector.meminfo
           #- --no-collector.netclass
           #- --no-collector.netdev
           #- --no-collector.netstat
-          - --no-collector.nfs
-          - --no-collector.nfsd
+          #- --no-collector.nfs
+          #- --no-collector.nfsd
           #- --no-collector.pressure
-          - --no-collector.rapl
-          - --no-collector.schedstat
-          - --no-collector.sockstat
-          - --no-collector.softnet
-          - --no-collector.stat
-          - --no-collector.textfile
-          - --no-collector.thermal_zone
-          - --no-collector.time
-          - --no-collector.timex
-          - --no-collector.udp_queues
+          #- --no-collector.rapl
+          #- --no-collector.schedstat
+          #- --no-collector.sockstat
+          #- --no-collector.softnet
+          #- --no-collector.stat
+          #- --no-collector.textfile
+          #- --no-collector.thermal_zone
+          #- --no-collector.time
+          #- --no-collector.timex
+          #- --no-collector.udp_queues
           #- --no-collector.uname
           #- --no-collector.vmstat
-          - --no-collector.xfs
-          - --no-collector.zfs
+          #- --no-collector.xfs
+          #- --no-collector.zfs
         ports:
         - name: metrics
           containerPort: 9100
