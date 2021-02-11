@@ -20,6 +20,8 @@ spec:
       labels:
         app: node-exporter
     spec:
+      hostNetwork: true
+      hostPID: true
       tolerations:
       - key: node-role.kubernetes.io/master
         operator: Exists
@@ -70,12 +72,17 @@ spec:
         - name: metrics
           containerPort: 9100
         volumeMounts:
-        - name: host
-          mountPath: /host
+        - name: proc
+          mountPath: /host/proc
+        - name: sys
+          mountPath: /host/sys
       volumes:
-      - name: host
-        hostPath:
-          path: /
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: sys
+          hostPath:
+            path: /sys
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
