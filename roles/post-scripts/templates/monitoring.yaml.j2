@@ -20,6 +20,9 @@ spec:
       labels:
         app: node-exporter
     spec:
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
       hostNetwork: true
       hostPID: true
       tolerations:
