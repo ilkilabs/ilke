@@ -213,6 +213,24 @@ spec:
         ports:
         - name: metrics
           containerPort: 9090
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: 9090
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: 9090
+          failureThreshold: 1
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /-/healthy
+            port: 9090
+          failureThreshold: 30
+          periodSeconds: 10
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/prometheus
