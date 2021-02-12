@@ -4,7 +4,6 @@ kind: Namespace
 metadata:
   name: monitoring
 ---
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -43,6 +42,7 @@ spec:
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
+          - --web.config="/etc/node-exporter/web-config.yml"
           #- --no-collector.arp
           #- --no-collector.bcache
           #- --no-collector.bonding
@@ -88,6 +88,8 @@ spec:
           mountPath: /host/proc
         - name: sys
           mountPath: /host/sys
+        - name: web-config
+          mountPath: /etc/node-exporter
       volumes:
         - name: proc
           hostPath:
@@ -95,6 +97,9 @@ spec:
         - name: sys
           hostPath:
             path: /sys
+        - name: web-config
+          configMap:
+            name: web-config-node-exporter
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
