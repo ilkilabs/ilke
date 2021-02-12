@@ -91,6 +91,7 @@ spec:
         - name: web-config
           mountPath: /web-config.yml
           subPath: web-config.yml
+          mode: 0777
       volumes:
         - name: proc
           hostPath:
