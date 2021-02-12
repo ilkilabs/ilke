@@ -42,7 +42,7 @@ spec:
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
-          - --web.config="/etc/node-exporter/web-config.yml"
+          #- --web.config="/etc/node-exporter/web-config.yml"
           #- --no-collector.arp
           #- --no-collector.bcache
           #- --no-collector.bonding
@@ -188,11 +188,11 @@ data:
         - source_labels: [__meta_kubernetes_pod_container_port_number]
           regex: 9100
           action: keep
-      scheme: https
-      tls_config:
-        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        insecure_skip_verify: true
-      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      scheme: http
+      #tls_config:
+      #  ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      #  insecure_skip_verify: true
+      #bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 {% endraw %}
 ---
 apiVersion: apps/v1
