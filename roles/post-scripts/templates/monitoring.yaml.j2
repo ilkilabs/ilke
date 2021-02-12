@@ -4,6 +4,18 @@ kind: Namespace
 metadata:
   name: monitoring
 ---
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config-node-exporter
+  namespace: monitoring
+data:
+  web-config.yml: |
+    tls_server_config:
+      cert_file: /var/tls-monitoring/crt.pem
+      key_file: /var/tls-monitoring/key.pem
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
