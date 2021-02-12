@@ -42,7 +42,7 @@ spec:
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
-          #- --web.config="/etc/node-exporter/web-config.yml"
+          - --web.config="web-config.yml"
           #- --no-collector.arp
           #- --no-collector.bcache
           #- --no-collector.bonding
@@ -89,7 +89,7 @@ spec:
         - name: sys
           mountPath: /host/sys
         - name: web-config
-          mountPath: /etc/node-exporter/web-config.yml
+          mountPath: /web-config.yml
           subPath: web-config.yml
       volumes:
         - name: proc
