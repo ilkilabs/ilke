@@ -27,7 +27,7 @@ spec:
       hostPID: true
       containers:
       - name: node-exporter
-        image: quay.io/prometheus/node-exporter:v1.0.1
+        image: quay.io/prometheus/node-exporter:v1.1.0
         args:
           - --path.procfs=/host/proc
           - --path.sysfs=/host/sys
@@ -192,7 +192,7 @@ spec:
       serviceAccountName: prometheus
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.20.0
+        image: prom/prometheus:v2.24.1
         args:
           - --web.enable-lifecycle
           - --web.listen-address=0.0.0.0:9090
