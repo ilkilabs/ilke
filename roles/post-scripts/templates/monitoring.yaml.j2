@@ -155,13 +155,6 @@ data:
     - job_name: 'node-exporter'
       kubernetes_sd_configs:
       - role: pod
-      #
-      # Exemple de suppression de Metric non utile
-      #
-      #metric_relabel_configs:
-      #- source_labels: [__name__]
-      #  regex: 'node_cpu_guest_seconds_total'
-      #  action: drop
       relabel_configs:
         - source_labels: [__meta_kubernetes_namespace]
           regex: monitoring
@@ -169,16 +162,14 @@ data:
         - source_labels: [__meta_kubernetes_pod_controller_name]
           regex: node-exporter
           action: keep
-        #- source_labels: [__meta_kubernetes_pod_label_component]
-        #  regex: alertmanager
-        #  action: keep
-        #- source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_probe]
-        #  regex: {{ index $root.Values.alertmanager.podAnnotations "prometheus.io/probe" | default ".*" }}
-        #  action: keep
         - source_labels: [__meta_kubernetes_pod_container_port_number]
           regex: 9100
           action: keep
-      scheme: http
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
 {% endraw %}
 ---
 apiVersion: apps/v1
