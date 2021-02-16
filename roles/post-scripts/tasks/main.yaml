@@ -10,6 +10,10 @@
   include_tasks: kube-router.yaml
   when: ike_network.cni_plugin == 'kube-router'
 
+- name: Include Tasks Cilium
+  include_tasks: cilium.yaml
+  when: ike_network.cni_plugin == 'cilium'
+
 - name: Deploy CoreDNS to K8S
   include_tasks: coredns.yaml
 
