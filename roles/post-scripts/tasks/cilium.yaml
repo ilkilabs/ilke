@@ -1,0 +1,34 @@
+---
+- name: Create tempdir
+  tempfile:
+    state: directory
+    suffix: cilium
+  register: cilium_tempdir
+  changed_when: false
+
+- name: Render templates
+  template:
+    dest: "{{ cilium_tempdir.path }}/cilium.yaml"
+    src: "cilium.yaml.j2"
+  changed_when: false
+
+- name: Apply templates
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ cilium_tempdir.path }}/cilium.yaml
+  register: apply_cilium
+  changed_when: >
+    apply_cilium.stdout is search("created")
+    or apply_cilium.stdout is search("configured")
+- name: Cleanup tempdir
+  file:
+    state: absent
+    path: "{{ cilium_tempdir.path }}"
+  changed_when: false
+
+#- name: Wait for Cilium to be deployed
+#  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf get deploy -n kube-system calico-kube-controllers
+#  changed_when: false
+#  register: calico_deployment
+#  until: calico_deployment.stdout.find("1/1") != -1
+#  retries: 300
+#  delay: 10
+#  run_once: true
