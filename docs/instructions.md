@@ -77,7 +77,7 @@ We actually configure the proper VM size for your ETCD depending on the number o
 
 # Nodes Setup
 
-This section explains how to setup notes before deploying Kubernetes Clusters with IKE.
+This section explains how to setup nodes before deploying Kubernetes Clusters with IKE.
 
 ## Deployment node
 
@@ -91,11 +91,54 @@ The prerequisites are:
 - git
 - curl
 
-Then clone or download the git branch / release you want to use.
+Then clone or download the IKE git branch / release you want to use.
 
 You can run the following command to automatically install those packages and clone the latest stable IKE distribution:
 ```
 bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
+```
+
+### Use Python Virtual Environment
+
+Sometimes it is better to run Ansible and all its dependences into a specific *Python Virtual Environment*. This will make it easier for you to install Ansible and all its dependences needed by IKE without take the risk to break your existing Python/Python3 installation.
+
+You can run Ansible in a pre-installed *Python Virtual Environment* by following:
+
+```
+# Download pre-installed Python Virtual Environment for IKE
+
+
+```
+
+You can alernativelly create your own *Python Virtual Environment* from scratch by following:
+
+```
+# Install on deploy machine python3, pyhton3-pip and python3-venv
+apt update
+apt install -yqq python3 python3-pip python3-venv
+
+# Create a Python Virtual Environment
+python3 -m venv /usr/local/ike-env
+
+# Tell to your shell to use this Python Virtual Environment
+source /usr/local/ike-env/bin/activate
+
+# Then install Ansible and Netaddr (needed by IKE)
+pip3 install ansible
+pip3 install netddr
+
+# You can alternatively install packages with "ike-core/requirements.txt" file located on IKE
+pip3 install -r ike-core/requirements.txt
+
+# Validate ansible is installed and use your Python Virtual Environment
+ansible --version
+
+#ansible 2.10.5
+#  config file = None
+#  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+#  ansible python module location = /usr/local/ike-env/lib/python3.8/site-packages/ansible
+#  executable location = /usr/local/ike-env/bin/ansible
+#  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
 ```
 
 
