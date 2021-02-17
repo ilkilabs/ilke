@@ -25,7 +25,7 @@ rules:
     - system:serviceaccount:openebs:openebs-maya-operator
     - system:serviceaccount:metallb-system:speaker
     - system:serviceaccount:metallb-system:controller
-
+    - system:serviceaccount:ingress-traefik:traefik-ingress-controller
   # Do not log from collector
   - level: None
     users:
