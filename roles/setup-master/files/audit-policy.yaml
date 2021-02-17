@@ -4,14 +4,6 @@ rules:
   - level: None
     userGroups: ["system:serviceaccounts:kube-system"]
   - level: None
-    # Ingress controller reads `configmaps/ingress-uid` through the unsecured port.
-    users: ["system:unsecured"]
-    namespaces: ["kube-system"]
-    verbs: ["get"]
-    resources:
-      - group: "" # core
-        resources: ["configmaps"]
-  - level: None
     users: ["kubelet"] # legacy kubelet identity
     verbs: ["get"]
     resources:
