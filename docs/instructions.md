@@ -105,7 +105,29 @@ You can run Ansible in a pre-installed *Python Virtual Environment* by following
 
 ```
 # Download pre-installed Python Virtual Environment for IKE
-curl https://github.com/ilkilabs/ike-core/releases/download/V1.0.0-PVE/ike-env.tar.gz --output /usr/local/ike-env.tar.gz
+wget https://github.com/ilkilabs/ike-core/releases/download/V1.0.0-PVE/ike-env.tar.gz /usr/local/
+
+# Unarchive the Python Virtual Environment
+tar -xvf /usr/local/ike-env.tar.gz
+
+# Delete archive
+rm -rf /usr/local/ike-env.tar.gz
+
+# Tell to your shell to use this Python Virtual Environment
+source /usr/local/ike-env/bin/activate
+
+# Validate ansible is installed and use your Python Virtual Environment
+ansible --version
+
+#ansible 2.10.5
+#  config file = None
+#  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+#  ansible python module location = /usr/local/ike-env/lib/python3.8/site-packages/ansible
+#  executable location = /usr/local/ike-env/bin/ansible
+#  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
+
+# If you whant to stop using the Python Virtual Environment, just execute the following command:
+deactivate
 
 ```
 
