@@ -26,6 +26,8 @@ rules:
     - system:serviceaccount:metallb-system:speaker
     - system:serviceaccount:metallb-system:controller
     - system:serviceaccount:ingress-traefik:traefik-ingress-controller
+    - system:serviceaccount:monitoring:metrics-prometheus-server
+
   # Do not log from collector
   - level: None
     users:
