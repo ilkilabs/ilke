@@ -1,8 +1,8 @@
 ﻿# AgoraKube
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Filkilab%2Fagorakube.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Filkilab%2Fagorakube?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Filkilabs%2Fagorakube.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Filkilabs%2Fagorakube?ref=badge_shield)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3104/badge)](https://bestpractices.coreinfrastructure.org/projects/3104)
-[![Build Status](https://travis-ci.org/ilkilab/agorakube.svg?branch=master)](https://travis-ci.org/ilkilab/agorakube)
+[![Build Status](https://travis-ci.org/ilkilabs/agorakube.svg?branch=master)](https://travis-ci.org/ilkilabs/agorakube)
 
 <p align="center">
 <img src="../../../images/agorakube-logo.svg" width="450" alt="Agorakube" title="Agorakube" />
@@ -16,7 +16,7 @@ Actuellement, Ubuntu 18.04 (Bionic) amd64 et Centos 7/8 sont pris en charge, mai
 
 La branche Master est stable.
 
-Lisez la documentation en [Anglais](https://github.com/ilkilab/agorakube/blob/master/README.md)
+Lisez la documentation en [Anglais](https://github.com/ilkilabs/agorakube/blob/master/README.md)
 
 Depuis novembre 2019, Agorakube est certifié par le "Kubernetes Conformance Program" et est un projet membre du [cncf landscape](https://landscape.cncf.io/selected=agora-kube).
 
@@ -54,12 +54,12 @@ Nous utilisons habituellement une machine virtuelle pour déployer chaque cluste
 #### Sur le noeud de "déploiement"
 Exécutez cette commande afin d'installer Ansible et de cloner le dépôt du projet :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube/master/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/agorakube/master/setup-deploy.sh)
 ```
 #### Sur les noeuds K8S
 Exécutez cette commande sur chaque noeud pour les mettre à jour et installer la dernière version de Python :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/agorakube/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/agorakube/master/setup-hosts.sh)
 ```
 
 ### Guide d'installation
@@ -68,17 +68,17 @@ Pour déployer votre cluster K8S, suivez ces [instructions](../../instructions.m
 
 ## Comment nous faire des retours
 
-Tous les retours d'expérience sont les bienvenus via la [page GitHub](https://github.com/ilkilab/agorakube) en tant qu'issue ou pull request.
+Tous les retours d'expérience sont les bienvenus via la [page GitHub](https://github.com/ilkilabs/agorakube) en tant qu'issue ou pull request.
 
 Vous pouvez également remonter les failles de sécurité par ces moyens.
 
 ## Comment contribuer
 
-Voir le [Code Of Conduct](https://github.com/ilkilab/agorakube/blob/master/CODE_OF_CONDUCT.md) et [CONTRIBUTING](https://github.com/ilkilab/agorakube/blob/master/docs/CONTRIBUTING.md) pour plus d'informations.
+Voir le [Code Of Conduct](https://github.com/ilkilabs/agorakube/blob/master/CODE_OF_CONDUCT.md) et [CONTRIBUTING](https://github.com/ilkilabs/agorakube/blob/master/docs/CONTRIBUTING.md) pour plus d'informations.
 
 ## Communauté
 
-Rejoignez la communauté Agorakube pour discuter et poser des questions : [Agorakube Slack](http://slack.agorakube.ilkilabs.io/)
+Rejoignez la communauté Agorakube pour discuter et poser des questions : [Agorakube Slack](http://slack.agorakube.ilkilabss.io/)
 
 Channels :
 - **#general** - Pour usage  général (news, events...)
@@ -95,4 +95,4 @@ si ce contenu n'est pas exécutable, incluant le texte extrait du code, c'est "(
 
 Comme presque tout logiciel aujourd'hui, ce logiciel dépend d'autres composants ayant leurs propres licences. Les composants donc nous dépendont ne sont pas tous sous licence APACHE 2.0, mais tous les composants *requis* sont sous licence de type FLOSS. Nous prévenons les problèmes de licence à l'aide de différent processus (voir [Contribuer](../../CONTRIBUTING.md))
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Filkilab%2Fagorakube.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Filkilab%2Fagorakube?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Filkilabs%2Fagorakube.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Filkilabs%2Fagorakube?ref=badge_large)
