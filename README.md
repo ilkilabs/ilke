@@ -51,12 +51,12 @@ We regularly use a machine to deploy every cluster. We only use it for deploymen
 #### On the "deployment" node
 Execute this command in order to install Ansible and clone the repository :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
 ```
 #### On the K8S nodes
 Execute this command on each node to update them and install the last version of Python : 
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-hosts.sh)
 ```
 
 ### Installation instructions
@@ -66,14 +66,14 @@ To deploy your K8S cluster follow these [instructions](docs/instructions.md).
 ## How to give feedback
 
 Every feedback is very welcome via the
-[GitHub site](https://github.com/ilkilab/ike-core)
+[GitHub site](https://github.com/ilkilabs/ike-core)
 as issues or pull (merge) requests.
 
 You can also give use vulnerability reports by this way.
 ## How to contribute
 
 
-See our [Code Of Conduct](https://github.com/ilkilab/agorakube/blob/core/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilab/agorakube/blob/core/docs/CONTRIBUTING.md) for more information.
+See our [Code Of Conduct](https://github.com/ilkilabs/agorakube/blob/core/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilabs/agorakube/blob/core/docs/CONTRIBUTING.md) for more information.
 
 ## Community
 

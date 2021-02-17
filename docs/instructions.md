@@ -95,7 +95,7 @@ Then clone or download the git branch / release you want to use.
 
 You can run the following command to automatically install those packages and clone the latest stable IKE distribution:
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
 ```
 
 
@@ -110,7 +110,7 @@ The prerequisites are:
 
 You can run the following command to automatically install those packages :
 ```
-bash <(curl -s https://raw.githubusercontent.com/ilkilab/ike-core/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-hosts.sh)
 ```
 
 ## SSH keys creation
