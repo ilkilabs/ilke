@@ -105,7 +105,7 @@ You can run Ansible in a pre-installed *Python Virtual Environment* by following
 
 ```
 # Download pre-installed Python Virtual Environment for IKE
-wget https://github.com/ilkilabs/ike-core/releases/download/V1.0.0-PVE/ike-env.tar.gz /usr/local/
+wget https://github.com/ilkilabs/ike-core/releases/download/V1.0.0-PVE/ike-env.tar.gz -P /usr/local/
 
 # Unarchive the Python Virtual Environment
 tar -xvf /usr/local/ike-env.tar.gz
