@@ -73,7 +73,7 @@ You can also give use vulnerability reports by this way.
 ## How to contribute
 
 
-See our [Code Of Conduct](https://github.com/ilkilabs/ike-core/blob/core/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilabs/ike-core/blob/core/docs/CONTRIBUTING.md) for more information.
+See our [Code Of Conduct](https://github.com/ilkilabs/ike-core/blob/master/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilabs/ike-core/blob/master/docs/CONTRIBUTING.md) for more information.
 
 ## Community
 
