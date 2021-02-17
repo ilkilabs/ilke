@@ -86,10 +86,9 @@ The deployment node is an Ansible server which contains all Ansible roles and va
 The prerequisites are:
 - SSH Server (like openssh-server)
 - Python3 & pip3
-- Ansible
-- netaddr
 - git
 - curl
+- with pip3 : ansible, netaddr
 
 Then clone or download the IKE git branch / release you want to use.
 
