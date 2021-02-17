@@ -77,7 +77,7 @@ See our [Code Of Conduct](https://github.com/ilkilabs/agorakube/blob/core/CODE_O
 
 ## Community
 
-Join IKE's community for discussion and ask questions : [IKE's Slack](http://slack.agorakube.ilkilabss.io/)
+Join IKE's community for discussion and ask questions : [IKE's Slack](http://slack.agorakube.ilkilabs.io/)
 
 Channels :
 - **#general** - For general purpose (news, events...)
