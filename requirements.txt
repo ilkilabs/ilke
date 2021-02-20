@@ -9,3 +9,4 @@ packaging==20.9
 pycparser==2.20
 pyparsing==2.4.7
 PyYAML==5.4.1
+selinux==0.2.1
