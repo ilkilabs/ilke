@@ -121,6 +121,7 @@ pip3 install --upgrade pip
 # Then install Ansible and Netaddr (needed by IKE)
 pip3 install ansible
 pip3 install netddr
+pip3 install selinux
 
 # You can alternatively install packages with "ike-core/requirements.txt" file located on IKE
 pip3 install -r ike-core/requirements.txt
