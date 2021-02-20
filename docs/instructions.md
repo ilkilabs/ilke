@@ -101,37 +101,8 @@ bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-
 
 Sometimes it is better to run Ansible and all its dependences into a specific *Python Virtual Environment*. This will make it easier for you to install Ansible and all its dependences needed by IKE without take the risk to break your existing Python/Python3 installation.
 
-You can run Ansible in a pre-installed *Python Virtual Environment* by following:
 
-```
-# Download pre-installed Python Virtual Environment for IKE
-wget https://github.com/ilkilabs/ike-core/releases/download/V1.0.0-PVE/ike-env.tar.gz -P /usr/local/
-
-# Unarchive the Python Virtual Environment
-tar -xvf /usr/local/ike-env.tar.gz -C /usr/local/
-
-# Delete archive
-rm -rf /usr/local/ike-env.tar.gz
-
-# Tell to your shell to use this Python Virtual Environment
-source /usr/local/ike-env/bin/activate
-
-# Validate ansible is installed and use your Python Virtual Environment
-ansible --version
-
-#ansible 2.10.5
-#  config file = None
-#  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-#  ansible python module location = /usr/local/ike-env/lib/python3.8/site-packages/ansible
-#  executable location = /usr/local/ike-env/bin/ansible
-#  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
-
-# If you whant to stop using the Python Virtual Environment, just execute the following command:
-deactivate
-
-```
-
-You can alernativelly create your own *Python Virtual Environment* from scratch by following:
+You can create your own *Python Virtual Environment* from scratch by following:
 
 ```
 # Install on deploy machine python3, pyhton3-pip and python3-venv
