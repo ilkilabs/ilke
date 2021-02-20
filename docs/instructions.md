@@ -115,6 +115,9 @@ python3 -m venv /usr/local/ike-env
 # Tell to your shell to use this Python Virtual Environment
 source /usr/local/ike-env/bin/activate
 
+# Update PIP
+pip3 install --upgrade pip
+
 # Then install Ansible and Netaddr (needed by IKE)
 pip3 install ansible
 pip3 install netddr
