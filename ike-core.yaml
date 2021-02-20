@@ -23,7 +23,6 @@
   become: true
   roles:
     - setup-master
-#    - configure-kubeconfig
     - install-cni
     - install-runtimes
     - setup-worker
@@ -36,7 +35,5 @@
 - hosts: deploy
   become: true
   roles:
-#    - install-kubectl
-#    - configure-kubeconfig
     - post-scripts
     - show-info
