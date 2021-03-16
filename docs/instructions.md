@@ -174,7 +174,7 @@ ssh-copy-id -i .ssh/id_rsa.pub yourUser@IP_OF_THE_HOST
 ```
 You have to execute this command for each node of your cluster
 
-Once your ssh keys have been pushed to all nodes, modify the file "ike/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
+Once your ssh keys have been pushed to all nodes, modify the file "ike-core/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
 
 # K8S Cluster Configuration
 
