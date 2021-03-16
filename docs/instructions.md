@@ -265,16 +265,31 @@ ike_pki:
     root_cn: "ILKI Kubernetes Engine"
     expirity: "+3650d"
   management:
-    rotate_certificats: false
+    rotate_certificats: False
 
 ike_base_components:
   etcd:
     release: v3.4.14
-    update: false
+    update: False
     check: true
     data_path: /var/lib/etcd
+    backup:
+      enabled: False
+      crontab: "*/30 * * * *"
+      storage:
+        capacity: 10Gi
+        enabled: False
+        type: "storageclass"
+        storageclass:
+          name: "default-jiva"
+        persistentvolume:
+          name: "my-pv-backup-etcd"
+          storageclass: "my-storageclass-name"
+        hostpath:
+          nodename: "master1"
+          path: /var/etcd-backup
   kubernetes:
-    release: v1.20.4
+    release: v1.20.2
     update: false
   container:
     engine: containerd
@@ -294,7 +309,7 @@ ike_network:
   nodeport:
     range: 30000-32000
   external_loadbalancing:
-    enabled: True
+    enabled: False
     ip_range: 10.10.20.50-10.10.20.250
     secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
   kube_proxy:
@@ -302,30 +317,34 @@ ike_network:
     algorithm: rr
 
 ike_features:
+  coredns:
+    release: "1.8.0"
+    replicas: 2
   storage:
-    enabled: true
-    release: "2.5.0"
+    enabled: false
+    release: "2.6.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
     hostpath:
       data_path: /var/local-hostpath
   dashboard:
-    enabled: true
-    generate_admin_token: true
+    enabled: false
+    generate_admin_token: false
+    release: v2.1.0
   metrics_server:
-    enabled: true
+    enabled: false
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.44.0
   monitoring:
-    enabled: true
-    persistent: true
+    enabled: false
+    persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: True
+ike_populate_etc_hosts: false
 
 # Security
 ike_encrypt_etcd_keys:
