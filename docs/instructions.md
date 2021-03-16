@@ -198,13 +198,13 @@ The next Sample deploys K8S components in HA mode on 6 nodes (3 **etcd/masters**
 
 ```
 [deploy]
-worker1 ansible_connection=local
+deploy ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 
 [masters]
-worker1  ansible_host=10.10.20.4
+master1  ansible_host=10.10.20.4
 
 [etcd]
-worker1  ansible_host=10.10.20.4
+master1  ansible_host=10.10.20.4
 
 [workers]
 worker2  ansible_host=10.10.20.5
@@ -214,13 +214,19 @@ worker3  ansible_host=10.10.20.6
 worker4 ansible_host=10.10.20.20
 
 [all:vars]
-advertise_masters=10.10.20.40
+advertise_masters=10.10.20.4
 #advertise_masters=kubernetes.localcluster.lan
 
 # SSH connection settings
-ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+ansible_ssh_extra_args=-o StrictHostKeyChecking=no
 ansible_user=vagrant
 ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
+
+# Python version
+
+# If centOS-7, use python2.7
+# If no-CentOS-7, use Python3
+ansible_python_interpreter=/usr/bin/python3
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
