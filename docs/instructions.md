@@ -109,6 +109,9 @@ You can create your own *Python Virtual Environment* from scratch by following:
 apt update
 apt install -yqq python3 python3-pip python3-venv
 
+# Only on Centos7
+yum install -y libselinux-python3
+
 # Create a Python Virtual Environment
 python3 -m venv /usr/local/ike-env
 
