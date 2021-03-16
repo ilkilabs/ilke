@@ -77,7 +77,7 @@ We actually configure the proper VM size for your ETCD depending on the number o
 
 # Nodes Setup
 
-This section explains how to setup notes before deploying Kubernetes Clusters with IKE.
+This section explains how to setup nodes before deploying Kubernetes Clusters with IKE.
 
 ## Deployment node
 
@@ -86,16 +86,61 @@ The deployment node is an Ansible server which contains all Ansible roles and va
 The prerequisites are:
 - SSH Server (like openssh-server)
 - Python3 & pip3
-- Ansible
-- netaddr
 - git
 - curl
+- with pip3 : ansible, netaddr
 
-Then clone or download the git branch / release you want to use.
+Then clone or download the IKE git branch / release you want to use.
 
 You can run the following command to automatically install those packages and clone the latest stable IKE distribution:
 ```
 bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
+```
+
+### Use Python Virtual Environment
+
+Sometimes it is better to run Ansible and all its dependences into a specific *Python Virtual Environment*. This will make it easier for you to install Ansible and all its dependences needed by IKE without take the risk to break your existing Python/Python3 installation.
+
+
+You can create your own *Python Virtual Environment* from scratch by following:
+
+```
+# Install on deploy machine python3, pyhton3-pip and python3-venv
+apt update
+apt install -yqq python3 python3-pip python3-venv
+
+# Only on Centos7
+yum install -y libselinux-python3
+
+# Create a Python Virtual Environment
+python3 -m venv /usr/local/ike-env
+
+# Tell to your shell to use this Python Virtual Environment
+source /usr/local/ike-env/bin/activate
+
+# Update PIP
+pip3 install --upgrade pip
+
+# Then install Ansible and Netaddr (needed by IKE)
+pip3 install ansible
+pip3 install netddr
+pip3 install selinux
+
+# You can alternatively install packages with "ike-core/requirements.txt" file located on IKE
+pip3 install -r ike-core/requirements.txt
+
+# Validate ansible is installed and use your Python Virtual Environment
+ansible --version
+
+#ansible 2.10.5
+#  config file = None
+#  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+#  ansible python module location = /usr/local/ike-env/lib/python3.8/site-packages/ansible
+#  executable location = /usr/local/ike-env/bin/ansible
+#  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
+
+# If you whant to stop using the Python Virtual Environment, just execute the following command:
+deactivate
 ```
 
 
@@ -129,7 +174,7 @@ ssh-copy-id -i .ssh/id_rsa.pub yourUser@IP_OF_THE_HOST
 ```
 You have to execute this command for each node of your cluster
 
-Once your ssh keys have been pushed to all nodes, modify the file "ike/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
+Once your ssh keys have been pushed to all nodes, modify the file "ike-core/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
 
 # K8S Cluster Configuration
 
@@ -153,13 +198,13 @@ The next Sample deploys K8S components in HA mode on 6 nodes (3 **etcd/masters**
 
 ```
 [deploy]
-worker1 ansible_connection=local
+deploy ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 
 [masters]
-worker1  ansible_host=10.10.20.4
+master1  ansible_host=10.10.20.4
 
 [etcd]
-worker1  ansible_host=10.10.20.4
+master1  ansible_host=10.10.20.4
 
 [workers]
 worker2  ansible_host=10.10.20.5
@@ -169,13 +214,19 @@ worker3  ansible_host=10.10.20.6
 worker4 ansible_host=10.10.20.20
 
 [all:vars]
-advertise_masters=10.10.20.40
+advertise_masters=10.10.20.4
 #advertise_masters=kubernetes.localcluster.lan
 
 # SSH connection settings
-ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+ansible_ssh_extra_args=-o StrictHostKeyChecking=no
 ansible_user=vagrant
 ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
+
+# Python version
+
+# If centOS-7, use python2.7
+# If no-CentOS-7, use Python3
+ansible_python_interpreter=/usr/bin/python3
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
@@ -220,16 +271,31 @@ ike_pki:
     root_cn: "ILKI Kubernetes Engine"
     expirity: "+3650d"
   management:
-    rotate_certificats: false
+    rotate_certificats: False
 
 ike_base_components:
   etcd:
     release: v3.4.14
-    update: false
+    update: False
     check: true
     data_path: /var/lib/etcd
+    backup:
+      enabled: False
+      crontab: "*/30 * * * *"
+      storage:
+        capacity: 10Gi
+        enabled: False
+        type: "storageclass"
+        storageclass:
+          name: "default-jiva"
+        persistentvolume:
+          name: "my-pv-backup-etcd"
+          storageclass: "my-storageclass-name"
+        hostpath:
+          nodename: "master1"
+          path: /var/etcd-backup
   kubernetes:
-    release: v1.20.4
+    release: v1.20.2
     update: false
   container:
     engine: containerd
@@ -249,7 +315,7 @@ ike_network:
   nodeport:
     range: 30000-32000
   external_loadbalancing:
-    enabled: True
+    enabled: False
     ip_range: 10.10.20.50-10.10.20.250
     secret_key: LGyt2l9XftOxEUIeFf2w0eCM7KjyQdkHform0gldYBKMORWkfQIsfXW0sQlo1VjJBB17shY5RtLg0klDNqNq4PAhNaub+olSka61LxV73KN2VaJY/snrZmHbdf/a7DfdzaeQ5pzP6D5O7zbUZwfb5ASOhNrG8aDMY3rkf4ZzHkc=
   kube_proxy:
@@ -257,30 +323,34 @@ ike_network:
     algorithm: rr
 
 ike_features:
+  coredns:
+    release: "1.8.0"
+    replicas: 2
   storage:
-    enabled: true
-    release: "2.5.0"
+    enabled: false
+    release: "2.6.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
     hostpath:
       data_path: /var/local-hostpath
   dashboard:
-    enabled: true
-    generate_admin_token: true
+    enabled: false
+    generate_admin_token: false
+    release: v2.1.0
   metrics_server:
-    enabled: true
+    enabled: false
   ingress:
     controller: nginx
-    release: v0.41.2
+    release: v0.44.0
   monitoring:
-    enabled: true
-    persistent: true
+    enabled: false
+    persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: True
+ike_populate_etc_hosts: false
 
 # Security
 ike_encrypt_etcd_keys:

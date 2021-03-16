@@ -1,5 +1,5 @@
 [deploy]
-deploy ansible_connection=local
+deploy ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 
 [masters]
 master1  ansible_host=10.10.20.4

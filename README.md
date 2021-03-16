@@ -44,23 +44,6 @@ This project is currently under active development so other customizable options
 
 ## How to install
 
-We regularly use a machine to deploy every cluster. We only use it for deployment.
-
-### Setup
-
-#### On the "deployment" node
-Execute this command in order to install Ansible and clone the repository :
-```
-bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
-```
-#### On the K8S nodes
-Execute this command on each node to update them and install the last version of Python : 
-```
-bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-hosts.sh)
-```
-
-### Installation instructions
-
 To deploy your K8S cluster follow these [instructions](docs/instructions.md).
 
 ## How to give feedback
