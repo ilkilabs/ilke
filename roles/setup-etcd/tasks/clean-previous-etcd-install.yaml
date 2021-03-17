@@ -1,5 +1,4 @@
 ---
----
 - name: Find old ETCD dir binaries
   find:
     path: /usr/bin/
