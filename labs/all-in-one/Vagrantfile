@@ -193,7 +193,7 @@ SCRIPT
 
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "bento/ubuntu-20.04"
+    config.vm.box = "bento/centos-7"
 	config.vm.define "kubernetes" do |kubernetes|
 	    kubernetes.vm.provision "shell", inline: $script2
 		kubernetes.vm.hostname = "kubernetes"
