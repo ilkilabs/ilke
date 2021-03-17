@@ -16,7 +16,7 @@ ike_pki:
 ike_base_components:
   etcd:
     release: v3.4.14
-    update: False
+    upgrade: False
     check: true
     data_path: /var/lib/etcd
     backup:
@@ -36,7 +36,7 @@ ike_base_components:
           path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
-    update: false
+    upgrade: false
   container:
     engine: containerd
 # release : Only Supported if container engine is set to docker
