@@ -41,7 +41,7 @@ ike_base_components:
     engine: containerd
 # release : Only Supported if container engine is set to docker
     release: ""
-#    update: false
+#    upgrade: false
 
 ike_network:
   cni_plugin: calico
