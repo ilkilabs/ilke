@@ -276,7 +276,7 @@ ike_pki:
 ike_base_components:
   etcd:
     release: v3.4.14
-    update: False
+    upgrade: False
     check: true
     data_path: /var/lib/etcd
     backup:
@@ -296,12 +296,12 @@ ike_base_components:
           path: /var/etcd-backup
   kubernetes:
     release: v1.20.2
-    update: false
+    upgrade: false
   container:
     engine: containerd
 # release : Only Supported if container engine is set to docker
     release: ""
-#    update: false
+#    upgrade: false
 
 ike_network:
   cni_plugin: calico
@@ -401,7 +401,7 @@ This section allows you to configure your ETCD deployment.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ike_base_components.etcd.release` | ETCD release that will be installed on etcd hosts | **v3.4.14** *(default)* |
-| `ike_base_components.etcd.update` | Update current ETCD release to `ike_base_components.etcd.release` | **False** *(default)* |
+| `ike_base_components.etcd.upgrade` | Upgrade current ETCD release to `ike_base_components.etcd.release` | **False** *(default)* |
 | `ike_base_components.etcd.check` | Check ETCD cluster Status/Size/Health/Leader when running ike run | **True** *(default)* |
 | `ike_base_components.etcd.data_path` | Path where ETCD save data on ETCD hosts | **/var/lib/etcd** *(default)* |
 | `ike_base_components.etcd.backup.enabled` | Enable etcd backup Pod | **False** *(default)* |
@@ -423,7 +423,7 @@ This section allows you to configure your Kubernetes deployment.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ike_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.20.4** *(default)* |
-| `ike_base_components.kubernetes.update` | Update current Kubernetes release to `ike_base_components.kubernetes.release` | **False** *(default)* |
+| `ike_base_components.kubernetes.upgrade` | Upgrade current Kubernetes release to `ike_base_components.kubernetes.release` | **False** *(default)* |
 
 ### Container Engine
 
@@ -433,7 +433,7 @@ This section allows you to configure your Container Engine taht will be deployed
 | --- | --- | --- |
 | `ike_base_components.container.engine`  | Container Engine to install (Containerd or Docker) on all Master/Worker/Storage hosts |  **containerd** *(default)*, or docker |
 | `ike_base_components.container.release` | Release of Container Engine to install - Supported only if `ike_base_components.container.engine` set to *docker*  | If **""** install latest release *(default)* |
-| `ike_base_components.container.update` | Update current Container Engine release to `ike_base_components.container.release` | **Will be available soon** (No effect) |
+| `ike_base_components.container.upgrade` | Upgrade current Container Engine release to `ike_base_components.container.release` | **Will be available soon** (No effect) |
 
 ## Network Settings
 
