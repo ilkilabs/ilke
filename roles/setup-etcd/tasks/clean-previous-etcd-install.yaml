@@ -2,6 +2,6 @@
 - name: Delete prevous etcd binaries
   file:
     state: absent
-    path: /usr/bin/etcd-{{ ike_base_components.etcd.release }}-linux-amd64
+    path: /usr/bin/etcd-{{ item }}-linux-amd64
   with_fileglob:
     - "/usr/bin/etcd-*-linux-amd64"
