@@ -4,7 +4,7 @@
 
 - name: Clean previous install of K8S
   include_tasks: clean-previous-k8s-install.yaml
-  when: ike_base_components.kubernetes.update | bool == True
+  when: ike_base_components.kubernetes.upgrade | bool == True
 
 - name: Include Setup
   include_tasks: setup-master.yaml
