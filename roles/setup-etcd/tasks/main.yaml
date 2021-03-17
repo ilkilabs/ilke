@@ -4,7 +4,7 @@
 
 - name: Delete previous ETCD install
   include_tasks: clean-previous-etcd-install.yaml
-  when: ike_base_components.etcd.update | bool == True
+  when: ike_base_components.etcd.upgrade | bool == True
 
 - name: Setup etcd server
   include_tasks: setup-etcd.yaml
