@@ -40,6 +40,8 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Metrics-Server
 * Kubernetes-Dashboard
 
+![IKE](./images/IKE.png)
+
 This project is currently under active development so other customizable options will be added soon.
 
 ## How to install
