@@ -1,11 +1,11 @@
 ---
 - name: Add Docker repository for Debian lilke distros
-  include_tasks: "repo-debian-lilke.yaml"
-  when: is_debian_lilke
+  include_tasks: "repo-debian-like.yaml"
+  when: is_debian_like
 
 - name: Add Docker repository for centos lilke distros
-  include_tasks: "repo-centos-lilke.yaml"
-  when: is_centos_lilke
+  include_tasks: "repo-centos-like.yaml"
+  when: is_centos_like
 
 - name: Install package Iptables
   package:
@@ -18,13 +18,13 @@
     path: /usr/sbin/iptables-legacy
   when: ansible_distribution|lower == 'debian'
 
-- name: Install Docker for Debian lilke distros
-  include_tasks: "docker-debian-lilke.yaml"
-  when: is_debian_lilke
+- name: Install Docker for Debian like distros
+  include_tasks: "docker-debian-like.yaml"
+  when: is_debian_like
 
 - name: Install Docker for Centos lilke distros
-  include_tasks: "docker-centos-lilke.yaml"
-  when: is_centos_lilke
+  include_tasks: "docker-centos-like.yaml"
+  when: is_centos_like
 
 - name: Start Runtime
   systemd:
