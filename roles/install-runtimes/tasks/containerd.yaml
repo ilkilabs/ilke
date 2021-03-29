@@ -33,12 +33,12 @@
     - { name: 'net.bridge.bridge-nf-call-ip6tables', value: '1' }
 
 - name: Add Docker repository for Debian lilke distros
-  include_tasks: "repo-debian-lilke.yaml"
-  when: is_debian_lilke
+  include_tasks: "repo-debian-like.yaml"
+  when: is_debian_like
 
 - name: Add Docker repository for centos lilke distros
-  include_tasks: "repo-centos-lilke.yaml"
-  when: is_centos_lilke
+  include_tasks: "repo-centos-like.yaml"
+  when: is_centos_like
 
 - name: Install containerd
   package:
