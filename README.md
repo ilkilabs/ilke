@@ -13,6 +13,7 @@ This is a list of points that will be explained in this Readme file for the IKE 
 
 - [What is ILKE](#what-is-ilke)
 - [How to install](#how-to-install)
+- [Where to Install Kubernetes? Bare-Metal vs. VMs. vs. Cloud](#how-to-choose)
 - [How to give feedback](#how-to-give-feedback)
 - [How to contribute](#how-to-contribute)
 - [Community](#community)
@@ -46,6 +47,35 @@ This project is currently under active development so other customizable options
 ## How to install
 
 To deploy your K8S cluster follow these [instructions](docs/instructions.md).
+
+## Where to Install Kubernetes? Bare-Metal vs. VMs. vs. Cloud
+
+### Bare-metal Kubernetes
+
+Simply stated, Bare Metal has the power and reliability of the long-lived, dedicated server environment coupled with the flexibility, 
+scalability and efficiency of the cloud model. Bare Metal cloud servers do not run a hypervisor, meaning that they are not virtualized, but they can be consumed in a cloud-like 
+service model.
+bare-metal Kubernetes nodes have much less overhead compared to nodes that are virtualized using hypervisors, which all other methods of installing Kubernetes are with the 
+exception of hosting Kubernetes on dedicated bare-metal servers in the cloud, which you could do, but it would be pretty expensive and probably not worth it.
+However,With bare-metal servers, you would only be able to host one node per server. 
+Also, bare-metal servers do not offer rollback functions.
+
+### Virtual machines
+
+If you’re setting up Kubernetes on-premises, using virtual machines is the more efficient way to go about it. You can use imaging tools to provision the servers with virtual 
+machine images quickly and easily, then install Kubernetes on them.
+Virtual machines also give you the flexibility to choose to host one or multiple nodes on a single physical server.
+The major drawback of virtual machines is performance. You waste system resources running a hypervisor for each virtual machine and, therefore, have fewer resources available to 
+devote to your actual cluster. 
+
+### Cloud
+
+Another common choice to make when planning a Kubernetes deployment is to host in the cloud.Cloud apply when it comes to thinking about where to run Kubernetes.
+In the cloud, setup is generally easier and faster, you have virtually unlimited scalability, but your installation and configuration options are limited to those supported by your cloud vendor or managed Kubernetes service.
+It’s worth noting, too, that it’s easier to set up a high-availability cluster in the cloud. You can set up multiple master nodes and host them in different availability zones 
+in order to build a highly fault-tolerant cluster.
+
+In Conclusion, there is no wrong way to configure the Kubernetes infrastructure. The approach you take should reflect your priorities and preferences. 
 
 ## How to give feedback
 
