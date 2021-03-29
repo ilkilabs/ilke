@@ -32,13 +32,13 @@
     - { name: 'net.ipv4.ip_forward', value: '1' }
     - { name: 'net.bridge.bridge-nf-call-ip6tables', value: '1' }
 
-- name: Add Docker repository for Debian like distros
-  include_tasks: "repo-debian-like.yaml"
-  when: is_debian_like
+- name: Add Docker repository for Debian lilke distros
+  include_tasks: "repo-debian-lilke.yaml"
+  when: is_debian_lilke
 
-- name: Add Docker repository for centos like distros
-  include_tasks: "repo-centos-like.yaml"
-  when: is_centos_like
+- name: Add Docker repository for centos lilke distros
+  include_tasks: "repo-centos-lilke.yaml"
+  when: is_centos_lilke
 
 - name: Install containerd
   package:

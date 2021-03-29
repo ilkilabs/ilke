@@ -3,19 +3,19 @@
 ## Metrics-Server
 We use official Metrics-Server yaml file.
 
-We **will** add **{{ ike_features.metrics_server.release }}** variable to chose the correct Metrics-Server release to install
+We **will** add **{{ ilke_features.metrics_server.release }}** variable to chose the correct Metrics-Server release to install
 
 ## CoreDNS
 
 We use official CoreDNS yaml file.
-We added **{{ ike_features.coredns.replicas }}** variable to chose the correct coredns release to install
-We added **{{ ike_features.coredns.release }}** variable to chose the number of CoreDNS replicas that will be deployed.
+We added **{{ ilke_features.coredns.replicas }}** variable to chose the correct coredns release to install
+We added **{{ ilke_features.coredns.release }}** variable to chose the number of CoreDNS replicas that will be deployed.
 
 ## Nginx
 
 We use official Ningix-controller yaml file.
 
-We added **{{ ike_features.ingress.release }}** variable to chose the correct nginx release to install.
+We added **{{ ilke_features.ingress.release }}** variable to chose the correct nginx release to install.
 
 This is useful when installing, and updateting Nginx with IKE
 
@@ -83,11 +83,11 @@ nodeSelector:
 
 ## Traefik
 
-We add {{ ike_features.ingress.release }} variable to select Traefik release to install.
+We add {{ ilke_features.ingress.release }} variable to select Traefik release to install.
 
 
 ## HA-PROXY
 
-We add {{ ike_features.ingress.release }} variable to select HA-PROXY release to install.
+We add {{ ilke_features.ingress.release }} variable to select HA-PROXY release to install.
 
-{{ ike_features.ingress.release }} sample:   "1.5.O"   Releases are according Docker Hub Tags !
+{{ ilke_features.ingress.release }} sample:   "1.5.O"   Releases are according Docker Hub Tags !

@@ -4,47 +4,47 @@
 
 - name: Include Tasks Calico
   include_tasks: calico.yaml
-  when: ike_network.cni_plugin == 'calico'
+  when: ilke_network.cni_plugin == 'calico'
 
 - name: Include Tasks Kube-router
   include_tasks: kube-router.yaml
-  when: ike_network.cni_plugin == 'kube-router'
+  when: ilke_network.cni_plugin == 'kube-router'
 
 - name: Deploy CoreDNS to K8S
   include_tasks: coredns.yaml
 
 - name: Install MetalLB Layer2
   include_tasks: metallb_l2.yaml
-  when: ike_network.external_loadbalancing.enabled | bool == True
+  when: ilke_network.external_loadbalancing.enabled | bool == True
 
 - name: Install Metrics-Server
   include_tasks: metrics-server.yaml
-  when: ike_features.metrics_server.enabled | bool == True
+  when: ilke_features.metrics_server.enabled | bool == True
 
 - name: Install ingress (traefik)
   include_tasks: traefik.yaml
-  when: ike_features.ingress.controller == 'traefik'
+  when: ilke_features.ingress.controller == 'traefik'
 
 - name: Install ingress (haproxy)
   include_tasks: haproxy.yaml
-  when: ike_features.ingress.controller == 'haproxy'
+  when: ilke_features.ingress.controller == 'haproxy'
 
 - name: Install ingress (nginx)
   include_tasks: nginx.yaml
-  when: ike_features.ingress.controller == 'nginx'
+  when: ilke_features.ingress.controller == 'nginx'
 
 - name: Install K8S Default Dashboard
   include_tasks: default_dashboard.yaml
-  when: ike_features.dashboard.enabled | bool == True
+  when: ilke_features.dashboard.enabled | bool == True
 
 - name: Install openebs for persistence
   include_tasks: openebs.yaml
-  when: ike_features.storage.enabled | bool == True
+  when: ilke_features.storage.enabled | bool == True
 
 - name: Install Monitoring
   include_tasks: monitoring.yaml
-  when: ike_features.monitoring.enabled | bool == True
+  when: ilke_features.monitoring.enabled | bool == True
 
 - name: enable etcd backup cronJob
   include_tasks: backup-etcd-cronjob.yaml
-  when: ike_base_components.etcd.backup.enabled | bool == True
+  when: ilke_base_components.etcd.backup.enabled | bool == True

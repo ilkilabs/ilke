@@ -1,7 +1,7 @@
 ---
 - name: Install kubectl
   get_url:
-    url: https://storage.googleapis.com/kubernetes-release/release/{{ ike_base_components.kubernetes.release }}/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ ilke_base_components.kubernetes.release }}/bin/linux/amd64/kubectl
     dest: /usr/bin/kubectl
     owner: root
     group: root

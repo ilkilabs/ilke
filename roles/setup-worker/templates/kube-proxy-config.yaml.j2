@@ -2,9 +2,9 @@ kind: KubeProxyConfiguration
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 clientConnection:
   kubeconfig: "/etc/kubernetes/manifests/proxier.conf"
-mode: "{{ ike_network.kube_proxy.mode }}"
-clusterCIDR: "{{ ike_network.cidr.pod }}"
-{% if ike_network.kube_proxy.mode == 'ipvs' %}
+mode: "{{ ilke_network.kube_proxy.mode }}"
+clusterCIDR: "{{ ilke_network.cidr.pod }}"
+{% if ilke_network.kube_proxy.mode == 'ipvs' %}
 ipvs:
   strictARP: true
 {% endif %}

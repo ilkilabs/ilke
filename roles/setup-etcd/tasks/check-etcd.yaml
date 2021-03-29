@@ -1,7 +1,7 @@
 ---
 - name: Verify if etcd cluster has successfully started
   command: >-
-      /usr/bin/etcd-{{ ike_base_components.etcd.release }}-linux-amd64/etcdctl member list -w=table
+      /usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcdctl member list -w=table
       --endpoints=https://127.0.0.1:2379
       --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
   environment:
@@ -20,7 +20,7 @@
 
 - name: Verify etcd cluster health
   command: >-
-      /usr/bin/etcd-{{ ike_base_components.etcd.release }}-linux-amd64/etcdctl endpoint health -w=table
+      /usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcdctl endpoint health -w=table
       --endpoints=https://127.0.0.1:2379
       --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
   environment:
@@ -38,7 +38,7 @@
 
 - name: Get etcd cluster status
   command: >-
-      /usr/bin/etcd-{{ ike_base_components.etcd.release }}-linux-amd64/etcdctl endpoint status -w=table
+      /usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcdctl endpoint status -w=table
       --endpoints=https://127.0.0.1:2379
       --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
   environment:

@@ -22,7 +22,7 @@ metadata:
   name: backup-etcd
   namespace: kube-system
 spec:
-  schedule: "{{ ike_base_components.etcd.backup.crontab }}"
+  schedule: "{{ ilke_base_components.etcd.backup.crontab }}"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -38,42 +38,42 @@ spec:
               operator: Exists
             - effect: NoExecute
               operator: Exists
-{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
-{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+{% if ilke_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ilke_base_components.etcd.backup.storage.type  == "hostpath" %}
           nodeSelector:
-            kubernetes.io/hostname: {{ ike_base_components.etcd.backup.storage.hostpath.nodename }}
+            kubernetes.io/hostname: {{ ilke_base_components.etcd.backup.storage.hostpath.nodename }}
 {% endif %}
 {% endif %}
           restartPolicy: Never
           containers:
           - name: backup-etcd
-            image: quay.io/coreos/etcd:{{ ike_base_components.etcd.release }}
+            image: quay.io/coreos/etcd:{{ ilke_base_components.etcd.release }}
             command: ["/opt/backup_etcd/backup-etcd.sh"]
             env:
             - name: ETCDCTL_API
               value: "3"
             - name: ETCDCTL_CACERT
-              value: "/etc/ike/etcd/etcd-api.crt/ca.crt"
+              value: "/etc/ilke/etcd/etcd-api.crt/ca.crt"
             - name: ETCDCTL_CERT
-              value: "/etc/ike/etcd/etcdctl.crt/kube-etcd-healthcheck-client.crt"
+              value: "/etc/ilke/etcd/etcdctl.crt/kube-etcd-healthcheck-client.crt"
             - name: ETCDCTL_KEY
-              value: "/etc/ike/etcd/etcdctl.key/kube-etcd-healthcheck-client.key"
+              value: "/etc/ilke/etcd/etcdctl.key/kube-etcd-healthcheck-client.key"
             - name: BACKUP_ETCD_DIR
               value: "/var/backup_etcd"
             volumeMounts:
               - name: etcd-api
-                mountPath: /etc/ike/etcd/etcd-api.crt
+                mountPath: /etc/ilke/etcd/etcd-api.crt
                 readOnly: true
               - name: etcdctl-crt
-                mountPath: /etc/ike/etcd/etcdctl.crt
+                mountPath: /etc/ilke/etcd/etcdctl.crt
                 readOnly: true
               - name: etcdctl-key
-                mountPath: /etc/ike/etcd/etcdctl.key
+                mountPath: /etc/ilke/etcd/etcdctl.key
                 readOnly: true
               - name: script-backup-etcd
                 mountPath: /opt/backup_etcd/
                 readOnly: false
-{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ilke_base_components.etcd.backup.storage.enabled | bool == True %}
               - name: backup-etcd-dir
                 mountPath: /var/backup_etcd/
 {% endif %}
@@ -91,12 +91,12 @@ spec:
             - name: etcdctl-key
               secret:
                 secretName: etcd-healthcheck-client.key
-{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ilke_base_components.etcd.backup.storage.enabled | bool == True %}
             - name: backup-etcd-dir
               persistentVolumeClaim:
                 claimName: backup-etcd
 {% endif %}
-{% if ike_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ilke_base_components.etcd.backup.storage.enabled | bool == True %}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -104,26 +104,26 @@ metadata:
   name: backup-etcd
   namespace: kube-system
 spec:
-{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+{% if ilke_base_components.etcd.backup.storage.type  == "hostpath" %}
   storageClassName: etcd-backup-hostpath
 {% endif %}
-{% if ike_base_components.etcd.backup.storage.type  == "storageclass" %}
-  storageClassName: "{{ ike_base_components.etcd.backup.storage.storageclass.name }}"
+{% if ilke_base_components.etcd.backup.storage.type  == "storageclass" %}
+  storageClassName: "{{ ilke_base_components.etcd.backup.storage.storageclass.name }}"
 {% endif %}
-{% if ike_base_components.etcd.backup.storage.type  == "persistentvolume" %}
-  storageClassName: "{{ ike_base_components.etcd.backup.storage.persistentvolume.storageclass }}"
+{% if ilke_base_components.etcd.backup.storage.type  == "persistentvolume" %}
+  storageClassName: "{{ ilke_base_components.etcd.backup.storage.persistentvolume.storageclass }}"
 {% endif %}
   resources:
     requests:
-      storage: {{ ike_base_components.etcd.backup.storage.capacity }}
+      storage: {{ ilke_base_components.etcd.backup.storage.capacity }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-{% if ike_base_components.etcd.backup.storage.type  == "persistentvolume" %}
-  volumeName: "{{ ike_base_components.etcd.backup.storage.persistentvolume.name }}"
+{% if ilke_base_components.etcd.backup.storage.type  == "persistentvolume" %}
+  volumeName: "{{ ilke_base_components.etcd.backup.storage.persistentvolume.name }}"
 {% endif %}
 ---
-{% if ike_base_components.etcd.backup.storage.type  == "hostpath" %}
+{% if ilke_base_components.etcd.backup.storage.type  == "hostpath" %}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -132,10 +132,10 @@ metadata:
 spec:
   storageClassName: etcd-backup-hostpath
   capacity:
-    storage: {{ ike_base_components.etcd.backup.storage.capacity  }}
+    storage: {{ ilke_base_components.etcd.backup.storage.capacity  }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "{{ ike_base_components.etcd.backup.storage.hostpath.path  }}"
+    path: "{{ ilke_base_components.etcd.backup.storage.hostpath.path  }}"
 {% endif %}
 {% endif %}

@@ -1,11 +1,11 @@
 [Unit]
-Description=Kubernetes Controller Manager {{ ike_base_components.kubernetes.release }}
+Description=Kubernetes Controller Manager {{ ilke_base_components.kubernetes.release }}
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
 ExecStart=/usr/local/bin/kubernetes/server/bin/kube-controller-manager \
   --bind-address=127.0.0.1 \
-  --cluster-cidr={{ ike_network.cidr.pod }} \
+  --cluster-cidr={{ ilke_network.cidr.pod }} \
   --cluster-name=kubernetes \
   --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt \
   --cluster-signing-key-file=/etc/kubernetes/pki/ca.key \
@@ -15,7 +15,7 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kube-controller-manager \
   --root-ca-file=/etc/kubernetes/pki/ca.crt \
   --client-ca-file=/etc/kubernetes/pki/ca.crt \
   --service-account-private-key-file=/etc/kubernetes/pki/sa/sa.key \
-  --service-cluster-ip-range={{ ike_network.cidr.service }} \
+  --service-cluster-ip-range={{ ilke_network.cidr.service }} \
   --terminated-pod-gc-threshold=500 \
   --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt \
   --use-service-account-credentials=true \

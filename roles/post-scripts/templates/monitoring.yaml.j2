@@ -143,7 +143,7 @@ subjects:
 - kind: ServiceAccount
   name: prometheus
   namespace: monitoring
-{% if ike_features.monitoring.persistent | bool == True %}
+{% if ilke_features.monitoring.persistent | bool == True %}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -151,7 +151,7 @@ metadata:
   name: prometheus-data
   namespace: monitoring
   labels:
-    openebs.io/target-affinity: ike-monitoring
+    openebs.io/target-affinity: ilke-monitoring
 spec:
   accessModes:
     - ReadWriteOnce
@@ -208,8 +208,8 @@ spec:
     metadata:
       labels:
         app: prometheus
-{% if ike_features.monitoring.persistent | bool == True  %}
-        openebs.io/target-affinity: ike-monitoring
+{% if ilke_features.monitoring.persistent | bool == True  %}
+        openebs.io/target-affinity: ilke-monitoring
 {% endif %}
     spec:
       serviceAccountName: prometheus
@@ -248,7 +248,7 @@ spec:
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/prometheus
-{% if ike_features.monitoring.persistent | bool == True %}
+{% if ilke_features.monitoring.persistent | bool == True %}
         - name: prometheus-data
           mountPath: /prometheus
       initContainers:
@@ -263,7 +263,7 @@ spec:
       - name: prometheus-config
         configMap:
          name: prometheus-config
-{% if ike_features.monitoring.persistent | bool == True %}
+{% if ilke_features.monitoring.persistent | bool == True %}
       - name: prometheus-data
         persistentVolumeClaim:
             claimName: prometheus-data
@@ -303,9 +303,9 @@ spec:
         - containerPort: 3000
         env:
           - name: GF_SECURITY_ADMIN_USER
-            value: "{{ ike_features.monitoring.admin.user }}"
+            value: "{{ ilke_features.monitoring.admin.user }}"
           - name: GF_SECURITY_ADMIN_PASSWORD
-            value: "{{ ike_features.monitoring.admin.password }}"
+            value: "{{ ilke_features.monitoring.admin.password }}"
           - name: GF_USERS_ALLOW_SIGN_UP
             value: "false"
         volumeMounts:

@@ -57,7 +57,7 @@ data:
       log
       health
       ready
-      kubernetes cluster.local {{ ike_network.cidr.service }} {{ ike_network.cidr.pod }} {
+      kubernetes cluster.local {{ ilke_network.cidr.service }} {{ ilke_network.cidr.pod }} {
         pods insecure
         fallthrough in-addr.arpa ip6.arpa
         ttl 30
@@ -78,7 +78,7 @@ metadata:
     k8s-app: kube-dns
     kubernetes.io/name: "CoreDNS"
 spec:
-  replicas: {{ ike_features.coredns.replicas }}
+  replicas: {{ ilke_features.coredns.replicas }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -100,7 +100,7 @@ spec:
         beta.kubernetes.io/os: linux
       containers:
       - name: coredns
-        image: coredns/coredns:{{ ike_features.coredns.release }}
+        image: coredns/coredns:{{ ilke_features.coredns.release }}
         imagePullPolicy: IfNotPresent
         resources:
           limits:
@@ -169,7 +169,7 @@ metadata:
 spec:
   selector:
     k8s-app: kube-dns
-  clusterIP: {{ ike_network.service_ip.coredns }} 
+  clusterIP: {{ ilke_network.service_ip.coredns }} 
   ports:
   - name: dns
     port: 53

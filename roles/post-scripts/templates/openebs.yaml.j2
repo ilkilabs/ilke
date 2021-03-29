@@ -85,7 +85,7 @@ metadata:
   labels:
     name: maya-apiserver
     openebs.io/component-name: maya-apiserver
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -100,7 +100,7 @@ spec:
       labels:
         name: maya-apiserver
         openebs.io/component-name: maya-apiserver
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -112,7 +112,7 @@ spec:
       containers:
       - name: maya-apiserver
         imagePullPolicy: IfNotPresent
-        image: openebs/m-apiserver:{{ ike_features.storage.release }}
+        image: openebs/m-apiserver:{{ ilke_features.storage.release }}
         ports:
         - containerPort: 5656
         env:
@@ -162,54 +162,54 @@ spec:
         # OPENEBS_IO_BASE_DIR is used to configure base directory for openebs on host path.
         # Where OpenEBS can store required files. Default base path will be /var/openebs
         - name: OPENEBS_IO_BASE_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}"
+          value: "{{ ilke_features.storage.jiva.data_path }}"
         # OPENEBS_IO_CSTOR_TARGET_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor volume pod.
         # The default path used is /var/openebs/sparse
         - name: OPENEBS_IO_CSTOR_TARGET_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
+          value: "{{ ilke_features.storage.jiva.data_path }}/sparse"
         # OPENEBS_IO_CSTOR_POOL_SPARSE_DIR can be used to specify the hostpath
         # to be used for saving the shared content between the side cars
         # of cstor pool pod. This ENV is also used to indicate the location
         # of the sparse devices.
         # The default path used is /var/openebs/sparse
         - name: OPENEBS_IO_CSTOR_POOL_SPARSE_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
+          value: "{{ ilke_features.storage.jiva.data_path }}/sparse"
         # OPENEBS_IO_JIVA_POOL_DIR can be used to specify the hostpath
         # to be used for default Jiva StoragePool loaded by OpenEBS
         # The default path used is /var/openebs
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
         - name: OPENEBS_IO_JIVA_POOL_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}"
+          value: "{{ ilke_features.storage.jiva.data_path }}"
         # OPENEBS_IO_LOCALPV_HOSTPATH_DIR can be used to specify the hostpath
         # to be used for default openebs-hostpath storageclass loaded by OpenEBS
         # The default path used is /var/openebs/local
         # This value takes effect only if OPENEBS_IO_CREATE_DEFAULT_STORAGE_CONFIG
         # is set to true
         - name: OPENEBS_IO_LOCALPV_HOSTPATH_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}/local"
+          value: "{{ ilke_features.storage.jiva.data_path }}/local"
         - name: OPENEBS_IO_JIVA_CONTROLLER_IMAGE
-          value: "openebs/jiva:{{ ike_features.storage.release }}"
+          value: "openebs/jiva:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_JIVA_REPLICA_IMAGE
-          value: "openebs/jiva:{{ ike_features.storage.release }}"
+          value: "openebs/jiva:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_JIVA_REPLICA_COUNT
           value: "{{ replicas_openebs }}"
         - name: OPENEBS_IO_CSTOR_TARGET_IMAGE
-          value: "openebs/cstor-istgt:{{ ike_features.storage.release }}"
+          value: "openebs/cstor-istgt:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_CSTOR_POOL_IMAGE
-          value: "openebs/cstor-pool:{{ ike_features.storage.release }}"
+          value: "openebs/cstor-pool:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_CSTOR_POOL_MGMT_IMAGE
-          value: "openebs/cstor-pool-mgmt:{{ ike_features.storage.release }}"
+          value: "openebs/cstor-pool-mgmt:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_CSTOR_VOLUME_MGMT_IMAGE
-          value: "openebs/cstor-volume-mgmt:{{ ike_features.storage.release }}"
+          value: "openebs/cstor-volume-mgmt:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_VOLUME_MONITOR_IMAGE
-          value: "openebs/m-exporter:{{ ike_features.storage.release }}"
+          value: "openebs/m-exporter:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_CSTOR_POOL_EXPORTER_IMAGE
-          value: "openebs/m-exporter:{{ ike_features.storage.release }}"
+          value: "openebs/m-exporter:{{ ilke_features.storage.release }}"
         - name: OPENEBS_IO_HELPER_IMAGE
-          value: "openebs/linux-utils:{{ ike_features.storage.release }}"
+          value: "openebs/linux-utils:{{ ilke_features.storage.release }}"
         # OPENEBS_IO_ENABLE_ANALYTICS if set to true sends anonymous usage
         # events to Google Analytics
         - name: OPENEBS_IO_ENABLE_ANALYTICS
@@ -262,7 +262,7 @@ metadata:
   labels:
     name: openebs-provisioner
     openebs.io/component-name: openebs-provisioner
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -277,7 +277,7 @@ spec:
       labels:
         name: openebs-provisioner
         openebs.io/component-name: openebs-provisioner
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -289,7 +289,7 @@ spec:
       containers:
       - name: openebs-provisioner
         imagePullPolicy: IfNotPresent
-        image: openebs/openebs-k8s-provisioner:{{ ike_features.storage.release }}
+        image: openebs/openebs-k8s-provisioner:{{ ilke_features.storage.release }}
         env:
         # OPENEBS_IO_K8S_MASTER enables openebs provisioner to connect to K8s
         # based on this address. This is ignored if empty.
@@ -342,7 +342,7 @@ metadata:
   labels:
     name: openebs-snapshot-operator
     openebs.io/component-name: openebs-snapshot-operator
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -356,7 +356,7 @@ spec:
       labels:
         name: openebs-snapshot-operator
         openebs.io/component-name: openebs-snapshot-operator
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -367,7 +367,7 @@ spec:
       serviceAccountName: openebs-maya-operator
       containers:
         - name: snapshot-controller
-          image: openebs/snapshot-controller:{{ ike_features.storage.release }}
+          image: openebs/snapshot-controller:{{ ilke_features.storage.release }}
           imagePullPolicy: IfNotPresent
           env:
           - name: OPENEBS_NAMESPACE
@@ -395,7 +395,7 @@ spec:
         #- name: OPENEBS_MAYA_SERVICE_NAME
         #  value: "maya-apiserver-apiservice"
         - name: snapshot-provisioner
-          image: openebs/snapshot-provisioner:{{ ike_features.storage.release }}
+          image: openebs/snapshot-provisioner:{{ ilke_features.storage.release }}
           imagePullPolicy: IfNotPresent
           env:
           - name: OPENEBS_NAMESPACE
@@ -475,7 +475,7 @@ metadata:
   labels:
     name: openebs-ndm
     openebs.io/component-name: ndm
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -488,7 +488,7 @@ spec:
       labels:
         name: openebs-ndm
         openebs.io/component-name: ndm
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -497,7 +497,7 @@ spec:
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       # By default the node-disk-manager will be run on all kubernetes nodes
-      # If you would like to limit this to only some nodes, say the nodes
+      # If you would lilke to limit this to only some nodes, say the nodes
       # that have storage attached, you could label those node and use
       # nodeSelector.
       #
@@ -554,7 +554,7 @@ spec:
         # specify the directory where the sparse files need to be created.
         # if not specified, then sparse files will not be created.
         - name: SPARSE_FILE_DIR
-          value: "{{ ike_features.storage.jiva.data_path }}/sparse"
+          value: "{{ ilke_features.storage.jiva.data_path }}/sparse"
         # Size(bytes) of the sparse file to be created.
         - name: SPARSE_FILE_SIZE
           value: "10737418240"
@@ -604,7 +604,7 @@ metadata:
   labels:
     name: openebs-ndm-operator
     openebs.io/component-name: ndm-operator
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -618,7 +618,7 @@ spec:
       labels:
         name: openebs-ndm-operator
         openebs.io/component-name: ndm-operator
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -656,7 +656,7 @@ spec:
             - name: OPERATOR_NAME
               value: "node-disk-operator"
             - name: CLEANUP_JOB_IMAGE
-              value: "openebs/linux-utils:{{ ike_features.storage.release }}"
+              value: "openebs/linux-utils:{{ ilke_features.storage.release }}"
             # OPENEBS_IO_INSTALL_CRD environment variable is used to enable/disable CRD installation
             # from NDM operator. By default the CRDs will be installed
             #- name: OPENEBS_IO_INSTALL_CRD
@@ -680,7 +680,7 @@ metadata:
   labels:
     app: admission-webhook
     openebs.io/component-name: admission-webhook
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   replicas: 1
   strategy:
@@ -694,7 +694,7 @@ spec:
       labels:
         app: admission-webhook
         openebs.io/component-name: admission-webhook
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -705,7 +705,7 @@ spec:
       serviceAccountName: openebs-maya-operator
       containers:
         - name: admission-webhook
-          image: openebs/admission-server:{{ ike_features.storage.release }}
+          image: openebs/admission-server:{{ ilke_features.storage.release }}
           imagePullPolicy: IfNotPresent
           args:
             - -alsologtostderr
@@ -743,7 +743,7 @@ metadata:
   labels:
     name: openebs-localpv-provisioner
     openebs.io/component-name: openebs-localpv-provisioner
-    openebs.io/version: {{ ike_features.storage.release }}
+    openebs.io/version: {{ ilke_features.storage.release }}
 spec:
   selector:
     matchLabels:
@@ -757,7 +757,7 @@ spec:
       labels:
         name: openebs-localpv-provisioner
         openebs.io/component-name: openebs-localpv-provisioner
-        openebs.io/version: {{ ike_features.storage.release }}
+        openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
       - key: "NoSchedulabe"
@@ -769,7 +769,7 @@ spec:
       containers:
       - name: openebs-provisioner-hostpath
         imagePullPolicy: IfNotPresent
-        image: openebs/provisioner-localpv:{{ ike_features.storage.release }}
+        image: openebs/provisioner-localpv:{{ ilke_features.storage.release }}
         env:
         # OPENEBS_IO_K8S_MASTER enables openebs provisioner to connect to K8s
         # based on this address. This is ignored if empty.
@@ -800,7 +800,7 @@ spec:
         - name: OPENEBS_IO_INSTALLER_TYPE
           value: "openebs-operator"
         - name: OPENEBS_IO_HELPER_IMAGE
-          value: "openebs/linux-utils:{{ ike_features.storage.release }}"
+          value: "openebs/linux-utils:{{ ilke_features.storage.release }}"
         # LEADER_ELECTION_ENABLED is used to enable/disable leader election. By default
         # leader election is enabled.
         #- name: LEADER_ELECTION_ENABLED

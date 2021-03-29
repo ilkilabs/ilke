@@ -147,7 +147,7 @@ spec:
       serviceAccountName: haproxy-ingress-service-account
       containers:
       - name: haproxy-ingress
-        image: haproxytech/kubernetes-ingress:{{ ike_features.ingress.release }}
+        image: haproxytech/kubernetes-ingress:{{ ilke_features.ingress.release }}
         args:
           - --configmap=haproxy-controller/haproxy
           - --default-backend-service=haproxy-controller/ingress-default-backend

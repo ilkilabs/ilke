@@ -5,7 +5,7 @@ metadata:
   name: default-storage-pool-jiva
   type: hostdir
 spec:
-  path: "{{ ike_features.storage.jiva.data_path }}"
+  path: "{{ ilke_features.storage.jiva.data_path }}"
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -22,7 +22,7 @@ metadata:
       - name: VolumeMonitor
         value: ON
       - name: FSType
-        value: "{{ ike_features.storage.jiva.fs_type }}"
+        value: "{{ ilke_features.storage.jiva.fs_type }}"
       - name: ReplicaNodeSelector
         value: |-
             node-role.kubernetes.io/storage: true
@@ -52,7 +52,7 @@ metadata:
       - name: StorageType
         value: hostpath
       - name: BasePath
-        value: {{ ike_features.storage.hostpath.data_path }}
+        value: {{ ilke_features.storage.hostpath.data_path }}
 provisioner: openebs.io/local
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
