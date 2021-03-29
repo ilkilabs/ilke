@@ -249,7 +249,7 @@ The **all:vars** section contains information about how to connect to K8S nodes.
 The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
-**ansible_user** User used as service account by Agorakube to connect to all nodes. **User must be sudoer**.
+**ansible_user** User used as service account by ILKE to connect to all nodes. **User must be sudoer**.
 
 ## Configuration file
 
@@ -375,7 +375,7 @@ This section is used to custom global ILKE settings.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke.global.data_path` | Path where ILKE saves all config/pik/service files on deploy machine | **/var/ilke/** *(default)* |
+| `ilke.global.data_path` | Path where ILKE saves all config/pki/service files on deploy machine | **/var/ilke/** *(default)* |
 
 ## Certificates & PKI section
 
@@ -427,7 +427,7 @@ This section allows you to configure your Kubernetes deployment.
 
 ### Container Engine
 
-This section allows you to configure your Container Engine taht will be deployed on all Master/Worker/Storage hosts.
+This section allows you to configure your Container Engine that will be deployed on all Master/Worker/Storage hosts.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
@@ -529,7 +529,7 @@ kubectl get pods
 
 You can Benchmark your ILKE Storage Class as follow:
 
-* Create a falie named "benchmarckStorage.yaml" with the followinf content:
+* Create a file named "benchmarckStorage.yaml" with the following content:
 
 Note: You can custom the storageClassName in your PersistentVolumeClaim to Benchmark a specific StorageClass. Default config Benchark the default StorageClass (Jiva volume)
 ```
