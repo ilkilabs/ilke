@@ -84,7 +84,7 @@ This section explains how to setup nodes before deploying Kubernetes Clusters wi
 The deployment node is an Ansible server which contains all Ansible roles and variables used to deploy and configure Kubernetes Clusters with ILKE distribution.
 
 The prerequisites are:
-- SSH Server (lilke openssh-server)
+- SSH Server (like openssh-server)
 - Python3 & pip3
 - git
 - curl
