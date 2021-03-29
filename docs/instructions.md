@@ -1,11 +1,11 @@
 # Table of Contents
-This is a list of points that will be explained in this instructions file for the IKE project :
+This is a list of points that will be explained in this instructions file for the ILKE project :
 
 - [High-level Architecture](#high-level-architecture)
 - [Prerequisites](#prerequisites)
 - [Nodes Setup](#nodes-setup)
 - [K8S Cluster Configuration](#k8s-cluster-configuration)
-- [IKE Parameters](#ilke-parameters)
+- [ILKE Parameters](#ilke-parameters)
 - [Kubernetes deployment](#kubernetes-deployment)
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
@@ -14,8 +14,8 @@ This is a list of points that will be explained in this instructions file for th
 
 # High-level Architecture
 
-Below a diagram of the high-level architecture deployed by IKE :
-![Architecture](../images/IKE_diagram.png)
+Below a diagram of the high-level architecture deployed by ILKE :
+![Architecture](../images/ILKE_diagram.png)
 
 **Notes :** This distibution is aimed to be customizable so you can choose : 
  - Where the **etcd** will be deployed (with the master or not) 
@@ -26,7 +26,7 @@ Below a diagram of the high-level architecture deployed by IKE :
  
  # Prerequisites
 
-This section explains what are the prerequisites to install IKE in your environment.
+This section explains what are the prerequisites to install ILKE in your environment.
 
 ## OS
 
@@ -48,14 +48,14 @@ Node sizing indicated here is for production environment. You can custom it acco
 
 It is a best-practice to install ETCD and MASTERS on separate hosts.
 
-| IKE Type | no HA or all-in-one | no-production | production |
+| ILKE Type | no HA or all-in-one | no-production | production |
 | --- | --- | --- | --- |
-| MASTER | 1 | 3 | 5 |
+| MASTER | 1 | 3 | 3+ |
 | ETCD | 1 | 3 | 5 |
 | WORKER | 1 | X | X |
 | STORAGE | 0 - 1 | 3 | 3+ |
 
-We actually configure the proper VM size for your mMASTER depending on the number of nodes (Workers + Storage) in your cluster
+We actually configure the proper VM size for your MASTER depending on the number of nodes (Workers + Storage) in your cluster
 
 | nodes | Master Size |
 | --- | --- |
@@ -77,11 +77,11 @@ We actually configure the proper VM size for your ETCD depending on the number o
 
 # Nodes Setup
 
-This section explains how to setup nodes before deploying Kubernetes Clusters with IKE.
+This section explains how to setup nodes before deploying Kubernetes Clusters with ILKE.
 
 ## Deployment node
 
-The deployment node is an Ansible server which contains all Ansible roles and variables used to deploy and configure Kubernetes Clusters with IKE distribution.
+The deployment node is an Ansible server which contains all Ansible roles and variables used to deploy and configure Kubernetes Clusters with ILKE distribution.
 
 The prerequisites are:
 - SSH Server (lilke openssh-server)
@@ -90,16 +90,16 @@ The prerequisites are:
 - curl
 - with pip3 : ansible, netaddr
 
-Then clone or download the IKE git branch / release you want to use.
+Then clone or download the ILKE git branch / release you want to use.
 
-You can run the following command to automatically install those packages and clone the latest stable IKE distribution:
+You can run the following command to automatically install those packages and clone the latest stable ILKE distribution:
 ```
 bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ilke/master/setup-deploy.sh)
 ```
 
 ### Use Python Virtual Environment
 
-Sometimes it is better to run Ansible and all its dependences into a specific *Python Virtual Environment*. This will make it easier for you to install Ansible and all its dependences needed by IKE without take the risk to break your existing Python/Python3 installation.
+Sometimes it is better to run Ansible and all its dependences into a specific *Python Virtual Environment*. This will make it easier for you to install Ansible and all its dependences needed by ILKE without take the risk to break your existing Python/Python3 installation.
 
 
 You can create your own *Python Virtual Environment* from scratch by following:
@@ -121,12 +121,12 @@ source /usr/local/ilke-env/bin/activate
 # Update PIP
 pip3 install --upgrade pip
 
-# Then install Ansible and Netaddr (needed by IKE)
+# Then install Ansible and Netaddr (needed by ILKE)
 pip3 install ansible
 pip3 install netddr
 pip3 install selinux
 
-# You can alternatively install packages with "ilke/requirements.txt" file located on IKE
+# You can alternatively install packages with "ilke/requirements.txt" file located on ILKE
 pip3 install -r ilke/requirements.txt
 
 # Validate ansible is installed and use your Python Virtual Environment
@@ -160,7 +160,7 @@ bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ilke/master/setup-host
 
 ## SSH keys creation
 
-IKE is using Ansible to deploy Kubernetes. You have to configure SSH keys to ensure the communication between the deploy machine and the others.
+ILKE is using Ansible to deploy Kubernetes. You have to configure SSH keys to ensure the communication between the deploy machine and the others.
 
 On the deploy machine, create the SSH keys :
 ```
@@ -174,11 +174,11 @@ ssh-copy-id -i .ssh/id_rsa.pub yourUser@IP_OF_THE_HOST
 ```
 You have to execute this command for each node of your cluster
 
-Once your ssh keys have been pushed to all nodes, modify the file "ilke/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that IKE will use to connect to all nodes
+Once your ssh keys have been pushed to all nodes, modify the file "ilke/hosts" to add the user/ssh-key (in section **SSH Connection settings**) that ILKE will use to connect to all nodes
 
 # K8S Cluster Configuration
 
-IKE enables an easy way to deploy and manage customizable K8S clusters.
+ILKE enables an easy way to deploy and manage customizable K8S clusters.
 
 ## ansible.cfg file
 
@@ -255,7 +255,7 @@ The **SSH Connection settings** section contain information about the SSH connex
 
 The [../group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
 
-Sample file will deploy **containerd** as container runtime, **calico** as CNI plugin and enable all IKE features (storage, dashboard, monitoring, LB, ingress, ....).
+Sample file will deploy **containerd** as container runtime, **calico** as CNI plugin and enable all ILKE features (storage, dashboard, monitoring, LB, ingress, ....).
 
 ```
 ---
@@ -365,17 +365,17 @@ ilke_encrypt_etcd_keys:
 
 **Note :** You can also modify the IPs-CIDR if you want.
 
-# IKE Parameters
+# ILKE Parameters
 
 Below  you can find all the parameters you can use in this file, section by section.
 
 ## Global Section
 
-This section is used to custom global IKE settings.
+This section is used to custom global ILKE settings.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke.global.data_path` | Path where IKE saves all config/pik/service files on deploy machine | **/var/ilke/** *(default)* |
+| `ilke.global.data_path` | Path where ILKE saves all config/pik/service files on deploy machine | **/var/ilke/** *(default)* |
 
 ## Certificates & PKI section
 
@@ -455,7 +455,7 @@ This section allows you to configure your K8S cluster network settings.
 | `ilke_network.kube_proxy.algorithm` | Default ClusterIP loadBalancing Algorithm : rr,lc,dh,sh,sed,nq. Only supported if IPVS | **rr** *(default Round-Robin)* |
 
 
-## IKE features
+## ILKE features
 
 This section allows you to configure your K8S features.
 
@@ -476,12 +476,12 @@ This section allows you to configure your K8S features.
 | `ilke_features.monitoring.admin.user` | Default Grafana admin user | **administrator** *(default)* |
 | `ilke_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
 
-## IKE other settings
+## ILKE other settings
 This section allows you to configure some other settings
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke_populate_etc_hosts` | Add to all hostname/IPs of IKE Cluster to /etc/hosts file of all hosts. Use it only if you don't have DNS server. | **False** *(default)* |
+| `ilke_populate_etc_hosts` | Add to all hostname/IPs of ILKE Cluster to /etc/hosts file of all hosts. Use it only if you don't have DNS server. | **False** *(default)* |
 | `ilke_encrypt_etcd_keys` | Array of keys/algorith used to crypt/decrypt data in etcd? Generate with : `head -c 32 /dev/urandom | base64` | **changeME !** *(default)* |
 | `restoration_snapshot_file` | ETCD backup path to be restored | **none** *(default)* |
 
@@ -527,7 +527,7 @@ kubectl get pods
 ```
 # Storage Benchmark
 
-You can Benchmark your IKE Storage Class as follow:
+You can Benchmark your ILKE Storage Class as follow:
 
 * Create a falie named "benchmarckStorage.yaml" with the followinf content:
 
