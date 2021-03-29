@@ -4,7 +4,7 @@ We are really glad you're reading this, because we need volunteer developers to 
 
 We want you working on things you're excited about.
 
-You can contact us by mail agorakube@ilki.fr or you can join our IKE's Slack community for discussion and ask questions : [IKE's Slack](http://slack.agorakube.ilkilabs.io/)
+You can contact us by mail agorakube@ilki.fr or you can join our ILKE's Slack community for discussion and ask questions : [ILKE's Slack](http://slack.agorakube.ilkilabs.io/)
 
 Channels :
 - **#general** - For general purpose (news, events...)
