@@ -1,4 +1,4 @@
-# ILKI KUBERNETES ENGINE Core
+# ILKILABS KUBERNETES ENGINE Core
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -11,20 +11,20 @@ Master branch is stable.
 
 This is a list of points that will be explained in this Readme file for the IKE project :
 
-- [What is IKE](#what-is-ilke)
+- [What is ILKE](#what-is-ilke)
 - [How to install](#how-to-install)
 - [How to give feedback](#how-to-give-feedback)
 - [How to contribute](#how-to-contribute)
 - [Community](#community)
 - [Licensing](#licensing)
 
-## What is IKE
+## What is ILKE
 
-IKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20).
+ILKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20).
 
-By its symplicity, IKE provide a good way to deploy and manage K8S Clusters.
+By its symplicity, ILKE provide a good way to deploy and manage K8S Clusters.
 
-IKE is based on Ansible scripts that install and configure Kubernetes components (control plane and data plane) quickly on bare-metal / VMs / Cloud Instances, as systemd services.
+ILKE is based on Ansible scripts that install and configure Kubernetes components (control plane and data plane) quickly on bare-metal / VMs / Cloud Instances, as systemd services.
 
 This distribution is also adaptive by offering the opportunity to customize your deployment and fit to your needs : 
 * OS : Ubuntu-18.04/20.04-amd64 and Centos 7.X-amd64, Debian-10-amd64 
@@ -39,7 +39,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Metrics-Server
 * Kubernetes-Dashboard
 
-![IKE](./images/IKE.png)
+![ILKE](./images/ILKE.png)
 
 This project is currently under active development so other customizable options will be added soon.
 
@@ -61,11 +61,11 @@ See our [Code Of Conduct](https://github.com/ilkilabs/ilke/blob/master/CODE_OF_C
 
 ## Community
 
-Join IKE's community for discussion and ask questions : [IKE's Slack](http://slack.agorakube.ilkilabs.io/)
+Join ILKE's community for discussion and ask questions : [ILKE's Slack](http://slack.agorakube.ilkilabs.io/)
 
 Channels :
 - **#general** - For general purpose (news, events...)
-- **#developpers** - For people who contribute to IKE by developing features
+- **#developpers** - For people who contribute to ILKE by developing features
 - **#end-users** - For end users who want to give us feedbacks
 - **#random** - As its name suggests, for random discussions :)
 
