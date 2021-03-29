@@ -9,7 +9,7 @@
 - hosts: deploy
   become: true
   vars:
-    ansible_python_interpreter: /usr/local/ike-env/bin/python3
+    ansible_python_interpreter: /usr/local/ilke-env/bin/python3
   roles:
 #    - compliance-checks
     - install-kubectl

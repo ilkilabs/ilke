@@ -1,14 +1,14 @@
 ---
 - name: Download etcd binaries
   unarchive:
-    src: https://github.com/etcd-io/etcd/releases/download/{{ ike_base_components.etcd.release }}/etcd-{{ ike_base_components.etcd.release }}-linux-amd64.tar.gz
+    src: https://github.com/etcd-io/etcd/releases/download/{{ ilke_base_components.etcd.release }}/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64.tar.gz
     dest: /usr/bin
     remote_src: yes
-    creates: /usr/bin/etcd-{{ ike_base_components.etcd.release }}-linux-amd64/etcd
+    creates: /usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcd
 
-- name: create folder {{ ike_base_components.etcd.data_path }}
+- name: create folder {{ ilke_base_components.etcd.data_path }}
   file:
-    path: "{{ ike_base_components.etcd.data_path }}"
+    path: "{{ ilke_base_components.etcd.data_path }}"
     state: directory
     recurse: yes
     owner: root

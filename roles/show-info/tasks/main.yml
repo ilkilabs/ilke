@@ -2,16 +2,16 @@
 - name: Store info file in /root
   template:
     src: info.j2
-    dest: /root/ike-info.txt
+    dest: /root/ilke-info.txt
     owner: root
     group: root
     mode: '0640'
 
 - name: Get file content to show to the user
-  command: cat /root/ike-info.txt
-  register: ike_info
+  command: cat /root/ilke-info.txt
+  register: ilke_info
   changed_when: False
 
 - name: Show information to the user
   debug:
-    var: ike_info.stdout_lines
+    var: ilke_info.stdout_lines

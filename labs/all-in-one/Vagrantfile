@@ -3,7 +3,7 @@ $script = <<-SCRIPT
 echo "
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBTj+4Tjx2Az14spFKaD1rkxrhQSaybNDQOS9P7jGk3OaubL8qWTXVr69n4xu56PDCe06g4XOlpXkLNUOVr5CKOyP+9Eyw41V9de4DDEaPhidFtOULTubzYJ4tyhwysFnB/vq75TfoCgI6uYHl4tcSZqQB6g/4C2TGuFWj/T0CzlE6hxNzRy16udyfMxH7YZ445238Wtn96RxfJdkINgB+6h0jGRh1j8OuuIwZdUa1e4W+p53JGizXCRySAtZPxlNyaT2SxqOpfXShp+KqhIG8N7HPgCMdBHNXFy2zticR/tWjdWOPsuro0z8SZY7EgZD3PfgKD88BkdaG4B50RPgt pierre@DESKTOP-BT28R5N
 " >> /home/vagrant/.ssh/authorized_keys
-bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-hosts.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ilke/master/setup-hosts.sh)
 SCRIPT
 
 $script2 = <<-SCRIPT
@@ -38,7 +38,7 @@ tLPRCasq7fw/jx3UnZlYAx5JiSgSl6wcr+eF+JDLLfZn4ExEqcwN03WHCXPPqede
 " >> /home/vagrant/ssh-private-key.pem
 chmod 0400 /home/vagrant/ssh-private-key.pem
 cd /home/vagrant/
-bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ike-core/master/setup-deploy.sh)
+bash <(curl -s https://raw.githubusercontent.com/ilkilabs/ilke/master/setup-deploy.sh)
 echo '
 [deploy]
 kubernetes ansible_connection=local
@@ -63,15 +63,15 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
-' > /home/vagrant/ike-core/hosts
+' > /home/vagrant/ilke/hosts
 
 echo '
 ---
-ike:
+ilke:
   global:
-    data_path: /var/ike
+    data_path: /var/ilke
 
-ike_pki:
+ilke_pki:
   infos:
     state: "Ile-De-France"
     locality: "Paris"
@@ -81,7 +81,7 @@ ike_pki:
   management:
     rotate_certificats: False
 
-ike_base_components:
+ilke_base_components:
   etcd:
     release: v3.4.14
     upgrade: False
@@ -111,7 +111,7 @@ ike_base_components:
     release: ""
 #    upgrade: false
 
-ike_network:
+ilke_network:
   cni_plugin: calico
   mtu: 0
   cidr:
@@ -130,7 +130,7 @@ ike_network:
     mode: ipvs
     algorithm: rr
 
-ike_features:
+ilke_features:
   coredns:
     release: "1.8.0"
     replicas: 2
@@ -158,10 +158,10 @@ ike_features:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: false
+ilke_populate_etc_hosts: false
 
 # Security
-ike_encrypt_etcd_keys:
+ilke_encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:
@@ -169,24 +169,24 @@ ike_encrypt_etcd_keys:
 
 #restoration_snapshot_file: /path/snopshot/file Located on {{ etcd_data_directory }}
 
-' > /home/vagrant/ike-core/group_vars/all.yaml
+' > /home/vagrant/ilke/group_vars/all.yaml
 echo '
 #!/bin/bash
 yum -y update
 yum -y install python3 python3-pip python3-venv
 yum install -y libselinux-python3
-python3 -m venv /usr/local/ike-env
-source /usr/local/ike-env/bin/activate
+python3 -m venv /usr/local/ilke-env
+source /usr/local/ilke-env/bin/activate
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ansible --version
-' > /home/vagrant/ike-core/script.sh
-chmod +x /home/vagrant/ike-core/script.sh
-cd /home/vagrant/ike-core/
-. /home/vagrant/ike-core/script.sh
+' > /home/vagrant/ilke/script.sh
+chmod +x /home/vagrant/ilke/script.sh
+cd /home/vagrant/ilke/
+. /home/vagrant/ilke/script.sh
 
-cd /home/vagrant/ike-core/
-ansible-playbook ike-core.yaml
+cd /home/vagrant/ilke/
+ansible-playbook ilke.yaml
 cp /root/.kube/config /var/kubeconfig/config
 SCRIPT
 

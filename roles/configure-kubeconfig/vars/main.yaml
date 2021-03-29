@@ -1,2 +1,2 @@
 ---
-pki_path: "{{ ike.global.data_path }}/pki"
+pki_path: "{{ ilke.global.data_path }}/pki"

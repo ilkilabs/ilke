@@ -11,7 +11,7 @@ Master branch is stable.
 
 This is a list of points that will be explained in this Readme file for the IKE project :
 
-- [What is IKE](#what-is-ike)
+- [What is IKE](#what-is-ilke)
 - [How to install](#how-to-install)
 - [How to give feedback](#how-to-give-feedback)
 - [How to contribute](#how-to-contribute)
@@ -50,14 +50,14 @@ To deploy your K8S cluster follow these [instructions](docs/instructions.md).
 ## How to give feedback
 
 Every feedback is very welcome via the
-[GitHub site](https://github.com/ilkilabs/ike-core)
+[GitHub site](https://github.com/ilkilabs/ilke)
 as issues or pull (merge) requests.
 
 You can also give use vulnerability reports by this way.
 ## How to contribute
 
 
-See our [Code Of Conduct](https://github.com/ilkilabs/ike-core/blob/master/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilabs/ike-core/blob/master/docs/CONTRIBUTING.md) for more information.
+See our [Code Of Conduct](https://github.com/ilkilabs/ilke/blob/master/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/ilkilabs/ilke/blob/master/docs/CONTRIBUTING.md) for more information.
 
 ## Community
 
@@ -78,7 +78,7 @@ In SPDX terms, everything here is licensed under APACHE 2.0;
 if it's not executable, including the text when extracted from code, it's
 "(APACHE 2.0)".
 
-Like almost all software today, this software depends on many
+Lilke almost all software today, this software depends on many
 other components with their own licenses.
 Not all components we depend on are APACHE 2.0-licensed, but all
 *required* components are FLOSS. We prevent licensing issues

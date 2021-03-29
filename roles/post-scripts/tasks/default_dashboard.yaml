@@ -2,7 +2,7 @@
 - name: Apply templates
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    apply -f https://raw.githubusercontent.com/kubernetes/dashboard/{{ ike_features.dashboard.release }}/aio/deploy/recommended.yaml
+    apply -f https://raw.githubusercontent.com/kubernetes/dashboard/{{ ilke_features.dashboard.release }}/aio/deploy/recommended.yaml
   register: apply_dashboard
   changed_when: >
     apply_dashboard.stdout is search("created")
@@ -12,7 +12,7 @@
   command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf get serviceaccounts -n kubernetes-dashboard dashboardadmin
   register: check_dashboard_admin
   failed_when: check_dashboard_admin.rc > 1
-  when: ike_features.dashboard.generate_admin_token | bool == True
+  when: ilke_features.dashboard.generate_admin_token | bool == True
   changed_when: False
 
 - name: Create dashboard admin user
@@ -22,14 +22,14 @@
     create_dashboard_admin.stdout is search("created")
     or create_dashboard_admin.stdout is search("configured")
   when:
-    - ike_features.dashboard.generate_admin_token | bool == True
+    - ilke_features.dashboard.generate_admin_token | bool == True
     - check_dashboard_admin.stderr is search("NotFound")
 
 - name: Check cluster role binding for admin user
   command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf get clusterrolebinding agora-dashboard-admin-role-binding
   register: check_dashboard_admin_role
   failed_when: check_dashboard_admin_role.rc > 1
-  when: ike_features.dashboard.generate_admin_token | bool == True
+  when: ilke_features.dashboard.generate_admin_token | bool == True
   changed_when: False
 
 - name: Create cluster role binding for admin user
@@ -41,7 +41,7 @@
     create_dashboard_admin_role.stdout is search("created")
     or create_dashboard_admin_role.stdout is search("configured")
   when:
-    - ike_features.dashboard.generate_admin_token | bool == True
+    - ilke_features.dashboard.generate_admin_token | bool == True
     - check_dashboard_admin_role.stderr is search("NotFound")
 
 - name: Get the admin service account
@@ -50,7 +50,7 @@
     get serviceaccount -n kubernetes-dashboard dashboardadmin -o jsonpath={.secrets[0].name}
   register: dashboard_admin_service_account
   when:
-    - ike_features.dashboard.generate_admin_token | bool == True
+    - ilke_features.dashboard.generate_admin_token | bool == True
     - create_dashboard_admin.changed
 
 - name: Get the admin token
@@ -59,7 +59,7 @@
     get secret -n kubernetes-dashboard {{ dashboard_admin_service_account.stdout }}  -o jsonpath={.data.token}
   register: dashboard_admin_token
   when:
-    - ike_features.dashboard.generate_admin_token | bool == True
+    - ilke_features.dashboard.generate_admin_token | bool == True
     - create_dashboard_admin.changed
 
 - name:  "Copying dashboard admin token in /root/.kube/dashboardadmin, Please copy and store the token to safe place, it will only be stored once"
@@ -68,7 +68,7 @@
     dest: /root/.kube/dashboardadmin
     mode: 0600
   when:
-    - ike_features.dashboard.generate_admin_token | bool == True
+    - ilke_features.dashboard.generate_admin_token | bool == True
     - dashboard_admin_token.changed
 
 - name: Verify if metric scraper pod has successfully started

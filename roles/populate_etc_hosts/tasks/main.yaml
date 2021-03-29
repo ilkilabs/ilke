@@ -7,5 +7,5 @@
   with_items:
   - "{{ groups['all'] }}"
   when:
-  - ike_populate_etc_hosts
+  - ilke_populate_etc_hosts
   - hostvars[item].ansible_host is defined

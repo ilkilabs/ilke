@@ -27,12 +27,12 @@ data:
   kubeconfig: |
     apiVersion: v1
     kind: Config
-    clusterCIDR: {{ ike_network.cidr.pod }}
+    clusterCIDR: {{ ilke_network.cidr.pod }}
     clusters:
     - name: cluster
       cluster:
         certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        server: https://{{ ike_network.service_ip.kubernetes }}
+        server: https://{{ ilke_network.service_ip.kubernetes }}
     users:
     - name: kube-router
       user:

@@ -5,6 +5,6 @@
   include_tasks: disable-swap.yaml
 - name: Clean previous K8S install
   include_tasks: clean-previous-k8s-install.yaml
-  when: ike_base_components.kubernetes.upgrade | bool == True
+  when: ilke_base_components.kubernetes.upgrade | bool == True
 - name: Setup Worker
   include_tasks: setup-worker.yaml

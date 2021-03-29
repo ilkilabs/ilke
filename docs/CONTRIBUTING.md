@@ -29,7 +29,7 @@ See below Agorakube code architecture:
 * test/inventory - Contains a test inventory file used by "test_lab"
 * labs/* - Contains test labs used for Agorakube development/test. This test labs use Vagrant/virtualBox
 * tools/* - Contains folders for some specific management actions
-    * etcd - Contains some playbooks for ETCD management like backup/restore etcd
+    * etcd - Contains some playbooks for ETCD management lilke backup/restore etcd
 * hosts - Inventory file that define your Agorakube Cluster
 * agorakube.yaml - Ansible Playbook used to deploy Agorakube
 
@@ -50,15 +50,15 @@ All contributions are welcome :)
 Here is a non-exhaustive list of contributions needed for this project:
 
 * Documentation
-* Add features like new runtime support, new Ingress Controller installation, new CNI plugin, etc...
+* Add features lilke new runtime support, new Ingress Controller installation, new CNI plugin, etc...
 * Improve the code quality
 * ...
 
 ## Submitting changes
 
-Please send a [GitHub Pull Request to IKE-CORE](https://github.com/ilkilabs/ike-core) with a clear list of what you've done (read more about [pull requests](https://help.github.com/en/articles/about-pull-requests/)). When you send a pull request, we will love you forever if your code stay idempotent. We can always use more test coverage. Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
+Please send a [GitHub Pull Request to IKE-CORE](https://github.com/ilkilabs/ilke) with a clear list of what you've done (read more about [pull requests](https://help.github.com/en/articles/about-pull-requests/)). When you send a pull request, we will love you forever if your code stay idempotent. We can always use more test coverage. Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
 
-Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
+Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look lilke this:
 
     $ git commit -m "A brief summary of the commit
     >
@@ -70,8 +70,8 @@ Start reading our code and you'll get the hang of it. We optimize for readabilit
 
   * We indent using two spaces (soft tabs)
   * We use task's name as comment in Ansible Playbooks. All names have to explicit the task goal.
-  * This is open source software. Consider the people who will read your code, and make it look nice for them. It's sort of like driving a car: Perhaps you love doing donuts when you're alone, but with passengers the goal is to make the ride as smooth as possible.
-  * You can use common tools like "VisualStudioCode", or "Atom" to make your Ansible code !
+  * This is open source software. Consider the people who will read your code, and make it look nice for them. It's sort of lilke driving a car: Perhaps you love doing donuts when you're alone, but with passengers the goal is to make the ride as smooth as possible.
+  * You can use common tools lilke "VisualStudioCode", or "Atom" to make your Ansible code !
 
 
 Thanks,

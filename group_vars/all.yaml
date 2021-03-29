@@ -1,9 +1,9 @@
 ---
-ike:
+ilke:
   global:
-    data_path: /var/ike
+    data_path: /var/ilke
 
-ike_pki:
+ilke_pki:
   infos:
     state: "Ile-De-France"
     locality: "Paris"
@@ -13,7 +13,7 @@ ike_pki:
   management:
     rotate_certificats: False
 
-ike_base_components:
+ilke_base_components:
   etcd:
     release: v3.4.14
     upgrade: False
@@ -43,7 +43,7 @@ ike_base_components:
     release: ""
 #    upgrade: false
 
-ike_network:
+ilke_network:
   cni_plugin: calico
   mtu: 0
   cidr:
@@ -62,7 +62,7 @@ ike_network:
     mode: ipvs
     algorithm: rr
 
-ike_features:
+ilke_features:
   coredns:
     release: "1.8.0"
     replicas: 2
@@ -90,10 +90,10 @@ ike_features:
       user: administrator
       password: P@ssw0rd
 
-ike_populate_etc_hosts: false
+ilke_populate_etc_hosts: false
 
 # Security
-ike_encrypt_etcd_keys:
+ilke_encrypt_etcd_keys:
 # Warrning: If multiple keys are defined ONLY LAST KEY is used for encrypt and decrypt.
 # Other keys are used only for decrypt purpose. Keys can be generated with command: head -c 32 /dev/urandom | base64
   key1:

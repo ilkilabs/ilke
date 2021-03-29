@@ -1,5 +1,5 @@
 [Unit]
-Description=Kubernetes Kube Proxy {{ ike_base_components.kubernetes.release }}
+Description=Kubernetes Kube Proxy {{ ilke_base_components.kubernetes.release }}
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
@@ -8,12 +8,12 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kube-proxy \
 {% else %}
 ExecStart=/usr/local/bin/kubernetes/node/bin/kube-proxy \
 {% endif %}
-{% if ike_network.kube_proxy.mode in ['userspace','iptables','ipvs'] %}
-  --proxy-mode={{ ike_network.kube_proxy.mode }} \
+{% if ilke_network.kube_proxy.mode in ['userspace','iptables','ipvs'] %}
+  --proxy-mode={{ ilke_network.kube_proxy.mode }} \
 {% endif %}
-{% if ike_network.kube_proxy.mode == 'ipvs' %}
-{% if ike_network.kube_proxy.algorithm in ['rr','lc','dh','sh','sed','nq'] %}
-  --ipvs-scheduler={{ ike_network.kube_proxy.algorithm }} \
+{% if ilke_network.kube_proxy.mode == 'ipvs' %}
+{% if ilke_network.kube_proxy.algorithm in ['rr','lc','dh','sh','sed','nq'] %}
+  --ipvs-scheduler={{ ilke_network.kube_proxy.algorithm }} \
 {% endif %}
 {% endif %}
   --hostname-override={{ ansible_fqdn }} \
