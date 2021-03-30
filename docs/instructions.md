@@ -124,7 +124,7 @@ pip3 install --upgrade pip
 
 # Then install Ansible and Netaddr (needed by ILKE)
 pip3 install ansible
-pip3 install netddr
+pip3 install netaddr
 pip3 install selinux
 
 # You can alternatively install packages with "ilke/requirements.txt" file located on ILKE
