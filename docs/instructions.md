@@ -106,7 +106,7 @@ You can create your own *Python Virtual Environment* from scratch by following:
 
 ```
 # Install on deploy machine python3, pyhton3-pip and python3-venv
-# On Ubuntu (18.04,20.04) use, (same commands are also useful on Debian10)
+# On Ubuntu (18.04,20.04) or Debian10 use the following commands:
 apt update
 apt install -yqq python3 python3-pip python3-venv
 
@@ -140,8 +140,6 @@ ansible --version
 #  executable location = /usr/local/ilke-env/bin/ansible
 #  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
 
-#ansible-core 2.11 and Ansible 4.0.0 will make Python 3.8 a soft dependency for the control node.
-#ansible-core 2.12 and Ansible 5.0.0 will require Python 3.8
 
 # If you whant to stop using the Python Virtual Environment, just execute the following command:
 deactivate
@@ -229,9 +227,8 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 # Python version
 
 # If centOS-7, use python2.7
-# If no-CentOS-7, use Python3
+# If no-CentOS-7, like ubuntu (18.04, 20.04) or If Debian 10, use Python3
 ansible_python_interpreter=/usr/bin/python3
-# If ubuntu (18.04, 20.04) or If Debian 10, use also Python3
 
 
 [etc_hosts]
