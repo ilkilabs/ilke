@@ -1,0 +1,4 @@
+---
+- name : Clear Openebs Data Storage
+  include_tasks: delete_openebs.yaml
+  when: ilke.global.uninstall | bool == True
