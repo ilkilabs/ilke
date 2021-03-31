@@ -32,6 +32,7 @@
   - install-cni
   - install-runtimes
   - setup-worker
+  - clear  
 - hosts: deploy
   become: true
   roles:
