@@ -29,10 +29,10 @@
 - hosts: workers,storage
   become: true
   roles:
-  - install-cni
-  - install-runtimes
-  - setup-worker
-  - clear  
+    - install-cni
+    - install-runtimes
+    - setup-worker
+    - clear
 - hosts: deploy
   become: true
   roles:
