@@ -106,6 +106,7 @@ You can create your own *Python Virtual Environment* from scratch by following:
 
 ```
 # Install on deploy machine python3, pyhton3-pip and python3-venv
+# On Ubuntu (18.04,20.04) or Debian10 use the following commands:
 apt update
 apt install -yqq python3 python3-pip python3-venv
 
@@ -123,7 +124,7 @@ pip3 install --upgrade pip
 
 # Then install Ansible and Netaddr (needed by ILKE)
 pip3 install ansible
-pip3 install netddr
+pip3 install netaddr
 pip3 install selinux
 
 # You can alternatively install packages with "ilke/requirements.txt" file located on ILKE
@@ -138,6 +139,7 @@ ansible --version
 #  ansible python module location = /usr/local/ilke-env/lib/python3.8/site-packages/ansible
 #  executable location = /usr/local/ilke-env/bin/ansible
 #  python version = 3.8.5 (default, Jul 28 2020, 12:59:40) [GCC 9.3.0]
+
 
 # If you whant to stop using the Python Virtual Environment, just execute the following command:
 deactivate
@@ -225,8 +227,9 @@ ansible_ssh_private_key_file=/home/vagrant/ssh-private-key.pem
 # Python version
 
 # If centOS-7, use python2.7
-# If no-CentOS-7, use Python3
+# If no-CentOS-7, like ubuntu (18.04, 20.04) or If Debian 10, use Python3
 ansible_python_interpreter=/usr/bin/python3
+
 
 [etc_hosts]
 #kubernetes.localcluster.lan ansible_host=10.10.20.4
@@ -249,7 +252,7 @@ The **all:vars** section contains information about how to connect to K8S nodes.
 The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
-**ansible_user** User used as service account by Agorakube to connect to all nodes. **User must be sudoer**.
+**ansible_user** User used as service account by ILKE to connect to all nodes. **User must be sudoer**.
 
 ## Configuration file
 
@@ -375,7 +378,7 @@ This section is used to custom global ILKE settings.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke.global.data_path` | Path where ILKE saves all config/pik/service files on deploy machine | **/var/ilke/** *(default)* |
+| `ilke.global.data_path` | Path where ILKE saves all config/pki/service files on deploy machine | **/var/ilke/** *(default)* |
 
 ## Certificates & PKI section
 
@@ -427,7 +430,7 @@ This section allows you to configure your Kubernetes deployment.
 
 ### Container Engine
 
-This section allows you to configure your Container Engine taht will be deployed on all Master/Worker/Storage hosts.
+This section allows you to configure your Container Engine that will be deployed on all Master/Worker/Storage hosts.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
@@ -529,7 +532,7 @@ kubectl get pods
 
 You can Benchmark your ILKE Storage Class as follow:
 
-* Create a falie named "benchmarckStorage.yaml" with the followinf content:
+* Create a file named "benchmarckStorage.yaml" with the following content:
 
 Note: You can custom the storageClassName in your PersistentVolumeClaim to Benchmark a specific StorageClass. Default config Benchark the default StorageClass (Jiva volume)
 ```
