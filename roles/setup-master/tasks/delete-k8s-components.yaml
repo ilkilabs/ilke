@@ -1,0 +1,34 @@
+---
+# Delete PKI files
+- name: Delete PKI files
+  file:
+    path: /etc/kubernetes/pki
+    state: absent
+
+# Delete Services Definition
+- name: Delete Master Service
+  file:
+    path: "/etc/systemd/system/{{ item }}"
+    with_items:
+      - kube-apiserver.service
+      - kube-controller-manager.service
+      - kube-scheduler.service
+    state: absent
+
+# Delete Binaries
+- name: Delete Server Binaries
+  file:
+    path: /usr/local/bin/kubernetes/server/bin/kube-apiserver
+    state: absent
+
+# Delete Logs
+- name: Delete Logs
+  file:
+    path: /var/log/kubernetes
+    state: absent
+
+# Delete Data Directory
+- name: Delete Data Directory
+  file:
+    path: /etc/kubernetes/manifests
+    state: absent

@@ -1,0 +1,41 @@
+---
+# Delete PKI files
+- name: Delete PKI files
+  file:
+    path: /etc/kubernetes/pki
+    state: absent
+
+# Delete Services Definition
+- name: Delete Kubelet Service
+  file:
+    path: /etc/systemd/system/kubelet.service
+    state: absent
+    when:
+    - ansible_fqdn in groups['workers'] or ansible_fqdn in groups['storage']
+    - ansible_fqdn not in groups['masters']
+
+- name: Delete Kube-proxy Service
+  file:
+    path: /etc/systemd/system/kube-proxy.service
+    state: absent
+    when:
+    - ansible_fqdn in groups['workers'] or ansible_fqdn in groups['storage']
+    - ansible_fqdn not in groups['masters']
+
+# Delete Binaries
+- name: Delete Node Binaries
+  file:
+    path: /usr/local/bin/kubernetes/node/bin/kubelet
+    state: absent
+
+# Delete Logs
+- name: Delete Logs
+  file:
+    path: /var/log/kubernetes
+    state: absent
+
+# Delete Data Directory
+- name: Delete Data Directory
+  file:
+    path: /etc/kubernetes/manifests
+    state: absent
