@@ -12,3 +12,7 @@
 - name: Check etcd cluster after installation
   include_tasks: check-etcd.yaml
   when: ilke_base_components.etcd.check | bool == True
+
+- name: uninstall and clear ETCD clusters
+  include_tasks: delete-etcd-clusters.yaml
+  when: ilke.global.uninstall | bool == True  

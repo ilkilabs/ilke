@@ -1,0 +1,30 @@
+---
+- name : Uninstall and Delete Etcd PKI Files
+  file: 
+    path: "/etc/kubernetes/pki/etcd"
+    state: absent
+
+- name : Delete etcd PKI Files
+  file:
+    path: "/etc/kubernetes/pki/etcd"
+    state: absent
+
+- name: Delete Pki Keys and Certificates
+  file:
+    path: "{{ pki_path }}/intermediate/etcd"
+    state: absent
+                            
+- name: Uninstall and delete ETCD Service Definition
+  file:
+    path: "/etc/systemd/system/etcd.service"
+    state: absent
+
+- name:  Uninstall and Delete ETCD Binaries
+  file:
+    path: "/usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcd"
+    state: absent
+
+- name: Uninstall and delete ETCD data-dir
+  file:
+    path: "ilke_base_components.etcd.data_path"
+    state: absent
