@@ -1,10 +1,10 @@
 ---
-- name : Uninstall and Delete Etcd PKI Files
+- name: Uninstall and Delete Etcd PKI Files
   file: 
     path: "/etc/kubernetes/pki/etcd"
     state: absent
 
-- name : Delete etcd PKI Files
+- name: Delete etcd PKI Files
   file:
     path: "/etc/kubernetes/pki/etcd"
     state: absent
