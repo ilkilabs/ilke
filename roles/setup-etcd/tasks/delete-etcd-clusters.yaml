@@ -1,12 +1,12 @@
 ---
 - name: Uninstall and Delete Etcd PKI Files
   file: 
-    path: /etc/kubernetes/pki/etcd
+    path: "/etc/kubernetes/pki/etcd"
     state: absent
 
 - name: Delete etcd PKI Files
   file:
-    path: /etc/kubernetes/pki/etcd
+    path: "/etc/kubernetes/pki/etcd"
     state: absent
 
 - name: Delete Pki Keys and Certificates
@@ -16,7 +16,7 @@
                             
 - name: Uninstall and delete ETCD Service Definition
   file:
-    path: /etc/systemd/system/etcd.service
+    path: "/etc/systemd/system/etcd.service"
     state: absent
 
 - name:  Uninstall and Delete ETCD Binaries
