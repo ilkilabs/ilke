@@ -11,4 +11,4 @@
 
 - name: Clear kubernetes components
   include_tasks: delete-k8s-components.yaml
-  when ilke.global.uninstall | bool == True
+  when: ilke.global.uninstall | bool == True
