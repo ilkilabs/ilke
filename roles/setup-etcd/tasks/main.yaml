@@ -15,4 +15,4 @@
 
 - name: uninstall and clear ETCD clusters
   include_tasks: delete-etcd-clusters.yaml
-  when: ilke.global.uninstall | bool == True  
+  when: ilke.global.uninstall | bool == True 
