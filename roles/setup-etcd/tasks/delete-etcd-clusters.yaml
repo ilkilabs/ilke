@@ -15,10 +15,8 @@
     state: absent
 
 - name: reload systemd
-  systemd:
-    state: restarted
-    daemon_reload: yes    
-    name: etcd    
+  notify:
+    - Reload daemons      
 
 - name:  Uninstall and Delete ETCD Binaries
   file:
