@@ -17,7 +17,7 @@
 - name: reload systemd
   systemd:
     daemon_reload: yes      
-
+    
 - name:  Uninstall and Delete ETCD Binaries
   file:
     path: "/usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64"
