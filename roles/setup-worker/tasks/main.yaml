@@ -10,4 +10,4 @@
   include_tasks: setup-worker.yaml
 - name: Clear kubenetes components
   include_tasks: delete-k8s-components.yaml
-  when: ilke.global.uninstall | bool == True
+  tags: ['never', 'uninstall']

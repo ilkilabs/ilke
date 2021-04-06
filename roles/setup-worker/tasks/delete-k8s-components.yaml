@@ -1,41 +1,44 @@
 ---
-# Delete PKI files
-- name: Delete PKI files
-  file:
-    path: /etc/kubernetes/pki
-    state: absent
+# Stop the Services before uninstalling them
+- name: Stop Kubelet Service
+  systemd:
+    state: stopped
+    name: kubelet
+
+- name: Stop Kube-proxy Service
+  systemd:
+    state: stopped
+    name: kube-proxy
 
 # Delete Services Definition
 - name: Delete Kubelet Service
   file:
     path: /etc/systemd/system/kubelet.service
     state: absent
-    when:
-    - ansible_fqdn in groups['workers'] or ansible_fqdn in groups['storage']
-    - ansible_fqdn not in groups['masters']
+  notify:
+    - Reload daemons
 
 - name: Delete Kube-proxy Service
   file:
     path: /etc/systemd/system/kube-proxy.service
     state: absent
-    when:
-    - ansible_fqdn in groups['workers'] or ansible_fqdn in groups['storage']
-    - ansible_fqdn not in groups['masters']
+  notify:
+    - Reload daemons
+
+# Delete PKI files and Data Directory
+- name: Delete PKI files
+  file:
+    path: /etc/kubernetes
+    state: absent
 
 # Delete Binaries
 - name: Delete Node Binaries
   file:
-    path: /usr/local/bin/kubernetes/node/bin/kubelet
+    path: /usr/local/bin/kubernetes
     state: absent
 
 # Delete Logs
 - name: Delete Logs
   file:
     path: /var/log/kubernetes
-    state: absent
-
-# Delete Data Directory
-- name: Delete Data Directory
-  file:
-    path: /etc/kubernetes/manifests
     state: absent
