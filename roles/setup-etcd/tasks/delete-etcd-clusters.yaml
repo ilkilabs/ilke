@@ -15,8 +15,8 @@
     state: absent
 
 - name: reload systemd
-  systemd: 
-    daemon_reload: yes  
+  systemd:
+    daemon_reload: yes      
 
 - name:  Uninstall and Delete ETCD Binaries
   file:
@@ -25,5 +25,5 @@
 
 - name: Uninstall and delete ETCD data-dir
   file:
-    path: "{{ilke_base_components.etcd.data_path}}"
+    path: "{{ ilke_base_components.etcd.data_path }}"
     state: absent
