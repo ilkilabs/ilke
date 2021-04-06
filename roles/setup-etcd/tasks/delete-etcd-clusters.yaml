@@ -13,8 +13,10 @@
   file:
     path: "/etc/systemd/system/etcd.service"
     state: absents
-  notify:
-    - Reload daemons
+
+- name: Reload daemons
+  systemd:
+    daemon_reload: yes
 
 - name:  Uninstall and Delete ETCD Binaries
   file:
