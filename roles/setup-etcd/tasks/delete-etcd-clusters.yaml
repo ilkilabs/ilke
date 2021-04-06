@@ -12,9 +12,7 @@
 - name: Uninstall and delete ETCD Service Definition
   file:
     path: "/etc/systemd/system/etcd.service"
-    state: absent
-
-- name: reload systemd
+    state: absents
   notify:
     - Reload daemons      
 
