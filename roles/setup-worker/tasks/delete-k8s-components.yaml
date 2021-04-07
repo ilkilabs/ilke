@@ -31,6 +31,13 @@
     - Reload Daemons
   tags: ['never', 'uninstall']
 
+# Delete Kubelet
+- name: Delete Kubelet
+  file:
+    path: /var/lib/kubelet
+    state: absent
+  tags: ['never', 'uninstall']
+
 # Delete PKI files and Data Directory
 - name: Delete PKI files
   file:
