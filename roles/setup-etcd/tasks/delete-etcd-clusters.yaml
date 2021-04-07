@@ -4,6 +4,7 @@
     name: etcd
     state: stopped
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 - name: Uninstall and Delete Etcd PKI Files
   file:

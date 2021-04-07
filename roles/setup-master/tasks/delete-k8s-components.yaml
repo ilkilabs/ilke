@@ -5,28 +5,31 @@
     state: stopped
     name: kube-apiserver
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 - name: Stop Kube Controller Manager Service
   systemd:
     state: stopped
     name: kube-controller-manager
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 - name: Stop Kube Scheduler Service
   systemd:
     state: stopped
     name: kube-scheduler
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 # Delete Services Definition
 - name: Delete Master Service
   file:
     path: "/etc/systemd/system/{{ item }}"
-    with_items:
-      - kube-apiserver.service
-      - kube-controller-manager.service
-      - kube-scheduler.service
     state: absent
+  with_items:
+    - "kube-apiserver.service"
+    - "kube-controller-manager.service"
+    - "kube-scheduler.service"
   notify:
     - Reload daemons
   tags: ['never', 'uninstall']

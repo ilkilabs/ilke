@@ -5,12 +5,14 @@
     state: stopped
     name: kubelet
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 - name: Stop Kube-proxy Service
   systemd:
     state: stopped
     name: kube-proxy
   tags: ['never', 'uninstall']
+  ignore_errors: yes
 
 # Delete Services Definition
 - name: Delete Kubelet Service
@@ -18,7 +20,7 @@
     path: /etc/systemd/system/kubelet.service
     state: absent
   notify:
-    - Reload daemons
+    - Reload Daemons
   tags: ['never', 'uninstall']
 
 - name: Delete Kube-proxy Service
@@ -26,7 +28,7 @@
     path: /etc/systemd/system/kube-proxy.service
     state: absent
   notify:
-    - Reload daemons
+    - Reload Daemons
   tags: ['never', 'uninstall']
 
 # Delete PKI files and Data Directory
