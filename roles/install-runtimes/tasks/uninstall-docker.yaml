@@ -1,0 +1,52 @@
+---
+- name: Stop the docker service
+  systemd:
+    name: docker
+    state: stopped
+  tags: ['never', 'uninstall']
+
+- name: Uninstall docker
+  file:
+    path: " ["docker-ce","docker-ce-cli"] "
+    state: absent
+  when: ilke_base_components.container.release|length == 0
+  tags: ['never', 'uninstall']  
+
+- name: Uninstall docker in specific release
+  file:
+    path: " ["docker-ce-{{ ilke_base_components.container.release }}","docker-ce-cli-{{ ilke_base_components.container.release }}"] "
+    state: absent
+  when: ilke_base_components.container.release|length > 0
+  tags: ['never', 'uninstall']
+
+- name: uninstall Docker for Debian lilke distros
+  file:
+    path: "docker-debian-like.yaml"
+    state: absent
+  when: is_debian_lilke
+  tags: ['never', 'uninstall']
+
+  - name: uninstall Docker for Centos lilke distros
+  file:
+    path: "docker-centos-like.yaml"
+    state: absent
+  when: is_centos_like
+  tags: ['never', 'uninstall']
+
+- name : Delete Docker config files
+  file:
+    path: "/etc/docker"
+    state: absent
+  tags: ['never', 'uninstall']
+
+- name: Delete all Docker  Network interfaces presents on the host
+  file:
+    path: "/var/lib/cni/networks"
+    state: absent
+  tags: ['never', 'uninstall']
+
+- name: Delte plugin CNI
+  file: 
+    path: /etc/cni/net.d
+    state: absent
+  tags: ['never', 'uninstall']
