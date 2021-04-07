@@ -11,3 +11,6 @@
 - name: Clear kubenetes components
   include_tasks: delete-k8s-components.yaml
   tags: ['never', 'uninstall']
+- name: Clear Containerd and Docker components
+  include_tasks: delete-containerd-docker-components.yaml
+  tags: ['never', 'uninstall']

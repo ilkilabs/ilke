@@ -1,0 +1,28 @@
+---
+# Stop Runtime
+- name: Stop Containerd Runtime
+  systemd:
+    state: stopped
+    name: containerd
+
+- name: Stop Docker Runtime
+  systemd:
+    state: stopped
+    name: docker
+
+# Uninstall Containerd and Docker
+- name: Uninstall Containerd and Docker
+  package:
+    name: ["containerd.io", "docker-ce", "docker-ce-cli"]
+    state: absent
+
+# Delete Config Files and Data Directory
+- name: Delete Containerd Config Files and Data Directory
+  file:
+    path: /etc/containerd
+    state: absent
+
+- name: Delete Docker Config Files and Data Directory
+  file:
+    path: /etc/docker
+    state: absent
