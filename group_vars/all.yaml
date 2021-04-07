@@ -2,7 +2,6 @@
 ilke:
   global:
     data_path: /var/ilke
-    uninstall: False
 
 ilke_pki:
   infos:
