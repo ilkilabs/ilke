@@ -30,6 +30,6 @@
 # Delete all Container Network Interface (CNI) on the host
 - name: Delete all CNI 
   file:
-    path: /etc/cni/net.d
+    path: /etc/cni
     state: absent
   tags: ['never', 'uninstall']
