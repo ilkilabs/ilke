@@ -22,7 +22,7 @@
   file:
     path: "docker-debian-like.yaml"
     state: absent
-  when: is_debian_lilke
+  when: is_debian_like
   tags: ['never', 'uninstall']
 
 - name: uninstall Docker for Centos lilke distros
