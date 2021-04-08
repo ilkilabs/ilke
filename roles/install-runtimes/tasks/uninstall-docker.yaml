@@ -6,8 +6,8 @@
   tags: ['never', 'uninstall']
 
 - name: Uninstall docker
-  file:
-    path: " ["docker-ce","docker-ce-cli"] "
+  package:
+    name: ["docker-ce","docker-ce-cli"]
     state: absent
   when: ilke_base_components.container.release|length == 0
   tags: ['never', 'uninstall']  
