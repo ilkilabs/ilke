@@ -33,12 +33,6 @@
   when: is_centos_like
   tags: ['never', 'uninstall']
 
-- name: Reload docker
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: docker
-
 - name : Delete Docker config files
   file:
     path: "/etc/docker"
