@@ -3,7 +3,7 @@
   systemd:
     state: stopped
     name: docker
-    
+
 - name: Uninstall docker
   package:
     name: ["docker-ce","docker-ce-cli"]
@@ -44,7 +44,7 @@
     state: absent
   tags: ['never', 'uninstall']
 
-- name: Delte plugin CNI
+- name: Delete plugin CNI
   file:
     path: /etc/cni/net.d
     state: absent
