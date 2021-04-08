@@ -13,8 +13,8 @@
   tags: ['never', 'uninstall']  
 
 - name: Uninstall docker in specific release
-  file:
-    path: " ["docker-ce-{{ ilke_base_components.container.release }}","docker-ce-cli-{{ ilke_base_components.container.release }}"] "
+  package:
+    name: ["docker-ce={{ ilke_base_components.container.release }}","docker-ce-cli={{ ilke_base_components.container.release }}"]
     state: absent
   when: ilke_base_components.container.release|length > 0
   tags: ['never', 'uninstall']
