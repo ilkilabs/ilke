@@ -46,7 +46,7 @@
   tags: ['never', 'uninstall']
 
 - name: Delte plugin CNI
-  file: 
+  file:
     path: /etc/cni/net.d
     state: absent
   tags: ['never', 'uninstall']
