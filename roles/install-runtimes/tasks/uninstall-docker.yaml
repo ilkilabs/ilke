@@ -1,10 +1,9 @@
 ---
-- name: Stop the docker service
+- name: stop docker
   systemd:
-    name: docker
     state: stopped
-  tags: ['never', 'uninstall']
-
+    name: docker
+    
 - name: Uninstall docker
   package:
     name: ["docker-ce","docker-ce-cli"]
