@@ -105,3 +105,15 @@
     path: /run/containerd/
     state: absent
   tags: ['never', 'uninstall']
+
+- name: Delete /var/lib/containerd
+  file:
+    path: /var/lib/containerd
+    state: absent
+  tags: ['never', 'uninstall']
+
+- name: Delete /var/run/containerd
+  file:
+    path: /var/run/containerd
+    state: absent
+  tags: ['never', 'uninstall']
