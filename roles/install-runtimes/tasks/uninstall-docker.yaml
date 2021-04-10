@@ -52,7 +52,7 @@
     state: absent
   tags: ['never', 'uninstall']
 
-- name: Delete /var/lib/docker 
+- name: Delete /var/lib/docker
   file:
     path: /var/lib/docker
     state: absent
