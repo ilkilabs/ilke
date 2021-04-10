@@ -31,8 +31,23 @@
     - Reload Daemons
   tags: ['never', 'uninstall']
 
+- name: Get kubelet volumes
+  shell: >
+    df -HT | grep '/var/lib/kubelet/' | awk '{print $7}'
+  register: kubelet_volumes
+  tags: ['never', 'uninstall']
+
+- name: Unmount kubelet volumes
+  mount:
+    path: "{{ item }}"
+    state: unmounted
+  tags: ['never', 'uninstall']
+  when: kubelet_volumes.stdout != ""
+  with_items:
+    - "{{ kubelet_volumes.stdout_lines }}"
+
 # Delete Kubelet
-- name: Delete Kubelet
+- name: Delete Kubelet data dir
   file:
     path: /var/lib/kubelet
     state: absent

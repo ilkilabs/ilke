@@ -4,10 +4,10 @@
 
 - name: Uninstall docker
   include_tasks: uninstall-docker.yaml
-  when: ilke_base_components.container.engine == docker
+  when: ilke_base_components.container.engine == "docker"
   tags: [ 'never', 'uninstall' ]
 
 - name: Clear Containerd Components
   include_tasks: delete-containerd-components.yaml
-  when: ilke_base_components.container.engine == containerd
+  when: ilke_base_components.container.engine == "containerd"
   tags: ['never', 'uninstall']
