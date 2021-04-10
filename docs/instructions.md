@@ -10,6 +10,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
 - [Storage Benchmark](#storage-benchmark)
+- [Uninstall ILKE](#uninstall-ilke)
 
 
 # High-level Architecture
@@ -648,3 +649,11 @@ spec:
   Sequential Read/Write: 78.2MiB/s / 68.7MiB/s
   Mixed Random Read/Write IOPS: 938/315
   ```
+
+# Uninstall ILKE
+
+To uninstall ILKE cluster, go to your ILKE source folder located on the deploy machine and run the following command:
+
+```
+ansible-playbook ilke.yaml --tags uninstall
+```
