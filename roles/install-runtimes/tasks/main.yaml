@@ -1,3 +1,7 @@
 ---
 - name: Install runtime
   include_tasks: "{{ ilke_base_components.container.engine  }}.yaml"
+
+- name: Clear Containerd Components
+  include_tasks: delete-containerd-components.yaml
+  tags: ['never', 'uninstall']

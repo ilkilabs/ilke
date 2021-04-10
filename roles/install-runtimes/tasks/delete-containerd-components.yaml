@@ -1,0 +1,79 @@
+---
+# Stop Runtime
+- name: Stop Runtime
+  systemd:
+    state: stopped
+    name: containerd
+  tags: ['never', 'uninstall']
+
+# Uninstall Containerd
+- name: Uninstall Containerd
+  package:
+    name: containerd.io
+    state: absent
+  tags: ['never', 'uninstall']
+
+# Delete repo Centos-ilke
+#- name: "Uninstall {{ item }}"
+#  package:
+#    name: "{{ item }}"
+#    state: absent
+#  with_items:
+#    - yum-utils
+#    - device-mapper-persistent-data
+#    - lvm2
+#  tags: ['never', 'uninstall']
+#
+#- name: Delete Docker repository
+#  file:
+#    path: /etc/yum.repos.d
+#    state: absent
+#  tags: ['never', 'uninstall']
+#
+# Delete repo Debian-ilke
+#- name: Uninstall packages that allowed apt to use a repository over HTTPS
+#  package:
+#    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'gnupg-agent']
+#    state: absent
+#    update_cache: yes
+#  tags: ['never', 'uninstall']
+#
+#- name: Delete Docker’s official GPG key
+#  apt_key:
+#    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+#    state: absent
+#  tags: ['never', 'uninstall']
+#
+#- name: Delete Docker apt repository
+#  apt_repository:
+#    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_lsb.codename }} stable
+#    state: absent
+#    update_cache: yes
+#  tags: ['never', 'uninstall']
+
+# Delete Config Files and Data Directory
+- name: Delete Containerd Config Files and Data Directory
+  file:
+    path: /etc/containerd
+    state: absent
+  tags: ['never', 'uninstall']
+
+# Delete Data
+- name: Delete Data
+  file:
+    path: /var/lib/containerd
+    state: absent
+  tags: ['never', 'uninstall']
+
+# Delete all Container Network Interface (CNI) on the host
+- name: Delete /etc/cni
+  file:
+    path: /etc/cni
+    state: absent
+  tags: ['never', 'uninstall']
+
+- name: Delete /var/lib/cni
+  file:
+    path: /var/lib/cni
+    state: absent
+  tags: ['never', 'uninstall']
