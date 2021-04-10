@@ -94,7 +94,7 @@
 - name: Unmount containerd volumes
   mount:
     path: "{{ item }}"
-    state: unmounted
+    state: absent
   tags: ['never', 'uninstall']
   when: containerd_volumes.stdout != ""
   with_items:
