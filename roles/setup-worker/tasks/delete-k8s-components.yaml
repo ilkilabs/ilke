@@ -40,7 +40,7 @@
 - name: Unmount kubelet volumes
   mount:
     path: "{{ item }}"
-    state: unmounted
+    state: absent
   tags: ['never', 'uninstall']
   when: kubelet_volumes.stdout != ""
   with_items:
