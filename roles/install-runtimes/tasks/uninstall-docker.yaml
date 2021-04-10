@@ -3,6 +3,7 @@
   systemd:
     state: stopped
     name: docker
+  tags: [ 'never', 'uninstall' ]
 
 - name: Uninstall docker
   package:
