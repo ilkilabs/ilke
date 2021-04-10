@@ -2,6 +2,12 @@
 - name: Install runtime
   include_tasks: "{{ ilke_base_components.container.engine  }}.yaml"
 
+- name: Uninstall docker
+  include_tasks: uninstall-docker.yaml
+  when: ilke_base_components.container.engine == docker
+  tags: [ 'never', 'uninstall' ]
+
 - name: Clear Containerd Components
   include_tasks: delete-containerd-components.yaml
+  when: ilke_base_components.container.engine == containerd
   tags: ['never', 'uninstall']
