@@ -12,6 +12,7 @@
   retries: 5
   delay: 10
   run_once: true
+  tags: [ 'check-etcd' ]
 
 - name: Show etcd member list
   debug:
@@ -30,12 +31,13 @@
   until: etcd_clusterhealth.stdout.find("true") != -1
   retries: 5
   delay: 10
+  tags: check-etcd
 
 - name: Show etcd cluster health
   debug:
     msg: "{{ etcd_clusterhealth.stdout_lines }}"
   run_once: true
-
+  tags: check-etcd
 - name: Get etcd cluster status
   command: >-
       /usr/bin/etcd-{{ ilke_base_components.etcd.release }}-linux-amd64/etcdctl endpoint status -w=table
@@ -45,8 +47,10 @@
     ETCDCTL_API: 3
   changed_when: false
   register: etcd_clusterstatus
+  tags: check-etcd
 
 - name: Show etcd cluster status
   debug:
     msg: "{{ etcd_clusterstatus.stdout_lines }}"
   run_once: true
+  tags: check-etcd
