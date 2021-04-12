@@ -1,4 +1,4 @@
-# ILKILABS KUBERNETES ENGINE Core
+# ILKILABS KUBERNETES ENGINE
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4797/badge)](https://bestpractices.coreinfrastructure.org/projects/4797)
@@ -22,7 +22,7 @@ This is a list of points that will be explained in this Readme file for the IKE 
 
 ## What is ILKE
 
-ILKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20).
+ILKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21).
 
 By its symplicity, ILKE provide a good way to deploy and manage K8S Clusters.
 
