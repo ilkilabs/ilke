@@ -20,7 +20,7 @@
 
 - name: Install Docker for Debian lilke distros
   include_tasks: "docker-debian-like.yaml"
-  when: is_debian_lilke
+  when: is_debian_like
 
 - name: Install Docker for Centos lilke distros
   include_tasks: "docker-centos-like.yaml"
