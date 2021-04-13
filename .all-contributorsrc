@@ -48,6 +48,15 @@
         "doc",
         "content"
       ]
+    },
+    {
+      "login": "gaelfr29",
+      "name": "gaelfr29",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43063988?v=4",
+      "profile": "https://github.com/gaelfr29",
+      "contributions": [
+        "business"
+      ]
     }
   ],
   "contributorsPerLine": 7,
