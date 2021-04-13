@@ -1,4 +1,7 @@
 # ILKILABS KUBERNETES ENGINE
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4797/badge)](https://bestpractices.coreinfrastructure.org/projects/4797)
@@ -88,3 +91,23 @@ using various processes (see [CONTRIBUTING](./docs/CONTRIBUTING.md)).
 
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Filkilabs%2Filke.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Filkilabs%2Filke?ref=badge_large)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.ilki.fr/"><img src="https://avatars.githubusercontent.com/u/43336050?v=4?s=100" width="100px;" alt=""/><br /><sub><b>pierre villard</b></sub></a><br /><a href="#projectManagement-pierreilki" title="Project Management">📆</a> <a href="https://github.com/ilkilabs/ilke/commits?author=pierreilki" title="Code">💻</a> <a href="#mentoring-pierreilki" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/ilkilabs/ilke/commits?author=pierreilki" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
