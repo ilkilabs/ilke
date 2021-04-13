@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "bryanILKI",
+      "name": "bryanILKI",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79568169?v=4",
+      "profile": "https://github.com/bryanILKI",
+      "contributions": [
+        "code",
+        "maintenance",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ilke",
+  "projectOwner": "ilkilabs",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
