@@ -6,8 +6,8 @@
 
 - name: Check runtime variable
   fail:
-    msg: "Runtime {{ runtime }} is not supported ! Supported values are : docker, containerd, none, false"
-  when: runtime not in ['docker','containerd','false','none']
+    msg: "Runtime {{ ilke_base_components.container.engine}} is not supported ! Supported values are : docker, containerd, none, false"
+  when: ilke_base_components.container.engine not in ['docker','containerd','false','none']
 
 #- name: Check CNI Pluging variable
 #  fail:
@@ -22,12 +22,12 @@
 - name: Check Populate /etc/hosts
   fail:
     msg: "Populate /etc/hosts variable is set to : {{ ilke_populate_etc_hosts }} ! Supported values are : True, False"
-  when: (ilke_populate_etc_hosts | string)  not in ['True','False']
+  when: (ilke_populate_etc_hosts| string)  not in ['True','False']
 
 - name: Check k8s_dashboard
   fail:
-    msg: "Variable k8s_dashboard is set to {{ k8s_dashboard }} ! Supported values are : True, False"
-  when: (k8s_dashboard | string) not in ['True','False']
+    msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are : True, False"
+  when: (ilke_features.dashboard.enabled | string) not in ['True','False']
 
 - name: Check cluster_cidr
   fail:
