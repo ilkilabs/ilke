@@ -103,9 +103,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -280,9 +279,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -359,9 +357,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -491,9 +488,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       # By default the node-disk-manager will be run on all kubernetes nodes
@@ -621,9 +617,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -697,9 +692,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
@@ -760,9 +754,8 @@ spec:
         openebs.io/version: {{ ilke_features.storage.release }}
     spec:
       tolerations:
-      - key: "NoSchedulabe"
-        operator: "Exists"
-        effect: "NoSchedule"
+      - effect: NoSchedule
+        operator: Exists
       nodeSelector:
         "node-role.kubernetes.io/storage": "true"
       serviceAccountName: openebs-maya-operator
