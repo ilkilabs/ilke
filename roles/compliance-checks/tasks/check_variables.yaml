@@ -5,7 +5,9 @@
 - name: check rotate certificates
   fail:
     msg: "End play with failed status"
-  when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
+  when: ( ilke_pki.management.rotate_certificats | string) not in ['true','false'] 
+  
+  #when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
 
 - name: check current Kubernetes release
   fail:
