@@ -68,13 +68,38 @@
 
 - name: Check CNI plugin used
   fail:
-    msg: "CNI plugin used {{ ilke_network.cni_plugin }} is not supported ! Supported values are : calico, kube-router none, false"
-  when: (ilke_network.cni_plugin| string| lower) not in ['calico','kube-router','false','none']
+    msg: "CNI plugin used {{ ilke_network.cni_plugin }} is not supported ! Supported values are : calico, kube-router, none"
+  when: (ilke_network.cni_plugin| string| lower) not in ['calico','kube-router','none']
 
-#- name: check Ingress Controller
- # fail:
-  #  msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
-  #when: ilke_features.ingress.controller != ['none','traefik','haproxy','nginx']
+- name: Check Kube-Proxy mode
+  fail:
+    msg: "Kube-Proxy mode {{ ilke_network.kube_proxy.mode }} is not supported ! Supported values are : ipvs, none, false"
+  when: (ilke_network.kube_proxy.mode| string| lower) not in ['ipvs','false','none']
+
+- name: Check Default ClusterIP loadBalancing Algorithm
+  fail:
+    msg: "Default ClusterIP loadBalancing Algorithm {{ ilke_network.kube_proxy.algorithm }} is not supported ! Supported values are : rr, lc, dh, sh, sed, nq, none"
+  when: (ilke_network.kube_proxy.algorithm| string| lower) not in ['rr','lc','dh','sh','sed','nq','none']
+
+- name: Check Jiva FS types
+  fail:
+    msg: "Jiva FS types {{ ilke_features.storage.jiva.fs_type }} is not supported ! Supported values are : ext4, none, false"
+  when: (ilke_features.storage.jiva.fs_type| string| lower) not in ['ext4','false','none']
+  
+- name: check Ingress Controller
+  fail:
+    msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik, haproxy, nginx"
+  when: (ilke_features.ingress.controller| string| lower) not in ['none','traefik','haproxy','nginx']
+
+- name: check Default Grafana admin user
+  fail:
+    msg: "Default Grafana admin user {{ ilke_features.monitoring.admin.user }} is not supported ! Supported values are : none, administrator"
+  when: (ilke_features.monitoring.admin.user| string| lower) not in ['none','administrator']
+
+- name: check Default grafana admin password
+  fail:
+    msg: "Default grafana admin password {{ ilke_features.monitoring.admin.password }} is not supported ! Supported values are : none, P@ssw0rd"
+  when: (ilke_features.monitoring.admin.password| string| lower) not in ['none','P@ssw0rd']
 
 #- name: check Ingress controller release
  # fail:
