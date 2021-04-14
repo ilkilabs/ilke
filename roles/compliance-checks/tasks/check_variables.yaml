@@ -4,13 +4,7 @@
 
 - name: check rotate certificates
   fail:
-    msg: >-
-              {{
-                 
-                  "Boolean used to rotate certificates is not supported."
-                
-              }}
-    #msg: Boolean used to rotate certificates is not supported.
+    msg: "End play with failed status"
   when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
 
 - name: check current Kubernetes release
