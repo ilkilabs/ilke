@@ -10,42 +10,41 @@
 - name: check current Kubernetes release
   fail:
     msg: "Kubernetes release {{ ilke_base_components.kubernetes.upgrade }} is not supported ! Supported values are : true, false"
-  when: ( ilke_base_components.kubernetes.upgrade|bool != false or ilke_base_components.kubernetes.upgrade != true )
+  when: (ilke_base_components.kubernetes.upgrade| string| lower) not in ['true', 'false']
 
 - name: check external_loadbalancing
   fail:
     msg: "External_loadbalancing {{ ilke_network.external_loadbalancing.enabled }} is not supported ! Supported values are : true, false"
-  when: ( ilke_network.external_loadbalancing.enabled|bool != false or ilke_network.external_loadbalancing.enabled|bool != true )
+  when: (ilke_network.external_loadbalancing.enabled| string| lower) not in ['true', 'false']
 
 - name: check Storage
   fail:
     msg: "Storage {{ ilke_features.storage.hostpath.data_path }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.storage.hostpath.data_path|bool != false or ilke_features.storage.hostpath.data_path|bool != true )
+  when: (ilke_features.storage.hostpath.data_path| string| lower) not in ['true', 'false']
 
 - name: check OpenEBS Path
   fail:
     msg: "Path where OpenEBS store HostPath volumes on Pod node {{ ilke_features.storage.enabled }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.storage.enabled|bool != false or ilke_features.storage.enabled|bool != true )
+  when: (ilke_features.storage.enabled| string| lower) not in ['true', 'false']
 
 - name: check Kubernetes dashboard
   fail:
     msg: "Kubernetes dashboard {{ ilke_features.dashboard.enabled }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.dashboard.enabled|bool != false or ilke_features.dashboard.enabled|bool != true )
-
+  when: (ilke_features.dashboard.enabled| string| lower) not in ['true', 'false']
 - name: check default admin user
   fail:
     msg: "default admin user {{ ilke_features.dashboard.generate_admin_token }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.dashboard.generate_admin_token|bool != false or ilke_features.dashboard.generate_admin_token|bool != true )
+  when: (ilke_features.dashboard.generate_admin_token| string| lower) not in ['true', 'false']
 
 - name: Metrics-Server
   fail:
     msg: "Metrics-Server {{ ilke_features.metrics_server.enabled }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.metrics_server.enabled|bool != false or ilke_features.metrics_server.enabled|bool != true )
+  when: (ilke_features.metrics_server.enabled| string| lower) not in ['true', 'false']
 
 - name: check ETCD cluster
   fail:
     msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are :  true, false"
-  when: ( ilke_base_components.etcd.check|bool != false or ilke_base_components.etcd.check|bool != true )
+  when: (ilke_base_components.etcd.check| string| lower) not in ['true', 'false']
 
 #- name: Check runtime variable
  # fail:
