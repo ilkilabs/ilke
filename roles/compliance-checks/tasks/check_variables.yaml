@@ -4,50 +4,55 @@
 #    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
 #  when: (delete_previous_k8s_install | string) not in ['True','False']
 
+- name: check rotate certificates
+  fail:
+    msg: "Boolean used to rotate certificates {{ ilke_pki.management.rotate_certificats }} ! Supported values are : true, false"
+  when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
+
 - name: check current Kubernetes release
   fail:
-    msg: "Kubernetes release {{ ilke_base_components.kubernetes.upgrade }} is not supported ! Supported values are : False"
-  when: ilke_base_components.etcd.check not in ['False']
+    msg: "Kubernetes release {{ ilke_base_components.kubernetes.upgrade }} is not supported ! Supported values are : true, false"
+  when: ( ilke_base_components.kubernetes.upgrade|bool != false or ilke_base_components.kubernetes.upgrade != true )
 
 - name: check external_loadbalancing
   fail:
-    msg: "External_loadbalancing {{ ilke_network.external_loadbalancing.enabled }} is not supported ! Supported values are : False"
-  when: ilke_network.external_loadbalancing.enabled not in ['False']
+    msg: "External_loadbalancing {{ ilke_network.external_loadbalancing.enabled }} is not supported ! Supported values are : true, false"
+  when: ( ilke_network.external_loadbalancing.enabled|bool != false or ilke_network.external_loadbalancing.enabled|bool != true )
 
 - name: check Storage
   fail:
-    msg: "Storage {{ ilke_features.storage.hostpath.data_path }} is not supported ! Supported values are : False"
-  when: ilke_features.storage.hostpath.data_path not in ['False']
+    msg: "Storage {{ ilke_features.storage.hostpath.data_path }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.storage.hostpath.data_path|bool != false or ilke_features.storage.hostpath.data_path|bool != true )
 
 - name: check OpenEBS Path
   fail:
-    msg: "Path where OpenEBS store HostPath volumes on Pod node {{ ilke_features.storage.enabled }} is not supported ! Supported values are : False"
-  when: ilke_features.storage.enabled not in ['False']
+    msg: "Path where OpenEBS store HostPath volumes on Pod node {{ ilke_features.storage.enabled }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.storage.enabled|bool != false or ilke_features.storage.enabled|bool != true )
 
 - name: check Kubernetes dashboard
   fail:
-    msg: "Kubernetes dashboard {{ ilke_features.dashboard.enabled }} is not supported ! Supported values are : False"
-  when: ilke_features.dashboard.enabled not in ['False']
+    msg: "Kubernetes dashboard {{ ilke_features.dashboard.enabled }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.dashboard.enabled|bool != false or ilke_features.dashboard.enabled|bool != true )
 
 - name: check default admin user
   fail:
-    msg: "default admin user {{ ilke_features.dashboard.generate_admin_token }} is not supported ! Supported values are : False"
-  when: ilke_features.dashboard.generate_admin_token not in ['False']
+    msg: "default admin user {{ ilke_features.dashboard.generate_admin_token }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.dashboard.generate_admin_token|bool != false or ilke_features.dashboard.generate_admin_token|bool != true )
 
 - name: Metrics-Server
   fail:
-    msg: "Metrics-Server {{ ilke_features.metrics_server.enabled }} is not supported ! Supported values are : False"
-  when: ilke_features.metrics_server.enabled not in ['False']
+    msg: "Metrics-Server {{ ilke_features.metrics_server.enabled }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.metrics_server.enabled|bool != false or ilke_features.metrics_server.enabled|bool != true )
 
 - name: check ETCD cluster
   fail:
-    msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are : True"
-  when: ilke_base_components.etcd.check not in ['True']
+    msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are :  true, false"
+  when: ( ilke_base_components.etcd.check|bool != false or ilke_base_components.etcd.check|bool != true )
 
 - name: Check runtime variable
   fail:
     msg: "Runtime {{ ilke_base_components.container.engine }} is not supported ! Supported values are : docker, containerd, none, false"
-  when: ilke_base_components.container.engine not in ['docker','containerd','false','none']
+  when: ilke_base_components.container.engine != ['docker','containerd','false','none']
 
 #- name: Check CNI Pluging variable
 #  fail:
@@ -57,32 +62,32 @@
 - name: check Ingress Controller
   fail:
     msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
-  when: ilke_features.ingress.controller not in ['none','traefik','haproxy','nginx']
+  when: ilke_features.ingress.controller != ['none','traefik','haproxy','nginx']
 
 - name: check Ingress controller release
   fail:
-    msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : False"
-  when: ilke_features.ingress.release not in ['False']
+    msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.ingress.release|bool != false or ilke_features.ingress.release|bool != true )
 
 - name: chekck Monitoring
   fail:
-    msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : False"
-  when: ilke_features.monitoring.enabled not in ['False']
+    msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.monitoring.enabled|bool != false or ilke_features.monitoring.enabled|bool != true )
 
 - name: chekck Monitoring Data
   fail:
-    msg: "Monitoring Data {{ ilke_features.monitoring.persistent }} is not supported ! Supported values are : False"
-  when: ilke_features.monitoring.persistent not in ['False']
+    msg: "Monitoring Data {{ ilke_features.monitoring.persistent }} is not supported ! Supported values are : true, false"
+  when: ( ilke_features.monitoring.persistent|bool != false or ilke_features.monitoring.persistent|bool != true )
 
 - name: Check Populate /etc/hosts
   fail:
-    msg: "Populate /etc/hosts variable is set to : {{ ilke_populate_etc_hosts }} ! Supported values are : True, False"
-  when: (ilke_populate_etc_hosts| string)  not in ['True','False']
+    msg: "Populate /etc/hosts variable is set to : {{ ilke_populate_etc_hosts }} ! Supported values are : true, false"
+  when: ( ilke_populate_etc_hosts|bool != false or ilke_populate_etc_hosts|bool != true )
 
 - name: Check k8s_dashboard
   fail:
-    msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are : True, False"
-  when: (ilke_features.dashboard.enabled | string) not in ['True','False']
+    msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are :  true, false"
+  when: ( ilke_features.dashboard.enabled|bool != false or ilke_features.dashboard.enabled|bool != true )
 
 - name: Check cluster_cidr
   fail:
