@@ -85,7 +85,7 @@
   fail:
     msg: "Jiva FS types {{ ilke_features.storage.jiva.fs_type }} is not supported ! Supported values are : ext4, none, false"
   when: (ilke_features.storage.jiva.fs_type| string| lower) not in ['ext4','false','none']
-  
+
 - name: check Ingress Controller
   fail:
     msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik, haproxy, nginx"
