@@ -30,7 +30,7 @@
 - name: Make hosts with master role not NoSchedulabe (if not a worker or storage)
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    taint nodes {{ item }} node-role.kubernetes.io/master:NoSchedule --overwrite
+    taint nodes {{ item }} node-role.kubernetes.io/master=true:NoSchedule --overwrite
   changed_when: false
   with_items:
   - "{{ groups['masters'] }}"
@@ -41,20 +41,18 @@
 - name: Make hosts with Storage role not NoSchedulabe (if not a worker, but can be a master)
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    taint nodes {{ item }} node-role.kubernetes.io/storage:NoSchedule --overwrite
+    taint nodes {{ item }} node-role.kubernetes.io/storage=true:NoSchedule --overwrite
   changed_when: false
   with_items:
   - "{{ groups['storage'] }}"
   when:
     - item not in groups['workers']
 
-#- name: Make sure hosts with worker role Schedulabe
-#  command: |
-#    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-#    taint nodes {{ item }} NoSchedulabe=true:NoSchedule- --overwrite
-#  changed_when: false
-#  with_items:
-#  - "{{ groups['masters'] }}"
-#  - "{{ groups['storage'] }}"
-#  when: item in groups['workers']
-#  ignore_errors: yes
+- name: Make sure hosts with worker role Schedulabe
+  command: |
+    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
+    taint nodes {{ item }} true:NoSchedule- --overwrite
+  changed_when: false
+  with_items:
+  - "{{ groups['workers'] }}"
+  ignore_errors: yes
