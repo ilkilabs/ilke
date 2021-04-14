@@ -41,6 +41,11 @@
     msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are :  true, false"
   when: (ilke_base_components.etcd.check| string| lower) not in ['true', 'false']
 
+- name: check ETCD cluster
+  fail:
+    msg: "ETCD cluster {{ ilke_base_components.etcd.backup.enabled }} is not supported ! Supported values are :  true, false"
+  when: (ilke_base_components.etcd.backup.enabled| string| lower) not in ['true', 'false']
+
 - name: chekck Monitoring
   fail:
     msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : true, false"
@@ -56,11 +61,6 @@
     msg: "Populate /etc/hosts variable is set to : {{ ilke_populate_etc_hosts }} ! Supported values are : true, false"
   when: (ilke_populate_etc_hosts| string| lower) not in ['true', 'false']
 
-- name: Check k8s_dashboard
-  fail:
-    msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are :  true, false"
-  when: (ilke_features.dashboard.enabled| string| lower) not in ['true', 'false']
-  
   #- name: Check runtime variable
  # fail:
   #  msg: "Runtime {{ runtime }} is not supported ! Supported values are : docker, containerd, none, false"
