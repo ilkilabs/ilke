@@ -48,10 +48,19 @@
   when:
     - item not in groups['workers']
 
-- name: Make sure hosts with worker role Schedulabe
+- name: Make sure hosts with worker role not have taint node-role.kubernetes.io/storage
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    taint nodes {{ item }} true:NoSchedule- --overwrite
+    taint nodes {{ item }} node-role.kubernetes.io/storage-
+  changed_when: false
+  with_items:
+  - "{{ groups['workers'] }}"
+  ignore_errors: yes
+
+- name: Make sure hosts with worker role not have taint node-role.kubernetes.io/master
+  command: |
+    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
+    taint nodes {{ item }} node-role.kubernetes.io/master-
   changed_when: false
   with_items:
   - "{{ groups['workers'] }}"
