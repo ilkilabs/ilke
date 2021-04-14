@@ -70,7 +70,7 @@
     msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : False"
   when: ilke_features.monitoring.enabled not in ['False']
 
-  - name: chekck Monitoring Data
+- name: chekck Monitoring Data
   fail:
     msg: "Monitoring Data {{ ilke_features.monitoring.persistent }} is not supported ! Supported values are : False"
   when: ilke_features.monitoring.persistent not in ['False']
