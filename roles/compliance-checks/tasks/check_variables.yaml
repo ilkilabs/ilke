@@ -65,7 +65,7 @@
  # fail:
   #  msg: "Runtime {{ runtime }} is not supported ! Supported values are : docker, containerd, none, false"
   #when: runtime not in ['docker','containerd','false','none']
-  
+
 #- name: check Ingress Controller
  # fail:
   #  msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
