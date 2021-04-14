@@ -2,10 +2,16 @@
 #    msg: "Variable delete_previous_k8s_install is set to {{ delete_previous_k8s_install }} ! Supported values are : True, False"
 #  when: (delete_previous_k8s_install | string) not in ['True','False']
 
-#- name: check rotate certificates
- # fail:
-  #  msg: Boolean used to rotate certificates is not supported.
-  #when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
+- name: check rotate certificates
+  fail:
+    msg: >-
+              {{
+                 
+                  "Boolean used to rotate certificates is not supported."
+                
+              }}
+    #msg: Boolean used to rotate certificates is not supported.
+  when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
 
 - name: check current Kubernetes release
   fail:
