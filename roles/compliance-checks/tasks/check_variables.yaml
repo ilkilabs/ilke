@@ -17,11 +17,6 @@
     msg: "External_loadbalancing {{ ilke_network.external_loadbalancing.enabled }} is not supported ! Supported values are : true, false"
   when: (ilke_network.external_loadbalancing.enabled| string| lower) not in ['true', 'false']
 
-- name: check Storage
-  fail:
-    msg: "Storage {{ ilke_features.storage.hostpath.data_path }} is not supported ! Supported values are : true, false"
-  when: (ilke_features.storage.hostpath.data_path| string| lower) not in ['true', 'false']
-
 - name: check OpenEBS Path
   fail:
     msg: "Path where OpenEBS store HostPath volumes on Pod node {{ ilke_features.storage.enabled }} is not supported ! Supported values are : true, false"
