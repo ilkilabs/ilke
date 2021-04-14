@@ -3,38 +3,38 @@
   any_errors_fatal: true
   become: true
   roles:
-    - connexion-to-hosts
-    - check-hosts-names
-    - populate_etc_hosts
+    #- connexion-to-hosts
+    #- check-hosts-names
+    #- populate_etc_hosts
 - hosts: deploy
   become: true
   vars:
     ansible_python_interpreter: /usr/local/ilke-env/bin/python3
   roles:
     - compliance-checks
-    - install-kubectl
-    - generate-certs
-    - configure-kubeconfig
+    #- install-kubectl
+    #- generate-certs
+    #- configure-kubeconfig
 - hosts: etcd
   become: true
   roles:
-    - setup-etcd
+    #- setup-etcd
 - hosts: masters
   become: true
   roles:
-    - setup-master
-    - install-cni
-    - install-runtimes
-    - setup-worker
+    #- setup-master
+    #- install-cni
+    #- install-runtimes
+    #- setup-worker
 - hosts: workers,storage
   become: true
   roles:
-    - install-cni
-    - install-runtimes
-    - setup-worker
-    - clear
+    #- install-cni
+    #- install-runtimes
+    #- setup-worker
+    #- clear
 - hosts: deploy
   become: true
   roles:
-    - post-scripts
-    - show-info
+    #- post-scripts
+    #- show-info

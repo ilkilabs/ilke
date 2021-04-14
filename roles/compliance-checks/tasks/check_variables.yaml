@@ -4,9 +4,8 @@
 
 - name: check rotate certificates
   fail:
-    msg: rotate certificates is not Supported.
-  when: ilke_pki.management.rotate_certificats != "true" or ilke_pki.management.rotate_certificats != "false"
- # when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
+    msg: "rotate certificates {{ ilke_pki.management.rotate_certificats }} is not supported ! Supported values are : true, false"
+  when: ( ilke_pki.management.rotate_certificats|bool != false ) or ( ilke_pki.management.rotate_certificats|bool != true )
 
 - name: check current Kubernetes release
   fail:
