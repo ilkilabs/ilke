@@ -39,15 +39,14 @@
     msg: "Metrics-Server {{ ilke_features.metrics_server.enabled }} is not supported ! Supported values are : False"
   when: ilke_features.metrics_server.enabled not in ['False']
 
-
-- name: check ETCD cluster 
+- name: check ETCD cluster
   fail:
     msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are : True"
   when: ilke_base_components.etcd.check not in ['True']
 
 - name: Check runtime variable
   fail:
-    msg: "Runtime {{ ilke_base_components.container.engine}} is not supported ! Supported values are : docker, containerd, none, false"
+    msg: "Runtime {{ ilke_base_components.container.engine }} is not supported ! Supported values are : docker, containerd, none, false"
   when: ilke_base_components.container.engine not in ['docker','containerd','false','none']
 
 #- name: Check CNI Pluging variable
