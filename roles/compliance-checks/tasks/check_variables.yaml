@@ -99,7 +99,7 @@
 - name: check Default grafana admin password
   fail:
     msg: "Default grafana admin password {{ ilke_features.monitoring.admin.password }} is not supported ! Supported values are : P@ssw0rd"
-  when: (ilke_features.monitoring.admin.password| string| upper) not in ['P@ssw0rd']
+  when: (ilke_features.monitoring.admin.password| string) not in ['P@ssw0rd']
 
 #- name: check Ingress controller release
  # fail:
