@@ -54,7 +54,7 @@
     - "{{ groups['workers'] }}"
     - "{{ groups['masters'] }}"
   when:
-    - item not in groups['storages']
+    - item not in groups['storage']
   ignore_errors: yes
 
 - name: Make hosts with master role not NoSchedulabe (if not a worker or storage)
