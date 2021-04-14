@@ -66,6 +66,11 @@
     msg: "Runtime {{ ilke_base_components.container.engine }} is not supported ! Supported values are : docker, containerd, none, false"
   when: (ilke_base_components.container.engine| string| lower) not in ['docker','containerd','false','none']
 
+- name: Check CNI plugin used
+  fail:
+    msg: "CNI plugin used {{ ilke_network.cni_plugin }} is not supported ! Supported values are : calico, kube-router none, false"
+  when: (ilke_network.cni_plugin| string| lower) not in ['calico','kube-router','false','none']
+
 #- name: check Ingress Controller
  # fail:
   #  msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
