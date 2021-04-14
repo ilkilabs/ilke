@@ -4,7 +4,7 @@
 
 - name: check rotate certificates
   fail:
-    msg: "Boolean used to rotate certificates ! Supported values are : true, false"
+    msg: "Boolean used to rotate certificates Supported values are : true, false"
   when: ( ilke_pki.management.rotate_certificats|bool != false or ilke_pki.management.rotate_certificats|bool != true )
 
 - name: check current Kubernetes release
