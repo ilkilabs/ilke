@@ -54,27 +54,27 @@
 - name: check Ingress controller release
   fail:
     msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.ingress.release|bool != false or ilke_features.ingress.release|bool != true )
+  when: (ilke_features.ingress.release| string| lower) not in ['true', 'false']
 
 - name: chekck Monitoring
   fail:
     msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.monitoring.enabled|bool != false or ilke_features.monitoring.enabled|bool != true )
+  when: (ilke_features.monitoring.enabled| string| lower) not in ['true', 'false']
 
 - name: chekck Monitoring Data
   fail:
     msg: "Monitoring Data {{ ilke_features.monitoring.persistent }} is not supported ! Supported values are : true, false"
-  when: ( ilke_features.monitoring.persistent|bool != false or ilke_features.monitoring.persistent|bool != true )
+  when: (ilke_features.monitoring.persistent| string| lower) not in ['true', 'false']
 
 - name: Check Populate /etc/hosts
   fail:
     msg: "Populate /etc/hosts variable is set to : {{ ilke_populate_etc_hosts }} ! Supported values are : true, false"
-  when: ( ilke_populate_etc_hosts|bool != false or ilke_populate_etc_hosts|bool != true )
+  when: (ilke_populate_etc_hosts| string| lower) not in ['true', 'false']
 
 - name: Check k8s_dashboard
   fail:
     msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are :  true, false"
-  when: ( ilke_features.dashboard.enabled|bool != false or ilke_features.dashboard.enabled|bool != true )
+  when: (ilke_features.dashboard.enabled| string| lower) not in ['true', 'false']
 
 #- name: Check cluster_cidr
 #  fail:
