@@ -35,6 +35,7 @@
     - "{{ groups['storage'] }}"
   when:
     - item not in groups['workers']
+  ignore_errors: yes
 
 - name: remove label node-role.kubernetes.io/master=true
   command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/master=true- --overwrite"
@@ -44,6 +45,7 @@
     - "{{ groups['storage'] }}"
   when:
     - item not in groups['masters']
+  ignore_errors: yes
 
 - name: remove label node-role.kubernetes.io/storage=true
   command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/storage=true- --overwrite"
@@ -53,6 +55,7 @@
     - "{{ groups['masters'] }}"
   when:
     - item not in groups['storages']
+  ignore_errors: yes
 
 - name: Make hosts with master role not NoSchedulabe (if not a worker or storage)
   command: |
