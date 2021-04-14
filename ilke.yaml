@@ -11,7 +11,7 @@
   vars:
     ansible_python_interpreter: /usr/local/ilke-env/bin/python3
   roles:
-#    - compliance-checks
+    - compliance-checks
     - install-kubectl
     - generate-certs
     - configure-kubeconfig
