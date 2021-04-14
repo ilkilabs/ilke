@@ -41,21 +41,6 @@
     msg: "ETCD cluster {{ ilke_base_components.etcd.check }} is not supported ! Supported values are :  true, false"
   when: (ilke_base_components.etcd.check| string| lower) not in ['true', 'false']
 
-#- name: Check runtime variable
- # fail:
-  #  msg: "Runtime {{ runtime }} is not supported ! Supported values are : docker, containerd, none, false"
-  #when: runtime not in ['docker','containerd','false','none']
-  
-#- name: check Ingress Controller
- # fail:
-  #  msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
-  #when: ilke_features.ingress.controller != ['none','traefik','haproxy','nginx']
-
-- name: check Ingress controller release
-  fail:
-    msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
-  when: (ilke_features.ingress.release| string| lower) not in ['true', 'false']
-
 - name: chekck Monitoring
   fail:
     msg: "Enable Monitoring {{ ilke_features.monitoring.enabled }} is not supported ! Supported values are : true, false"
@@ -75,6 +60,21 @@
   fail:
     msg: "Variable ilke_features.dashboard.enabled is set to {{ ilke_features.dashboard.enabled }} ! Supported values are :  true, false"
   when: (ilke_features.dashboard.enabled| string| lower) not in ['true', 'false']
+  
+  #- name: Check runtime variable
+ # fail:
+  #  msg: "Runtime {{ runtime }} is not supported ! Supported values are : docker, containerd, none, false"
+  #when: runtime not in ['docker','containerd','false','none']
+  
+#- name: check Ingress Controller
+ # fail:
+  #  msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik"
+  #when: ilke_features.ingress.controller != ['none','traefik','haproxy','nginx']
+
+#- name: check Ingress controller release
+ # fail:
+  #  msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
+  #when: (ilke_features.ingress.release| string| lower) not in ['true', 'false']
 
 #- name: Check cluster_cidr
 #  fail:
