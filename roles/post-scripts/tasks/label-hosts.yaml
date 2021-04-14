@@ -10,6 +10,7 @@
   with_items:
     - "{{ groups['masters'] }}"
     - "{{ groups['workers'] }}"
+    - "{{ groups['storage'] }}"
 
 - name: Label Woker Nodes
   command: "kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf label node {{ item }}  node-role.kubernetes.io/worker=true --overwrite"
@@ -26,24 +27,34 @@
   changed_when: false
   with_items: "{{ groups['masters'] }}"
 
-- name: Make hosts with master or storage role NoSchedulabe (if not a worker)
+- name: Make hosts with master role not NoSchedulabe (if not a worker or storage)
   command: |
     kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    taint nodes {{ item }} NoSchedulabe=true:NoSchedule --overwrite
+    taint nodes {{ item }} node-role.kubernetes.io/master:NoSchedule --overwrite
   changed_when: false
   with_items:
   - "{{ groups['masters'] }}"
+  when:
+    - item not in groups['workers']
+    - item not in groups['storage']
+
+- name: Make hosts with Storage role not NoSchedulabe (if not a worker, but can be a master)
+  command: |
+    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
+    taint nodes {{ item }} node-role.kubernetes.io/storage:NoSchedule --overwrite
+  changed_when: false
+  with_items:
   - "{{ groups['storage'] }}"
   when:
     - item not in groups['workers']
 
-- name: Make sure hosts with worker role Schedulabe
-  command: |
-    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
-    taint nodes {{ item }} NoSchedulabe=true:NoSchedule- --overwrite
-  changed_when: false
-  with_items:
-  - "{{ groups['masters'] }}"
-  - "{{ groups['storage'] }}"
-  when: item in groups['workers']
-  ignore_errors: yes
+#- name: Make sure hosts with worker role Schedulabe
+#  command: |
+#    kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf \
+#    taint nodes {{ item }} NoSchedulabe=true:NoSchedule- --overwrite
+#  changed_when: false
+#  with_items:
+#  - "{{ groups['masters'] }}"
+#  - "{{ groups['storage'] }}"
+#  when: item in groups['workers']
+#  ignore_errors: yes
