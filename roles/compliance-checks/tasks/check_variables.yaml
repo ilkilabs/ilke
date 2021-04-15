@@ -94,8 +94,8 @@
 - name : check kubernetes release
   fail:
     msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
-  when: ilke_base_components.kubernetes.release is version('v1.20.4', strict=True)
-  
+  when: ilke_base_components.kubernetes.release is version('v1.20.5', strict=True)
+
 #- name: check Default Grafana admin user
 #  fail:
 #    msg: "Default Grafana admin user {{ ilke_features.monitoring.admin.user }} is not supported ! Supported values are : none, administrator"
