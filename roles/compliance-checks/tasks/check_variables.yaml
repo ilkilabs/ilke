@@ -91,15 +91,20 @@
     msg: "Ingress Controller {{ ilke_features.ingress.controller }} is not supported ! Supported values are : none, traefik, haproxy, nginx"
   when: (ilke_features.ingress.controller| string| lower) not in ['none','traefik','haproxy','nginx']
 
-- name: check Default Grafana admin user
+- name : check kubernetes release
   fail:
-    msg: "Default Grafana admin user {{ ilke_features.monitoring.admin.user }} is not supported ! Supported values are : none, administrator"
-  when: (ilke_features.monitoring.admin.user| string| lower) not in ['none','administrator']
+    msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
+  when: ilke_base_components.kubernetes.release is version('v1.20.4', strict=True)
+  
+#- name: check Default Grafana admin user
+#  fail:
+#    msg: "Default Grafana admin user {{ ilke_features.monitoring.admin.user }} is not supported ! Supported values are : none, administrator"
+#  when: (ilke_features.monitoring.admin.user| string| lower) not in ['none','administrator']
 
-- name: check Default grafana admin password
-  fail:
-    msg: "Default grafana admin password {{ ilke_features.monitoring.admin.password }} is not supported ! Supported values are : P@ssw0rd"
-  when: (ilke_features.monitoring.admin.password| string) not in ['P@ssw0rd']
+#- name: check Default grafana admin password
+#  fail:
+#    msg: "Default grafana admin password {{ ilke_features.monitoring.admin.password }} is not supported ! Supported values are : P@ssw0rd"
+#  when: (ilke_features.monitoring.admin.password| string) not in ['P@ssw0rd']
 
 #- name: check Ingress controller release
  # fail:
