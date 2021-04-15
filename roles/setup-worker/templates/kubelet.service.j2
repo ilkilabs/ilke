@@ -31,6 +31,7 @@ ExecStart=/usr/local/bin/kubernetes/node/bin/kubelet \
   --register-node=true \
   --log-dir=/var/log/kubernetes \
   --logtostderr=false \
+  --node-ip={{ ansible_host }} \
   --v=2
 Restart=on-failure
 RestartSec=5

@@ -72,10 +72,9 @@ Add to all Deployments, DaemonSet
 
 ```
 tolerations:
-    - key: "NoSchedulabe"
-      operator: "Exists"
-      effect: "NoSchedule"
-nodeSelector:
+      - effect: NoSchedule
+        operator: Exists
+      nodeSelector:
         "node-role.kubernetes.io/storage": "true"
 ```
 
