@@ -128,7 +128,7 @@
 - name : check kubernetes release
   fail:
     msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
-  when: (ilke_base_components.kubernetes.release) is version('v1.20.2', strict=True)
+  when: (ilke_base_components.kubernetes.release) is version('v1.20.5', strict=False)
 
 #- name: check Ingress controller release
  # fail:
