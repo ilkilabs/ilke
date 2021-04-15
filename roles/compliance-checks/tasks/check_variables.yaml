@@ -96,10 +96,15 @@
     msg: "Variable cluster_cidr must be an IP adresse CIDR !"
   when: ilke_network.cidr.service is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
 
+- name: Check service_cluster_ip_range
+  fail:
+    msg: "Variable ilke_network.external_loadbalancing.ip_range must be an IP adresse CIDR !"
+  when: ilke_network.external_loadbalancing.ip_range | ansible.netcommon.ipaddr('10.10.20.0/24')
+
 #- name: Check service_cluster_ip_range
 #  fail:
 #    msg: "Variable ilke_network.external_loadbalancing.ip_range must be an IP adresse CIDR !"
-#  when: ilke_network.external_loadbalancing.ip_range is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
+#  when: ilke_network.external_loadbalancing.ip_range| ansible.netcommon.ipaddr('10.10.20.0/24') is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
 
 - name: Check kubernetes_service
   fail:
@@ -130,13 +135,3 @@
  # fail:
   #  msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
   #when: (ilke_features.ingress.release| string| lower) not in ['true', 'false']
-
-#- name: check Default Grafana admin user
-#  fail:
-#    msg: "Default Grafana admin user {{ ilke_features.monitoring.admin.user }} is not supported ! Supported values are : none, administrator"
-#  when: (ilke_features.monitoring.admin.user| string| lower) not in ['none','administrator']
-
-#- name: check Default grafana admin password
-#  fail:
-#    msg: "Default grafana admin password {{ ilke_features.monitoring.admin.password }} is not supported ! Supported values are : P@ssw0rd"
-#  when: (ilke_features.monitoring.admin.password| string) not in ['P@ssw0rd']
