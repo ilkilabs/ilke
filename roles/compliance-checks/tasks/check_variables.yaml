@@ -125,10 +125,10 @@
     msg: "Variable data_path must be a linux path ! Get {{ data_path }}"
   when: ilke.global.data_path is not regex("^(\/[^\/ ]*)+\/?$")
 
-#- name : check kubernetes release
- # fail:
-  #  msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
-  #when: (ilke_base_components.kubernetes.release) is version('v1.20.5', strict=True)
+- name : check kubernetes release
+  fail:
+    msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
+  when: (ilke_base_components.kubernetes.release) is version('v1.20.2', strict=True)
 
 #- name: check Ingress controller release
  # fail:
