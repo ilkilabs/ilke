@@ -96,10 +96,10 @@
     msg: "Variable cluster_cidr must be an IP adresse CIDR !"
   when: ilke_network.cidr.service is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
 
-- name: Check service_cluster_ip_range
-  fail:
-    msg: "Variable ilke_network.external_loadbalancing.ip_range must be an IP adresse CIDR !"
-  when: ilke_network.external_loadbalancing.ip_range is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
+#- name: Check service_cluster_ip_range
+#  fail:
+#    msg: "Variable ilke_network.external_loadbalancing.ip_range must be an IP adresse CIDR !"
+#  when: ilke_network.external_loadbalancing.ip_range is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
 
 - name: Check kubernetes_service
   fail:
