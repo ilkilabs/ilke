@@ -320,7 +320,7 @@ spec:
         command: ['/usr/bin/git', 'clone', 'https://github.com/ilkilabs/ilke.git', '/roles/post-scripts/files/dashboards/ilke-dashboard-v1.json'
         volumeMounts:
         - mountPath: /tmp/dashboard
-          name: dashboard
+          name: grafana-dashboard
       volumes:
       - name: grafana-datasource
         configMap:
