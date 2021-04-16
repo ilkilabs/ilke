@@ -124,4 +124,4 @@
 - name : check kubernetes release
   fail:
     msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
-  when: ilke_base_components.kubernetes.release is not regex ("^v(?:[+-]?(?:[0-9]+))(?:[+-]?(?:[0-9]+))(?:[+-]?(?:[0-9]+))?$")
+  when: ilke_base_components.kubernetes.release is not regex ("^v(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+))?$")
