@@ -81,10 +81,10 @@
     msg: "Default ClusterIP loadBalancing Algorithm {{ ilke_network.kube_proxy.algorithm }} is not supported ! Supported values are : rr, lc, dh, sh, sed, nq, none"
   when: (ilke_network.kube_proxy.algorithm| string| lower) not in ['rr','lc','dh','sh','sed','nq','none']
 
-- name: Check Jiva FS types
-  fail:
-    msg: "Jiva FS types {{ ilke_features.storage.jiva.fs_type }} is not supported ! Supported values are : ext4, none, false"
-  when: (ilke_features.storage.jiva.fs_type| string| lower) not in ['ext4','false','none']
+#- name: Check Jiva FS types
+#  fail:
+#    msg: "Jiva FS types {{ ilke_features.storage.jiva.fs_type }} is not supported ! Supported values are : ext4, none, false"
+#  when: (ilke_features.storage.jiva.fs_type| string| lower) not in ['ext4','false','none']
 
 - name: check Ingress Controller
   fail:
@@ -99,11 +99,7 @@
 - name: Check service_cluster_ip_range
   fail:
     msg: "Variable service_cluster_ip_range must be an IP adresse CIDR !"
-  when: ilke_network.external_loadbalancing.ip_range  | ipaddr('10.10.20.0/24') 
-  #fail:
-   # msg: "Variable service_cluster_ip_range must be an IP adresse CIDR !"
-  #when: ilke_network.external_loadbalancing.ip_range| ipaddr('10.10.20.0/24')
-  #when: ilke_network.external_loadbalancing.ip_range is not regex("^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$")
+  when: ilke_network.external_loadbalancing.ip_range is not regex("?<![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9]?$")
 
 - name: Check kubernetes_service
   fail:
@@ -128,9 +124,4 @@
 - name : check kubernetes release
   fail:
     msg: "kubernetes release {{ ilke_base_components.kubernetes.release }} is not supported ! Supported values are : v1.20.4"
-  when: (ilke_base_components.kubernetes.release) is version('v1.20.5', strict=False)
-
-#- name: check Ingress controller release
- # fail:
-  #  msg: "Ingress controller release {{ ilke_features.ingress.release }} is not supported ! Supported values are : true, false"
-  #when: (ilke_features.ingress.release| string| lower) not in ['true', 'false']
+  when: ilke_base_components.kubernetes.release is not regex ("^v(?:[+-]?(?:[0-9]+))(?:[+-]?(?:[0-9]+))(?:[+-]?(?:[0-9]+))?$")
