@@ -311,16 +311,22 @@ spec:
         volumeMounts:
         - name: grafana-datasource
           mountPath: /etc/grafana/provisioning/datasources
-        - name: grafana-dashboard
-          mountPath: /etc/grafana/provisioning/dashboards
-        resources:
+#        - name: grafana-dashboard
+#          mountPath: /etc/grafana/provisioning/dashboards
+#        resources:
+      initContainers:
+      - name: init-grafana-dashboard
+        image : busybox:1.28
+        command: ['/usr/bin/git', 'clone', 'https://github.com/ilkilabs/ilke.git', '/roles/post-scripts/files/dashboards/ilke-dashboard-v1.json'
+        volumeMounts:
+        - mountPath: /tmp/dashboard
+          name: dashboard
       volumes:
       - name: grafana-datasource
         configMap:
          name: grafana-datasource
       - name: grafana-dashboard
-        configMap:
-         name: grafana-dashboard
+        emptyDir: {}
 
 ---
 apiVersion: v1
@@ -353,24 +359,24 @@ spec:
   ports:
   - port: 3000
     targetPort: 3000
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: grafana-dashboard
-  namespace: monitoring
-data:
-  dashboard.yaml: |
-    apiVersion: 1
-    providers:
-      - name: 'Prometheus'
-        orgId: 1
-        folder: ''
-        type: file
-        disableDeletion: false
-        editable: true
-        allowUiUpdates: true
-        options:
-          path: /etc/grafana/provisioning/dashboards
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: grafana-dashboard
+#  namespace: monitoring
+#data:
+#  dashboard.yaml: |
+#    apiVersion: 1
+#    providers:
+#      - name: 'Prometheus'
+#        orgId: 1
+#        folder: ''
+#        type: file
+#        disableDeletion: false
+#        editable: true
+#        allowUiUpdates: true
+#        options:
+#          path: /etc/grafana/provisioning/dashboards
 #  node.json: |
 #{% raw %}
