@@ -1,4 +1,4 @@
-name: ansible-lint-agorakube
+name: ansible-lint-ilke
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
 jobs:
   ansible_lint:
     runs-on: ubuntu-latest
-    name: A job to lint Ansible Playbooks and roles for Agorakube
+    name: A job to lint Ansible Playbooks and roles for ILKE
     steps:
     - name: Checkout
       uses: actions/checkout@v1

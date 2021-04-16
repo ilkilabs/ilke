@@ -161,7 +161,7 @@ ilke_features:
       user: administrator
       password: P@ssw0rd
 
-ilke_populate_etc_hosts: false
+ilke_populate_etc_hosts: true
 
 # Security
 ilke_encrypt_etcd_keys:

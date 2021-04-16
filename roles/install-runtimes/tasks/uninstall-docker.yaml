@@ -79,7 +79,7 @@
 - name: Unmount /var/run/docker/netns/default volumes
   mount:
     path: /var/run/docker/netns/default
-    state: absent
+    state: unmounted
   tags: ['never', 'uninstall']
 
 - name: Delete /var/run/docker dir
