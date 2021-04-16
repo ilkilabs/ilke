@@ -130,10 +130,3 @@
   fail:
     msg: "ETCD release {{ ilke_base_components.etcd.release }} is not supported ! Supported values are : v3.4.14"
   when: ilke_base_components.etcd.release is not regex ("^v(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+))?$")
-
-- name : check ETCD release
-  fail:
-    msg: "ETCD release {{ ilke_base_components.etcd.release }} is not supported ! Supported values are : v3.4.14"
-  when: ilke_base_components.etcd.release is not regex ("^v(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+)).(?:[+-]?(?:[0-9]+))?$")
-
-  
