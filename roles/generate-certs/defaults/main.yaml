@@ -1,2 +1,3 @@
 ---
 advertise_masters: 10.10.0.3
+master_custom_alt_name: ""
