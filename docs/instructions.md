@@ -45,7 +45,7 @@ Below the OS currently supported on all the machines :
 
 ## Node Sizing
 
-Node sizing indicated here is for production environment. You can custom it according to sweet your needs.
+Node sizing indicated here is for production environment. You can custom it according to suit your needs.
 
 It is a best-practice to install ETCD and MASTERS on separate hosts.
 
@@ -250,14 +250,14 @@ The **etc_hosts** section contains a list of DNS entries that will be injected t
 
 The **all:vars** section contains information about how to connect to K8S nodes.
 
-The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
+The **advertise_masters** parameter configure the Advertising IP of control Plane. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6443. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
 **ansible_user** User used as service account by ILKE to connect to all nodes. **User must be sudoer**.
 
 ## Configuration file
 
-The [../group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
+The [./group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
 
 Sample file will deploy **containerd** as container runtime, **calico** as CNI plugin and enable all ILKE features (storage, dashboard, monitoring, LB, ingress, ....).
 
@@ -467,7 +467,7 @@ This section allows you to configure your K8S features.
 | --- | --- | --- |
 | `ilke_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
 | `ilke_features.storage.release` | OpenEBS release to be installed | **2.5.0** *(default)* |
-| `ilke_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebse** *(default)* |
+| `ilke_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebs** *(default)* |
 | `ilke_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
 | `ilke_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
 | `ilke_features.dashboard.enabled` | Enable Kubernetes dashboard | **False** *(default)* |
@@ -488,6 +488,7 @@ This section allows you to configure some other settings
 | `ilke_populate_etc_hosts` | Add to all hostname/IPs of ILKE Cluster to /etc/hosts file of all hosts. Use it only if you don't have DNS server. | **False** *(default)* |
 | `ilke_encrypt_etcd_keys` | Array of keys/algorith used to crypt/decrypt data in etcd? Generate with : `head -c 32 /dev/urandom | base64` | **changeME !** *(default)* |
 | `restoration_snapshot_file` | ETCD backup path to be restored | **none** *(default)* |
+| `master_custom_alt_name`  | Optional DNS alt name to be added to kube-apiserver certificate | **""** *(default)* |
 
 # Kubernetes deployment
 
