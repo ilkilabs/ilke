@@ -534,7 +534,7 @@ kubectl get pods
 
 You can Benchmark your ILKE Storage Class as follow:
 
-* Create a file named "benchmarckStorage.yaml" with the following content:
+* Create a file named "benchmarkStorage.yaml" with the following content:
 
 Note: You can custom the storageClassName in your PersistentVolumeClaim to Benchmark a specific StorageClass. Default config Benchark the default StorageClass (Jiva volume)
 ```
@@ -553,7 +553,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: benchmarck-openebs
+  name: benchmark-openebs
 spec:
   template:
     spec:
@@ -636,7 +636,7 @@ spec:
   backoffLimit: 4
 ```
 
-* Run ```kubectl apply -f benchmarckStorage.yaml``` and check the logs of the ongoing/completed job
+* Run ```kubectl apply -f benchmarkStorage.yaml``` and check the logs of the ongoing/completed job
 - In case of quick/detailed job types (default is **detailed**), the fio results are parsed and summary provided: 
 
   ```
