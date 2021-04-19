@@ -250,7 +250,7 @@ The **etc_hosts** section contains a list of DNS entries that will be injected t
 
 The **all:vars** section contains information about how to connect to K8S nodes.
 
-The **advertise_masters** parameter configure the Advertising IP of control Plane. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
+The **advertise_masters** parameter configure the Advertising IP of control Plane. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6443. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
 **ansible_user** User used as service account by ILKE to connect to all nodes. **User must be sudoer**.
