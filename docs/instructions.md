@@ -656,8 +656,8 @@ spec:
 Official Upgrade doc is available at https://github.com/openebs/openebs/blob/master/k8s/upgrades/README.md
 
 To upgrade OpenEBS Jiva volumes in your ILKE cluster, you have to follow the 2 next steps:
-  - Change in file "./group_vars/all.yaml" the variable *ilke_features.storage.release* to the desired OpenEBS relase (https://github.com/openebs/openebs/releases) and apply your changes to the cluster - This will only update the OpenEBS control plane
-  - Customize the following Job and run it on your cluster:  (Exemple will upgrade listed PVs from OpenEBS 2.6.0 to 2.8.0) - This will upgrade data plane
+  - Change in file *"./group_vars/all.yaml"* the variable **ilke_features.storage.release** to the desired OpenEBS release (https://github.com/openebs/openebs/releases) and apply your changes to the cluster - This will only update the OpenEBS control plane
+  - **Customize the following Job** and run it on your cluster:  (Exemple will upgrade listed PVs from OpenEBS 2.6.0 to 2.8.0) - This will upgrade data plane
 
 ```
 #This is an example YAML for upgrading jiva volume.
@@ -728,7 +728,7 @@ spec:
 ---
 ```
 
-  - Sometimes, some PVs become "ReadOnyFilesystem" after an OpenEBS Upgrade due to an Iscsi target error. Rebooting your nodes will solve this issue.
+  - Sometimes, some PVs become *"ReadOnyFilesystem"* after an OpenEBS Upgrade due to an Iscsi target error. Rebooting your nodes will solve this issue.
 
 # Uninstall ILKE
 
