@@ -10,6 +10,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
 - [Storage Benchmark](#storage-benchmark)
+- [Upgrade OpenEBS Storage](#upgrade-openEBS-storage)
 - [Uninstall ILKE](#uninstall-ilke)
 
 
@@ -650,6 +651,84 @@ spec:
   Sequential Read/Write: 78.2MiB/s / 68.7MiB/s
   Mixed Random Read/Write IOPS: 938/315
   ```
+# Upgrade OpenEBS Storage
+
+Official Upgrade doc is available at https://github.com/openebs/openebs/blob/master/k8s/upgrades/README.md
+
+To upgrade OpenEBS Jiva volumes in your ILKE cluster, you have to follow the 2 next steps:
+  - Change in file *"./group_vars/all.yaml"* the variable **ilke_features.storage.release** to the desired OpenEBS release (https://github.com/openebs/openebs/releases) and apply your changes to the cluster - This will only update the OpenEBS control plane
+  - **Customize the following Job** and run it on your cluster:  (Exemple will upgrade listed PVs from OpenEBS 2.6.0 to 2.8.0) - This will upgrade data plane
+
+```
+#This is an example YAML for upgrading jiva volume.
+#Some of the values below needs to be changed to
+#match your openebs installation. The fields are
+#indicated with VERIFY
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  #VERIFY that you have provided a unique name for this upgrade job.
+  #The name can be any valid K8s string for name. This example uses
+  #the following convention: jiva-vol-<flattened-from-to-versions>
+  name: jiva-vol-upgrade-27042021
+
+  #VERIFY the value of namespace is same as the namespace where openebs components
+  # are installed. You can verify using the command:
+  # `kubectl get pods -n <openebs-namespace> -l openebs.io/component-name=maya-apiserver`
+  # The above command should return status of the openebs-apiserver.
+  namespace: openebs
+
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      # VERIFY the value of serviceAccountName is pointing to service account
+      # created within openebs namespace. Use the non-default account.
+      # by running `kubectl get sa -n <openebs-namespace>`
+      serviceAccountName: openebs-maya-operator
+      containers:
+      - name:  upgrade
+        args:
+        - "jiva-volume"
+
+        # --from-version is the current version of the volume
+        - "--from-version=2.0.6"
+
+        # --to-version is the version desired upgrade version
+        - "--to-version=2.8.0"
+
+        # If the pools and volumes images have the prefix `quay.io/openebs/`
+        # then please add this flag as the new multi-arch images are not pushed to quay.
+        # It can also be used specify any other private repository or airgap prefix in use.
+        # "--to-version-image-prefix=openebs/"
+
+        # Bulk upgrade is supported
+        # To make use of it, please provide the list of PVs
+        # as mentioned below
+        - "pvc-1bc3b45a-3023-4a8e-a94b-b457cf9529b4"
+        - "pvc-82a2d097-c666-4f29-820d-6b7e41541c11"
+        
+        #Following are optional parameters
+        #Log Level
+        - "--v=4"
+        #DO NOT CHANGE BELOW PARAMETERS
+        env:
+        - name: OPENEBS_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        tty: true
+
+        # the image version should be same as the --to-version mentioned above
+        # in the args of the job
+        image: openebs/m-upgrade:2.8.0
+        imagePullPolicy: Always
+      restartPolicy: OnFailure
+---
+```
+
+  - Sometimes, some PVs become *"ReadOnyFilesystem"* after an OpenEBS Upgrade due to an Iscsi target error. Rebooting your nodes will solve this issue.
 
 # Uninstall ILKE
 
