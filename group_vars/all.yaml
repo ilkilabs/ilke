@@ -67,7 +67,7 @@ ilke_features:
     release: "1.8.0"
     replicas: 2
   reloader:
-    enabled: true
+    enabled: false
     release: "0.0.89"
   storage:
     enabled: false
