@@ -75,7 +75,7 @@ spec:
         release: "reloader"
     spec:
       containers:
-      - image: "stakater/reloader:v0.0.89"
+      - image: "stakater/reloader:v{{ ilke_features.reloader.release }}"
         imagePullPolicy: IfNotPresent
         name: reloader-reloader
 
