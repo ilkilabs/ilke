@@ -43,6 +43,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * MetalLB (L2/ARP mode for external LB)
 * Metrics-Server
 * Kubernetes-Dashboard
+* Kubernetes ConfigMap and Secret Reloader
 
 ![ILKE](./images/ILKE.png)
 
