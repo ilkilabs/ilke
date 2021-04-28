@@ -11,6 +11,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Create Pod](#create-pod)
 - [Storage Benchmark](#storage-benchmark)
 - [Upgrade OpenEBS Storage](#upgrade-openEBS-storage)
+- [How to use Reloader](#how-to-use-reloader)
 - [Uninstall ILKE](#uninstall-ilke)
 
 
@@ -733,6 +734,8 @@ spec:
   - Sometimes, some PVs become *"ReadOnyFilesystem"* after an OpenEBS Upgrade due to an Iscsi target error. Rebooting your nodes will solve this issue.
 
 # How to use Reloader
+
+Reloader is a tool that will help you to reload DaemonSet/Deployments/StatefulSets when a change on their ConfigMap/Secret occurs.
 
 ## Install K8S ConfigMap and Secret Reloader
 
