@@ -53,7 +53,7 @@ It is a best-practice to install ETCD and MASTERS on separate hosts.
 
 | ILKE Type | no HA or all-in-one | no-production | production |
 | --- | --- | --- | --- |
-| MASTER | 1 | 3 | 3+ |
+| MASTER | 1 | 2 | 3+ |
 | ETCD | 1 | 3 | 5 |
 | WORKER | 1 | X | X |
 | STORAGE | 0 - 1 | 3 | 3+ |
@@ -332,6 +332,9 @@ ilke_features:
   coredns:
     release: "1.8.0"
     replicas: 2
+  reloader:
+    enabled: false
+    release: "0.0.89"
   storage:
     enabled: false
     release: "2.6.0"
