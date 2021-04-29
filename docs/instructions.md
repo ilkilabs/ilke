@@ -12,6 +12,7 @@ This is a list of points that will be explained in this instructions file for th
 - [Storage Benchmark](#storage-benchmark)
 - [Upgrade OpenEBS Storage](#upgrade-openEBS-storage)
 - [How to use Reloader](#how-to-use-reloader)
+- [ILKE Log Architecture](#ilke-log-architecture)
 - [Uninstall ILKE](#uninstall-ilke)
 
 
