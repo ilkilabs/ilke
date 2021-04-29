@@ -848,6 +848,15 @@ metadata:
 spec:
   template: metadata:
 ```
+# ILKE Log Architecture
+
+Actually, ILKE configure Kubernetes componants to write logs in "journalctl" an "/var/log/kubernetes/" directory.
+
+In "/var/log/kubernetes/" directory, log file size is limited to 1800 MB.
+
+Pods logs are stored in "/var/log/pods" directory.
+
+ETCD logs are only present in "journalctl". Run the following command to get ETCD logs from an "ETCD" host : `journalctl -xeu etcd`
 
 # Uninstall ILKE
 
