@@ -7,7 +7,7 @@ data:
             notifempty
             sharedscripts
             daily
-            rotate 14
+            rotate {{ ilke_features.logrotate.day_retention }}
             compress
             delaycompress
     }
@@ -17,7 +17,7 @@ data:
             notifempty
             sharedscripts
             daily
-            rotate 14
+            rotate {{ ilke_features.logrotate.day_retention }}
             compress
             delaycompress
     }
@@ -31,7 +31,7 @@ data:
   root: |
     # do daily/weekly/monthly maintenance
     # min   hour    day     month   weekday command
-    *       *       *       *       *       logrotate -vf /etc/logrotate.conf
+    {{ ilke_features.logrotate.crontab }} logrotate -vf /etc/logrotate.conf
 kind: ConfigMap
 metadata:
   namespace: kube-system
@@ -60,7 +60,6 @@ spec:
          operator: Exists
       containers:
       - image: agorakube/crond:alpine-3
-        imagePullPolicy: Always
         name: crond
         volumeMounts:
         - name: varlog
