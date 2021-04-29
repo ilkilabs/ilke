@@ -92,6 +92,10 @@ ilke_features:
     admin:
       user: administrator
       password: P@ssw0rd
+  logrotate:
+    enabled: false
+    crontab: "0 * * * *"
+    day_retention: 14
 
 ilke_populate_etc_hosts: false
 
