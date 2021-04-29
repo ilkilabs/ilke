@@ -9,6 +9,7 @@ data:
             daily
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
+            copytruncate
             delaycompress
     }
   kubernetes: |
@@ -17,6 +18,7 @@ data:
             notifempty
             sharedscripts
             daily
+            copytruncate
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
             delaycompress
