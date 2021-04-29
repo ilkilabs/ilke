@@ -18,7 +18,7 @@ ExecStart=/usr/local/bin/kubernetes/node/bin/kube-proxy \
 {% endif %}
   --hostname-override={{ ansible_fqdn }} \
   --log-file=/var/log/kubernetes/kube-proxy.log \
-  --log-file-max-size=0 \
+  --log-file-max-size=1800 \
   --logtostderr=false \
   --config=/etc/kubernetes/manifests/kube-proxy-config.yaml
 Restart=on-failure
