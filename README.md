@@ -44,6 +44,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Metrics-Server
 * Kubernetes-Dashboard
 * Kubernetes ConfigMap and Secret Reloader
+* Logrotate
 
 ![ILKE](./images/ILKE.png)
 
