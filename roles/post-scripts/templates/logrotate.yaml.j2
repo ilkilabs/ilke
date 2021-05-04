@@ -5,23 +5,21 @@ data:
     /var/log/pods/*/*/*.log {
             missingok
             notifempty
-            sharedscripts
             daily
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
-            copytruncate
             delaycompress
+            copytruncate
     }
   kubernetes: |
     /var/log/kubernetes/*.log {
             missingok
             notifempty
-            sharedscripts
             daily
-            copytruncate
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
             delaycompress
+            copytruncate
     }
 kind: ConfigMap
 metadata:
