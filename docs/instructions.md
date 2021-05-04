@@ -359,6 +359,10 @@ ilke_features:
     admin:
       user: administrator
       password: P@ssw0rd
+  logrotate:
+    enabled: false
+    crontab: "* 2 * * *"
+    day_retention: 14
 
 ilke_populate_etc_hosts: false
 
@@ -487,6 +491,10 @@ This section allows you to configure your K8S features.
 | `ilke_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
 | `ilke_features.reloader.enabled` | Enable Reloader | **False** *(default)* |
 | `ilke_features.reloader.release` | Reloader release to install | **0.0.89** *(default)* |
+| `ilke_features.logrotate.enabled` | Enable Logrotate | **false** *(default)* |
+| `ilke_features.logrotate.crontab` | Crontab used to run logrotate | **"* 2 * * *"** *(default) run every day at 2 AM* |
+| `ilke_features.logrotate.day_retention` | Indicate how many days logs will be keep | **14** *(default)* |
+
 
 ## ILKE other settings
 This section allows you to configure some other settings
