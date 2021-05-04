@@ -8,7 +8,6 @@ data:
             daily
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
-            delaycompress
             copytruncate
     }
   kubernetes: |
@@ -18,7 +17,6 @@ data:
             daily
             rotate {{ ilke_features.logrotate.day_retention }}
             compress
-            delaycompress
             copytruncate
     }
 kind: ConfigMap
