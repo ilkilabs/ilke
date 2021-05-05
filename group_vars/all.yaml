@@ -48,7 +48,7 @@ ilke_network:
   mtu: 0
   cidr:
     pod: 10.33.0.0/16
-    service: 10.32.0.0/24
+    service: 10.32.0.0/16
   service_ip:
     kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
