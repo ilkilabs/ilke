@@ -302,7 +302,7 @@ ilke_base_components:
           nodename: "master1"
           path: /var/etcd-backup
   kubernetes:
-    release: v1.20.2
+    release: v1.21.0
     upgrade: false
   container:
     engine: containerd
@@ -315,7 +315,7 @@ ilke_network:
   mtu: 0
   cidr:
     pod: 10.33.0.0/16
-    service: 10.32.0.0/24
+    service: 10.32.0.0/16
   service_ip:
     kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
@@ -331,14 +331,14 @@ ilke_network:
 
 ilke_features:
   coredns:
-    release: "1.8.0"
+    release: "1.8.2"
     replicas: 2
   reloader:
     enabled: false
     release: "0.0.89"
   storage:
     enabled: false
-    release: "2.6.0"
+    release: "2.8.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
@@ -347,12 +347,12 @@ ilke_features:
   dashboard:
     enabled: false
     generate_admin_token: false
-    release: v2.1.0
+    release: v2.2.0
   metrics_server:
     enabled: false
   ingress:
     controller: nginx
-    release: v0.44.0
+    release: v0.46.0
   monitoring:
     enabled: false
     persistent: false
@@ -436,7 +436,7 @@ This section allows you to configure your Kubernetes deployment.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.20.4** *(default)* |
+| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.21.0** *(default)* |
 | `ilke_base_components.kubernetes.upgrade` | Upgrade current Kubernetes release to `ilke_base_components.kubernetes.release` | **False** *(default)* |
 
 ### Container Engine
@@ -458,7 +458,7 @@ This section allows you to configure your K8S cluster network settings.
 | `ilke_network.cni_plugin` | CNI plugin used to enable K8S hosts Networking | **calico** *(default)*, kube-router |
 | `ilke_network.mtu` | MTU for CNI plugin. Auto-MTU if set to **0**. Only used if `ilke_network.cni_plugin` is set to **calico** | **0** *(default)* |
 | `ilke_network.cidr.pod` | PODs CIDR network | **10.33.0.0/16** *(default)* |
-| `ilke_network.cidr.service` | Service CIDR network | **10.32.0.0/24** *(default)* |
+| `ilke_network.cidr.service` | Service CIDR network | **10.32.0.0/16** *(default)* |
 | `ilke_network.service_ip.kubernetes` | ClusterIP of *default.kubernetes* service. Should be the first IP available in `ilke_network.cidr.service` | **10.32.0.1** *(default)* |
 | `ilke_network.service_ip.coredns` | ClusterIP of *kube-system.kube-dns* service. | **10.32.0.10** *(default)* |
 | `ilke_network.nodeport.range` | Range of allowed ports usable by NodePort services | **30000-32000** *(default)* |
@@ -476,7 +476,7 @@ This section allows you to configure your K8S features.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ilke_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
-| `ilke_features.storage.release` | OpenEBS release to be installed | **2.5.0** *(default)* |
+| `ilke_features.storage.release` | OpenEBS release to be installed | **2.8.0** *(default)* |
 | `ilke_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebs** *(default)* |
 | `ilke_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
 | `ilke_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
