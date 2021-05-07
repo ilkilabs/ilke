@@ -96,6 +96,28 @@ ilke_features:
     enabled: false
     crontab: "* 2 * * *"
     day_retention: 14
+  keycloak_oidc:
+    enabled: true
+    admin:
+      user: administrator
+      password: P@ssw0rd
+    auto_bootstrap:
+        bootstrap_keycloak: true
+        bootstrap_kube_apiserver: true
+        populate_etc_hosts: true
+        host: oidc.local.lan
+    storage:
+        enabled: False
+        capacity: 10Gi
+        type: "storageclass"
+        storageclass:
+          name: "default-jiva"
+        persistentvolume:
+          name: "my-pv-backup-etcd"
+          storageclass: "my-storageclass-name"
+        hostpath:
+          nodename: "master1"
+          path: /var/etcd-backup
 
 ilke_populate_etc_hosts: false
 
