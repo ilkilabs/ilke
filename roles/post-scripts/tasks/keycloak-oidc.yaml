@@ -8,6 +8,8 @@
   changed_when: >
     apply_keycloak_tls.stdout is search("created")
     or apply_keycloak_tls.stdout is search("configured")
+  ignore_errors: yes
+  when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
 
 - name: Create tempdir
   tempfile:
