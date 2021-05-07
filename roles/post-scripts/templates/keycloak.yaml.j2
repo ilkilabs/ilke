@@ -59,8 +59,10 @@ spec:
           value: "keycloak-db"
         - name: DB_PORT
           value: "5432"
-#        - name: KEYCLOAK_IMPORT
-#          value: /var/lol.json
+{% if ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True %}
+        - name: KEYCLOAK_IMPORT
+          value: /var/realm-template.json
+{% endif %}
         ports:
         - name: http
           containerPort: 8080
@@ -70,13 +72,15 @@ spec:
           httpGet:
             path: /auth/realms/master
             port: 8080
-#        volumeMounts:
-#        - name: oidc-default-realm
-#          mountPath: /var/
-#      volumes:
-#        - name: oidc-default-realm
-#          configMap:
-#            name: oidc-default-realm
+{% if ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True %}
+        volumeMounts:
+        - name: oidc-default-realm
+          mountPath: /var/
+      volumes:
+        - name: oidc-default-realm
+          configMap:
+            name: oidc-default-realm
+{% endif %}
 ---
 apiVersion: apps/v1
 kind: Deployment
