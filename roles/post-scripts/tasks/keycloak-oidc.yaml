@@ -3,7 +3,7 @@
   when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
 
 - name: Create TLS secret for Keycloak Ingress
-  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf -n keycloak create secret tls tls-keycloak --cert=/var/ilke/pki/oidc/oidc-end.crt --key=/var/ilke/pki/oidc/oidc-end.key
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf -n keycloak create secret tls keycloak-tls --cert=/var/ilke/pki/oidc/oidc-end.crt --key=/var/ilke/pki/oidc/oidc-end.key
   register: apply_keycloak_tls
   changed_when: >
     apply_keycloak_tls.stdout is search("created")
