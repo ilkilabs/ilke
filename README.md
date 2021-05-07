@@ -45,7 +45,7 @@ This distribution is also adaptive by offering the opportunity to customize your
 * Kubernetes-Dashboard
 * Kubernetes ConfigMap and Secret Reloader
 * Logrotate
-* OICD/SSO with Keycloak
+* OIDC/SSO with Keycloak
 
 ![ILKE](./images/ILKE.png)
 
