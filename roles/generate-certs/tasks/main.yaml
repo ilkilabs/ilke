@@ -2,7 +2,7 @@
   include_tasks: generate-kubernetes-pki.yaml
 
 - name: Generate Keycloak PKI
-  include_tasks: generate-kubernetes-pki.yaml
+  include_tasks: oidc-keycloak.yaml
   when: 
     - ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
     - ilke_features.keycloak_oidc.enabled | bool == True
