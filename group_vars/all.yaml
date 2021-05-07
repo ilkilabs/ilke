@@ -117,7 +117,7 @@ ilke_features:
           storageclass: "my-storageclass-name"
         hostpath:
           nodename: "master1"
-          path: /var/etcd-backup
+          path: /var/keycloak
 
 ilke_populate_etc_hosts: false
 
