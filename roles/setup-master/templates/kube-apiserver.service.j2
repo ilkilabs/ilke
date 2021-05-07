@@ -57,7 +57,7 @@ ExecStart=/usr/local/bin/kubernetes/server/bin/kube-apiserver \
   --log-file-max-size=1800 \
   --logtostderr=false \
   --audit-log-path=/var/log/kubernetes/kube-apiserver-audit.log \
-{% if ilke_base_components.etcd.backup.storage.enabled | bool == True %}
+{% if ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_kube_apiserver | bool == True %}
   --oidc-issuer-url=https://{{ ilke_features.keycloak_oidc.auto_bootstrap.host }}/auth/realms/local \
   --oidc-client-id=kube \
   --oidc-ca-file=/etc/kubernetes/pki/oidc/oidc-ca.crt \
