@@ -1,7 +1,3 @@
-- name: Generate Keycloak PKI
-  include_tasks: gen-pki-keycloak.yaml
-  when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
-
 - name: Create TLS secret for Keycloak Ingress
   command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf -n keycloak create secret tls keycloak-tls --cert=/var/ilke/pki/oidc/oidc-end.crt --key=/var/ilke/pki/oidc/oidc-end.key
   register: apply_keycloak_tls
