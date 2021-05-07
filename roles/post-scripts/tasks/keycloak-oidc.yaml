@@ -1,0 +1,3 @@
+- name: Generate Keycloak PKI
+  include_tasks: gen-pki-keycloak.yaml
+  when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
