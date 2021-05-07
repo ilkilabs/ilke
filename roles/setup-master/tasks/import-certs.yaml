@@ -55,3 +55,13 @@
 #    mode: '600'
 #  with_fileglob:
 #    - "{{ data_path }}/authentication_keys/*"
+
+- name: Import CA Cert OIDC
+  copy:
+    src: "{{ pki_path }}/oidc/oidc-ca.crt"
+    dest: /etc/kubernetes/pki/oidc/
+  notify:
+    - Restart kube-apiserver service
+  when: 
+    - ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
+    - ilke_features.keycloak_oidc.enabled | bool == True
