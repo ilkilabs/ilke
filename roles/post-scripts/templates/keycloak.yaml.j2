@@ -128,28 +128,6 @@ spec:
   type: ClusterIP
 {% if ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True %}
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: keycloak
-  namespace: keycloak
-spec:
-  tls:
-  - hosts:
-      - {{ ilke_features.keycloak_oidc.auto_bootstrap.host }}
-    secretName: keycloak-tls
-  rules:
-  - host: {{ ilke_features.keycloak_oidc.auto_bootstrap.host }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: keycloak
-            port:
-              number: 8080
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
