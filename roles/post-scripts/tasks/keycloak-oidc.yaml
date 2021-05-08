@@ -1,12 +1,3 @@
-- name: Create TLS secret for Keycloak Ingress
-  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf -n keycloak create secret tls keycloak-tls --cert=/var/ilke/pki/oidc/oidc-end.crt --key=/var/ilke/pki/oidc/oidc-end.key
-  register: apply_keycloak_tls
-  changed_when: >
-    apply_keycloak_tls.stdout is search("created")
-    or apply_keycloak_tls.stdout is search("configured")
-  ignore_errors: yes
-  when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
-
 - name: Create tempdir
   tempfile:
     state: directory
@@ -26,6 +17,28 @@
   changed_when: >
     apply_keycloak.stdout is search("created")
     or apply_keycloak.stdout is search("configured")
+
+- name: Create TLS secret for Keycloak Ingress
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf -n keycloak create secret tls keycloak-tls --cert=/var/ilke/pki/oidc/oidc-end.crt --key=/var/ilke/pki/oidc/oidc-end.key
+  register: apply_keycloak_tls
+  changed_when: >
+    apply_keycloak_tls.stdout is search("created")
+    or apply_keycloak_tls.stdout is search("configured")
+  ignore_errors: yes
+  when: ilke_features.keycloak_oidc.auto_bootstrap.bootstrap_keycloak | bool == True
+
+- name: Render templates Ingress OIDC
+  template:
+    dest: "{{ keycloak_tempdir.path }}/keycloak-ingress.yaml"
+    src: "keycloak-ingress.yaml.j2"
+  changed_when: false
+
+- name: Apply templates Ingress OIDC
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ keycloak_tempdir.path }}/keycloak-ingress.yaml
+  register: apply_keycloak_ingress
+  changed_when: >
+    apply_keycloak_ingress.stdout is search("created")
+    or apply_keycloak_ingress.stdout is search("configured")
 
 - name: Cleanup tempdir
   file:
