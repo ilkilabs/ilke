@@ -6,7 +6,7 @@
 - name: Generate oidc-ca.key private keys
   openssl_privatekey:
     path: "{{ pki_path }}/oidc/oidc-ca.key"
-    force: "{{ rotate_private_keys }}"
+    force: false
 
 - name: Generate an OpenSSL Certificate Signing Request for OIDC CA
   openssl_csr:
@@ -25,12 +25,12 @@
     csr_path: "{{ pki_path }}/oidc/oidc-ca.csr"
     provider: selfsigned
     selfsigned_not_after: "{{ ilke_pki.infos.expirity }}"
-    force: "{{ ilke_pki.management.rotate_certificats }}"
+    force: false
 
 - name: Generate oidc-end.key private keys
   openssl_privatekey:
     path: "{{ pki_path }}/oidc/oidc-end.key"
-    force: "{{ rotate_private_keys }}"
+    force: false
 
 - name: Generate an OpenSSL Certificate Signing Request for OIDC-END CSR
   openssl_csr:
@@ -49,4 +49,4 @@
     ownca_path: "{{ pki_path }}/oidc/oidc-ca.crt"
     ownca_privatekey_path: "{{ pki_path }}/oidc/oidc-ca.key"
     provider: ownca
-    force: "{{ ilke_pki.management.rotate_certificats }}"
+    force: false
