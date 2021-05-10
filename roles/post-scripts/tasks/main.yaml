@@ -21,6 +21,14 @@
   include_tasks: metrics-server.yaml
   when: ilke_features.metrics_server.enabled | bool == True
 
+- name: Install Reloader
+  include_tasks: reloader.yaml
+  when: ilke_features.reloader.enabled | bool == True
+
+- name: Install logrotate
+  include_tasks: logrotate.yaml
+  when: ilke_features.logrotate.enabled | bool == True
+
 - name: Install ingress (traefik)
   include_tasks: traefik.yaml
   when: ilke_features.ingress.controller == 'traefik'

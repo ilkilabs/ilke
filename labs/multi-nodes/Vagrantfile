@@ -106,7 +106,7 @@ ilke_base_components:
           nodename: "master1"
           path: /var/etcd-backup
   kubernetes:
-    release: v1.20.2
+    release: v1.21.0
     upgrade: false
   container:
     engine: containerd
@@ -119,7 +119,7 @@ ilke_network:
   mtu: 0
   cidr:
     pod: 10.33.0.0/16
-    service: 10.32.0.0/24
+    service: 10.32.0.0/16
   service_ip:
     kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
@@ -135,11 +135,14 @@ ilke_network:
 
 ilke_features:
   coredns:
-    release: "1.8.0"
+    release: "1.8.2"
     replicas: 2
+  reloader:
+    enabled: false
+    release: "0.0.89"
   storage:
     enabled: false
-    release: "2.6.0"
+    release: "2.8.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
@@ -148,18 +151,22 @@ ilke_features:
   dashboard:
     enabled: false
     generate_admin_token: false
-    release: v2.1.0
+    release: v2.2.0
   metrics_server:
     enabled: false
   ingress:
     controller: nginx
-    release: v0.44.0
+    release: v0.46.0
   monitoring:
     enabled: false
     persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
+  logrotate:
+    enabled: false
+    crontab: "* 2 * * *"
+    day_retention: 14
 
 ilke_populate_etc_hosts: true
 
