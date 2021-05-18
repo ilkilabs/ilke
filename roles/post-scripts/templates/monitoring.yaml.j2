@@ -313,13 +313,15 @@ spec:
           mountPath: /etc/grafana/provisioning/datasources
         - name: grafana-dashboard
           mountPath: /etc/grafana/provisioning/dashboards
+        - name: init-grafana-dashboard
+          mountPath: /etc/grafana/provisioning/dashboards/default/
       initContainers:
       - name: init-grafana-dashboard
         image: busybox
-        command: ['sh', '-c', "wget https://raw.githubusercontent.com/bryanILKI/ilke/monitoring_k8s_integration2/roles/post-scripts/files/dashboards/ilke-dashboard-v1.json"]
+        command: ['sh', '-c', "wget https://raw.githubusercontent.com/bryanILKI/ilke/monitoring_k8s_integration2/roles/post-scripts/files/dashboards/ilke-dashboard-v1.json -O /etc/grafana/provisioning/dashboards/default/ilke-dashboard.json"]
         volumeMounts:
         - name: init-grafana-dashboard
-          mountPath: /tmp/dashboard
+          mountPath: /etc/grafana/provisioning/dashboards/default/
       volumes:
       - name: grafana-datasource
         configMap:
@@ -379,6 +381,6 @@ data:
         editable: true
         allowUiUpdates: true
         options:
-          path: /etc/grafana/provisioning/dashboards
+          path: /etc/grafana/provisioning/dashboards/default/
 #  node.json: |
 #{% raw %}
