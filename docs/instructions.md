@@ -10,6 +10,9 @@ This is a list of points that will be explained in this instructions file for th
 - [Manage ETCD Cluster](./manage_etcd.md)
 - [Create Pod](#create-pod)
 - [Storage Benchmark](#storage-benchmark)
+- [Upgrade OpenEBS Storage](#upgrade-openEBS-storage)
+- [How to use Reloader](#how-to-use-reloader)
+- [ILKE Log Architecture](#ilke-log-architecture)
 - [Uninstall ILKE](#uninstall-ilke)
 
 
@@ -45,13 +48,13 @@ Below the OS currently supported on all the machines :
 
 ## Node Sizing
 
-Node sizing indicated here is for production environment. You can custom it according to sweet your needs.
+Node sizing indicated here is for production environment. You can custom it according to suit your needs.
 
 It is a best-practice to install ETCD and MASTERS on separate hosts.
 
 | ILKE Type | no HA or all-in-one | no-production | production |
 | --- | --- | --- | --- |
-| MASTER | 1 | 3 | 3+ |
+| MASTER | 1 | 2 | 3+ |
 | ETCD | 1 | 3 | 5 |
 | WORKER | 1 | X | X |
 | STORAGE | 0 - 1 | 3 | 3+ |
@@ -250,14 +253,14 @@ The **etc_hosts** section contains a list of DNS entries that will be injected t
 
 The **all:vars** section contains information about how to connect to K8S nodes.
 
-The **advertise_masters** parameter configure the Advertising IP of control Plan. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6643. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
+The **advertise_masters** parameter configure the Advertising IP of control Plane. Actually it is the IP of a frontal LB that expose Master nodes on port TCP/6443. It can also be a Master's IP if you don't have LB. In this case, HA is not enabled even if you got multiple Masters...
 
 The **SSH Connection settings** section contain information about the SSH connexion. You have to modify the variable **ansible_ssh_private_key_file** with the path where your public key is stored.
 **ansible_user** User used as service account by ILKE to connect to all nodes. **User must be sudoer**.
 
 ## Configuration file
 
-The [../group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
+The [./group_vars/all.yaml](../group_vars/all.yaml) file contains all configuration variables that you can customize to make your K8S Cluster fit your needs.
 
 Sample file will deploy **containerd** as container runtime, **calico** as CNI plugin and enable all ILKE features (storage, dashboard, monitoring, LB, ingress, ....).
 
@@ -299,7 +302,7 @@ ilke_base_components:
           nodename: "master1"
           path: /var/etcd-backup
   kubernetes:
-    release: v1.20.2
+    release: v1.21.0
     upgrade: false
   container:
     engine: containerd
@@ -312,7 +315,7 @@ ilke_network:
   mtu: 0
   cidr:
     pod: 10.33.0.0/16
-    service: 10.32.0.0/24
+    service: 10.32.0.0/16
   service_ip:
     kubernetes: 10.32.0.1 
     coredns: 10.32.0.10
@@ -328,11 +331,14 @@ ilke_network:
 
 ilke_features:
   coredns:
-    release: "1.8.0"
+    release: "1.8.2"
     replicas: 2
+  reloader:
+    enabled: false
+    release: "0.0.89"
   storage:
     enabled: false
-    release: "2.6.0"
+    release: "2.8.0"
     jiva:
       data_path: /var/openebs
       fs_type: ext4
@@ -341,18 +347,22 @@ ilke_features:
   dashboard:
     enabled: false
     generate_admin_token: false
-    release: v2.1.0
+    release: v2.2.0
   metrics_server:
     enabled: false
   ingress:
     controller: nginx
-    release: v0.44.0
+    release: v0.46.0
   monitoring:
     enabled: false
     persistent: false
     admin:
       user: administrator
       password: P@ssw0rd
+  logrotate:
+    enabled: false
+    crontab: "* 2 * * *"
+    day_retention: 14
 
 ilke_populate_etc_hosts: false
 
@@ -426,7 +436,7 @@ This section allows you to configure your Kubernetes deployment.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.20.4** *(default)* |
+| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.21.0** *(default)* |
 | `ilke_base_components.kubernetes.upgrade` | Upgrade current Kubernetes release to `ilke_base_components.kubernetes.release` | **False** *(default)* |
 
 ### Container Engine
@@ -448,7 +458,7 @@ This section allows you to configure your K8S cluster network settings.
 | `ilke_network.cni_plugin` | CNI plugin used to enable K8S hosts Networking | **calico** *(default)*, kube-router |
 | `ilke_network.mtu` | MTU for CNI plugin. Auto-MTU if set to **0**. Only used if `ilke_network.cni_plugin` is set to **calico** | **0** *(default)* |
 | `ilke_network.cidr.pod` | PODs CIDR network | **10.33.0.0/16** *(default)* |
-| `ilke_network.cidr.service` | Service CIDR network | **10.32.0.0/24** *(default)* |
+| `ilke_network.cidr.service` | Service CIDR network | **10.32.0.0/16** *(default)* |
 | `ilke_network.service_ip.kubernetes` | ClusterIP of *default.kubernetes* service. Should be the first IP available in `ilke_network.cidr.service` | **10.32.0.1** *(default)* |
 | `ilke_network.service_ip.coredns` | ClusterIP of *kube-system.kube-dns* service. | **10.32.0.10** *(default)* |
 | `ilke_network.nodeport.range` | Range of allowed ports usable by NodePort services | **30000-32000** *(default)* |
@@ -466,8 +476,8 @@ This section allows you to configure your K8S features.
 | Parameter | Description | Values |
 | --- | --- | --- |
 | `ilke_features.storage.enabled` | Enable Storage feature - OpenEBS based | **False** *(default)* |
-| `ilke_features.storage.release` | OpenEBS release to be installed | **2.5.0** *(default)* |
-| `ilke_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebse** *(default)* |
+| `ilke_features.storage.release` | OpenEBS release to be installed | **2.8.0** *(default)* |
+| `ilke_features.storage.jiva.data_path` | Path where OpenEBS store Jiva volumes on Storage Nodes | **/var/openebs** *(default)* |
 | `ilke_features.storage.jiva.fs_type` | Jiva FS types | **ext4** *(default)* |
 | `ilke_features.storage.hostpath.data_path` | Path where OpenEBS store HostPath volumes on Pod node | **False** *(default)* |
 | `ilke_features.dashboard.enabled` | Enable Kubernetes dashboard | **False** *(default)* |
@@ -479,6 +489,12 @@ This section allows you to configure your K8S features.
 | `ilke_features.monitoring.persistent` | Persist Monitoring Data | **False** *(default)* |
 | `ilke_features.monitoring.admin.user` | Default Grafana admin user | **administrator** *(default)* |
 | `ilke_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
+| `ilke_features.reloader.enabled` | Enable Reloader | **False** *(default)* |
+| `ilke_features.reloader.release` | Reloader release to install | **0.0.89** *(default)* |
+| `ilke_features.logrotate.enabled` | Enable Logrotate | **false** *(default)* |
+| `ilke_features.logrotate.crontab` | Crontab used to run logrotate | **"* 2 * * *"** *(default) run every day at 2 AM* |
+| `ilke_features.logrotate.day_retention` | Indicate how many days logs will be keep | **14** *(default)* |
+
 
 ## ILKE other settings
 This section allows you to configure some other settings
@@ -488,6 +504,7 @@ This section allows you to configure some other settings
 | `ilke_populate_etc_hosts` | Add to all hostname/IPs of ILKE Cluster to /etc/hosts file of all hosts. Use it only if you don't have DNS server. | **False** *(default)* |
 | `ilke_encrypt_etcd_keys` | Array of keys/algorith used to crypt/decrypt data in etcd? Generate with : `head -c 32 /dev/urandom | base64` | **changeME !** *(default)* |
 | `restoration_snapshot_file` | ETCD backup path to be restored | **none** *(default)* |
+| `master_custom_alt_name`  | Optional DNS alt name to be added to kube-apiserver certificate | **""** *(default)* |
 
 # Kubernetes deployment
 
@@ -533,7 +550,7 @@ kubectl get pods
 
 You can Benchmark your ILKE Storage Class as follow:
 
-* Create a file named "benchmarckStorage.yaml" with the following content:
+* Create a file named "benchmarkStorage.yaml" with the following content:
 
 Note: You can custom the storageClassName in your PersistentVolumeClaim to Benchmark a specific StorageClass. Default config Benchark the default StorageClass (Jiva volume)
 ```
@@ -552,7 +569,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: benchmarck-openebs
+  name: benchmark-openebs
 spec:
   template:
     spec:
@@ -635,7 +652,7 @@ spec:
   backoffLimit: 4
 ```
 
-* Run ```kubectl apply -f benchmarckStorage.yaml``` and check the logs of the ongoing/completed job
+* Run ```kubectl apply -f benchmarkStorage.yaml``` and check the logs of the ongoing/completed job
 - In case of quick/detailed job types (default is **detailed**), the fio results are parsed and summary provided: 
 
   ```
@@ -649,6 +666,206 @@ spec:
   Sequential Read/Write: 78.2MiB/s / 68.7MiB/s
   Mixed Random Read/Write IOPS: 938/315
   ```
+# Upgrade OpenEBS Storage
+
+Official Upgrade doc is available at https://github.com/openebs/openebs/blob/master/k8s/upgrades/README.md
+
+To upgrade OpenEBS Jiva volumes in your ILKE cluster, you have to follow the 2 next steps:
+  - Change in file *"./group_vars/all.yaml"* the variable **ilke_features.storage.release** to the desired OpenEBS release (https://github.com/openebs/openebs/releases) and apply your changes to the cluster - This will only update the OpenEBS control plane
+  - **Customize the following Job** and run it on your cluster:  (Exemple will upgrade listed PVs from OpenEBS 2.6.0 to 2.8.0) - This will upgrade data plane
+
+```
+#This is an example YAML for upgrading jiva volume.
+#Some of the values below needs to be changed to
+#match your openebs installation. The fields are
+#indicated with VERIFY
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  #VERIFY that you have provided a unique name for this upgrade job.
+  #The name can be any valid K8s string for name. This example uses
+  #the following convention: jiva-vol-<flattened-from-to-versions>
+  name: jiva-vol-upgrade-27042021
+
+  #VERIFY the value of namespace is same as the namespace where openebs components
+  # are installed. You can verify using the command:
+  # `kubectl get pods -n <openebs-namespace> -l openebs.io/component-name=maya-apiserver`
+  # The above command should return status of the openebs-apiserver.
+  namespace: openebs
+
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      # VERIFY the value of serviceAccountName is pointing to service account
+      # created within openebs namespace. Use the non-default account.
+      # by running `kubectl get sa -n <openebs-namespace>`
+      serviceAccountName: openebs-maya-operator
+      containers:
+      - name:  upgrade
+        args:
+        - "jiva-volume"
+
+        # --from-version is the current version of the volume
+        - "--from-version=2.0.6"
+
+        # --to-version is the version desired upgrade version
+        - "--to-version=2.8.0"
+
+        # If the pools and volumes images have the prefix `quay.io/openebs/`
+        # then please add this flag as the new multi-arch images are not pushed to quay.
+        # It can also be used specify any other private repository or airgap prefix in use.
+        # "--to-version-image-prefix=openebs/"
+
+        # Bulk upgrade is supported
+        # To make use of it, please provide the list of PVs
+        # as mentioned below
+        - "pvc-1bc3b45a-3023-4a8e-a94b-b457cf9529b4"
+        - "pvc-82a2d097-c666-4f29-820d-6b7e41541c11"
+        
+        #Following are optional parameters
+        #Log Level
+        - "--v=4"
+        #DO NOT CHANGE BELOW PARAMETERS
+        env:
+        - name: OPENEBS_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        tty: true
+
+        # the image version should be same as the --to-version mentioned above
+        # in the args of the job
+        image: openebs/m-upgrade:2.8.0
+        imagePullPolicy: Always
+      restartPolicy: OnFailure
+---
+```
+
+  - Sometimes, some PVs become *"ReadOnyFilesystem"* after an OpenEBS Upgrade due to an Iscsi target error. Rebooting your nodes will solve this issue.
+
+# How to use Reloader
+
+Reloader is a tool that will help you to reload DaemonSet/Deployments/StatefulSets when a change on their ConfigMap/Secret occurs.
+
+## Install K8S ConfigMap and Secret Reloader
+
+Make sure that `ilke_features.reloader.enabled` and `ilke_features.reloader.release` variables are set correctly in your "./group_vars/all.yaml" config file.
+
+## Use K8S Reloader
+
+For a `Deployment` called `foo` have a `ConfigMap` called `foo-configmap` or `Secret` called `foo-secret` or both. Then add your annotation (by default `reloader.stakater.com/auto`) to main metadata of your `Deployment`
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  template: metadata:
+```
+
+This will discover deploymentconfigs/deployments/daemonsets/statefulset/rollouts automatically where `foo-configmap` or `foo-secret` is being used either via environment variable or from volume mount. And it will perform rolling upgrade on related pods when `foo-configmap` or `foo-secret`are updated.
+
+You can restrict this discovery to only `ConfigMap` or `Secret` objects that
+are tagged with a special annotation. To take advantage of that, annotate
+your deploymentconfigs/deployments/daemonsets/statefulset/rollouts like this:
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/search: "true"
+spec:
+  template:
+```
+
+and Reloader will trigger the rolling upgrade upon modification of any
+`ConfigMap` or `Secret` annotated like this:
+
+```yaml
+kind: ConfigMap
+metadata:
+  annotations:
+    reloader.stakater.com/match: "true"
+data:
+  key: value
+```
+
+provided the secret/configmap is being used in an environment variable, or a
+volume mount.
+
+Please note that `reloader.stakater.com/search` and
+`reloader.stakater.com/auto` do not work together. If you have the
+`reloader.stakater.com/auto: "true"` annotation on your deployment, then it
+will always restart upon a change in configmaps or secrets it uses, regardless
+of whether they have the `reloader.stakater.com/match: "true"` annotation or
+not.
+
+We can also specify a specific configmap or secret which would trigger rolling upgrade only upon change in our specified configmap or secret, this way, it will not trigger rolling upgrade upon changes in all configmaps or secrets used in a deploymentconfig, deployment, daemonset, statefulset or rollout.
+To do this either set the auto annotation to `"false"` (`reloader.stakater.com/auto: "false"`) or remove it altogether, and use annotations mentioned [here](#Configmap) or [here](#Secret)
+
+### Configmap
+
+To perform rolling upgrade when change happens only on specific configmaps use below annotation.
+
+For a `Deployment` called `foo` have a `ConfigMap` called `foo-configmap`. Then add this annotation to main metadata of your `Deployment`
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: "foo-configmap"
+spec:
+  template: metadata:
+```
+
+Use comma separated list to define multiple configmaps.
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    configmap.reloader.stakater.com/reload: "foo-configmap,bar-configmap,baz-configmap"
+spec:
+  template: metadata:
+```
+
+### Secret
+
+To perform rolling upgrade when change happens only on specific secrets use below annotation.
+
+For a `Deployment` called `foo` have a `Secret` called `foo-secret`. Then add this annotation to main metadata of your `Deployment`
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    secret.reloader.stakater.com/reload: "foo-secret"
+spec:
+  template: metadata:
+```
+
+Use comma separated list to define multiple secrets.
+
+```yaml
+kind: Deployment
+metadata:
+  annotations:
+    secret.reloader.stakater.com/reload: "foo-secret,bar-secret,baz-secret"
+spec:
+  template: metadata:
+```
+# ILKE Log Architecture
+
+Actually, ILKE configure Kubernetes componants to write logs in "journalctl" an "/var/log/kubernetes/" directory.
+
+In "/var/log/kubernetes/" directory, log file size is limited to 1800 MB.
+
+Pods logs are stored in "/var/log/pods" directory.
+
+ETCD logs are only present in "journalctl". Run the following command to get ETCD logs from an "ETCD" host : `journalctl -xeu etcd`
 
 # Uninstall ILKE
 

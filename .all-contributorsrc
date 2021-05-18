@@ -59,6 +59,82 @@
         "business",
         "projectManagement"
       ]
+    },
+    {
+      "login": "acjohnson",
+      "name": "Aaron Johnson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1386238?v=4",
+      "profile": "http://aaronjohnson.io",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "hameedullah",
+      "name": "Hameedullah Khan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59614?v=4",
+      "profile": "http://hameedullah.com",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Flybro",
+      "name": "Big Bill",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10743439?v=4",
+      "profile": "https://github.com/Flybro",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "husseinfahmy",
+      "name": "Hussein Fahmy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12388623?v=4",
+      "profile": "https://github.com/husseinfahmy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rushilgala",
+      "name": "rushilgala",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18123323?v=4",
+      "profile": "https://github.com/rushilgala",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tyb3n",
+      "name": "tyb3n",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16243465?v=4",
+      "profile": "https://github.com/tyb3n",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "digikin",
+      "name": "Eric Stumbo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25944964?v=4",
+      "profile": "https://ericstumbo.tech",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "msouvatdy",
+      "name": "msouvatdy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49560112?v=4",
+      "profile": "https://github.com/msouvatdy",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

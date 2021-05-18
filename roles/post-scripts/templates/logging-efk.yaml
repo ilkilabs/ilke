@@ -8,19 +8,57 @@ data:
   kubernetes.conf: |
     <source>
       @type tail
-      path /var/log/kubernetes/kube-apiserver.ERROR,/var/log/kubernetes/kube-controller-manager.ERROR,/var/log/kubernetes/kube-controller-manager.FATAL,/var/log/kubernetes/kube-scheduler.ERROR,/var/log/kubernetes/kube-scheduler.FATAL,/var/log/kubernetes/kube-apiserver.log
-      pos_file /var/log/td-agent/httpd-access.log.pos
-      tag kubernetes.logs
+      @id in_tail_kube_apiserver_audit
+      multiline_flush_interval 5s
+      path /var/log/kubernetes/kube-apiserver.log
+      pos_file /var/log/kube-apiserver-audit.log.pos
+      tag kube-apiserver-audit
       <parse>
-        @type none
+        @type json
       </parse>
     </source>
-    <match kubernetes.logs>
+
+    <match kube**>
       @type elasticsearch
       host elasticsearch
       port 9200
       logstash_format true
     </match>
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluentd
+  namespace: kube-login
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: fluentd
+  namespace: kube-login
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: fluentd
+roleRef:
+  kind: ClusterRole
+  name: fluentd
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: fluentd
+  namespace: kube-login
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -171,6 +209,8 @@ spec:
       labels:
         name: fluentd-elasticsearch
     spec:
+      serviceAccount: fluentd
+      serviceAccountName: fluentd
       tolerations:
       - effect: NoSchedule
         operator: Exists
