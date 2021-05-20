@@ -88,7 +88,20 @@ ilke_features:
     release: v0.46.0
   monitoring:
     enabled: false
-    persistent: false
+    persistent:
+      enable: false
+      storage:
+        capacity: 4Gi
+        enable: false
+        type: "storageclass"
+        storageclass:
+          name: "default-jiva"
+        persistentvolume:
+          name: "my-pv-monitoring"
+          storageclass: "my storageclass-name"
+        hostpath:
+          nodename: "master1"
+          path: /var/monitoring-persistent
     admin:
       user: administrator
       password: P@ssw0rd
