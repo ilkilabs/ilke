@@ -96,6 +96,7 @@ ilke_features:
     enabled: false
     crontab: "* 2 * * *"
     day_retention: 14
+# keycloak_oidc is an Alpha feature and do not support persistence wet. Use it only for test purpose.
   keycloak_oidc:
     enabled: true
     admin:
