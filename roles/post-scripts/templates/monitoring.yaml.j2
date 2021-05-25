@@ -332,6 +332,24 @@ spec:
             value: "{{ ilke_features.monitoring.admin.password }}"
           - name: GF_USERS_ALLOW_SIGN_UP
             value: "false"
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: 3000
+          failureThreshold: 1
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /-/healthy
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
         volumeMounts:
         - name: grafana-datasource
           mountPath: /etc/grafana/provisioning/datasources
@@ -396,11 +414,11 @@ metadata:
 spec:
   storageClassName: persistent-dashboard-hostpath
   capacity:
-    storage: {{ ilke_features.monitoring.persistent.storage.capacity  }}
+    storage: {{ ilke_features.monitoring.persistent.storage.capacity }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "{{ ilke_features.monitoring.persistent.storage.hostpath.path  }}"
+    path: "{{ ilke_features.monitoring.persistent.storage.hostpath.path }}"
 {% endif %}
 ---
 apiVersion: v1

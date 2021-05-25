@@ -92,7 +92,6 @@ ilke_features:
       enable: false
       storage:
         capacity: 4Gi
-        enable: false
         type: "storageclass"
         storageclass:
           name: "default-jiva"
