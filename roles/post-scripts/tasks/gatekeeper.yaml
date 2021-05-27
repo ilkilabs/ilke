@@ -2,3 +2,13 @@
 - name: Install Gatekeeper
   #command: kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml
   command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml
+
+- name: Verify if gatekeeper pods has successfully started
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf get deploy -n gatekeeper-system
+  #command: kubectl get deploy -n gatekeeper-system
+  changed_when: false
+  register: dashboard_deployment
+  until: dashboard_deployment.stdout.find(ilke_features.gatekeeper.replicas | string + "/" + ilke_features.gatekeeper.replicas | string) != -1
+  retries: 300
+  delay: 10
+  run_once: true

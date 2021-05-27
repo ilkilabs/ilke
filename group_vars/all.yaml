@@ -99,6 +99,7 @@ ilke_features:
   gatekeeper:
     enabled: true
     release: "3.4"
+    replicas: 3
 
 ilke_populate_etc_hosts: false
 
