@@ -1,6 +1,6 @@
 # Open Policy Agent
 
-![OPA](ilke/images/logo-opa.png)
+![opa](ilke/images/logo-opa.png)
 
 The Open Policy Agent (OPA) is an open source, general-purpose policy engine that enables unified, context-aware policy enforcement across the entire stack.
 OPA is hosted by the Cloud Native Computing Foundation (CNCF) as a graduated project.
