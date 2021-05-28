@@ -332,24 +332,24 @@ spec:
             value: "{{ ilke_features.monitoring.admin.password }}"
           - name: GF_USERS_ALLOW_SIGN_UP
             value: "false"
-        readinessProbe:
-          httpGet:
-            path: /-/ready
-            port: 3000
-          initialDelaySeconds: 3
-          periodSeconds: 5
-        livenessProbe:
-          httpGet:
-            path: /-/healthy
-            port: 3000
-          failureThreshold: 1
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /-/healthy
-            port: 3000
-          failureThreshold: 30
-          periodSeconds: 10
+        #readinessProbe:
+          #httpGet:
+            #path: /-/ready
+            #port: 3000
+          #initialDelaySeconds: 3
+          #periodSeconds: 5
+        #livenessProbe:
+          #httpGet:
+            #path: /-/healthy
+            #port: 3000
+          #failureThreshold: 1
+          #periodSeconds: 10
+        #startupProbe:
+          #httpGet:
+            #path: /-/healthy
+            #port: 3000
+          #failureThreshold: 30
+          #periodSeconds: 10
         volumeMounts:
         - name: grafana-datasource
           mountPath: /etc/grafana/provisioning/datasources
@@ -362,6 +362,13 @@ spec:
       - name: init-grafana-dashboard
         image: busybox
         command: ['sh', '-c', "wget https://raw.githubusercontent.com/bryanILKI/ilke/monitoring_k8s_integration2/roles/post-scripts/files/dashboards/ilke-dashboard-v1.json -O /etc/grafana/provisioning/dashboards/default/ilke-dashboard.json"]
+        volumeMounts:
+        - name: init-grafana-dashboard
+          mountPath: /etc/grafana/provisioning/dashboards/default/
+      - name: grafana-dashboard-permissions
+        image: busybox
+        command: ['sh', '-c', "chmod -R 777 /etc/grafana/provisioning/dashboards/default"]
+        #command: ["/bin/chmod", "777", "/etc/grafana/provisioning/dashboards/default"]
         volumeMounts:
         - name: init-grafana-dashboard
           mountPath: /etc/grafana/provisioning/dashboards/default/
