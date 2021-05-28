@@ -486,7 +486,14 @@ This section allows you to configure your K8S features.
 | `ilke_features.ingress.controller` | Ingress Controller to install : nginx, ha-proxy, traefik | **nginx** *(default)* |
 | `ilke_features.ingress.release` | Ingress controller release to install. Only used if `ilke_features.ingress.controller` set to "nginx" | **False** *(default)* |
 | `ilke_features.monitoring.enabled` | Enable Monitoring | **False** *(default)* |
-| `ilke_features.monitoring.persistent` | Persist Monitoring Data | **False** *(default)* |
+| `ilke_features.monitoring.persistent.enable` | Persist Monitoring Data | **False** *(default)* |
+| `ilke_features.monitoring.persistent.storage.capacity` | Storage size used to store Prometheus data and Dashboard localization | **4Gi** *(default)* |
+| `ilke_features.monitoring.persistent.storage.type` | Type of Storage to use when `ilke_features.monitoring.persistent.enable` is set to True | **storageclass** *(default)*, persistentVolume, hostpath |
+| `ilke_features.monitoring.persistent.storage.storageclass.name` | StorageClass name used to store Prometheus data and Dashboard localization. Used only if `ilke_features.monitoring.persistent.storage.type` is set to storageclass | **default-jiva** *(default)* |
+| `ilke_features.monitoring.persistent.storage.persistentVolume.name` | PersistentVolume name used to store Prometheus data and Dashboard localization. Used only if `ilke_features.monitoring.persistent.storage.type` is set to persistentVolume | **my-pv-monitoring** *(default)* |
+| `ilke_features.monitoring.persistent.storage.persistentVolume.storageclass` | StorageClass name used to create persistentvolume set in `ilke_features.monitoring.persistent.storage.persistentVolume.name`. Used only if `ilke_features.monitoring.persistent.storage.type` is set to persistentvolume | **my storageclass-name** *(default)* |
+| `ilke_features.monitoring.persistent.storage.hostpath.nodename` | K8S node (master/worker/storage) where monitoring data are stored locally. Used only `ilke_features.monitoring.persistent.storage.type` is set to hostpath | **master1** *(default)* |
+| `ilke_features.monitoring.persistent.storage.hostpath.path` | Path on `ilke_features.monitoring.persistent.storage.hostpath.nodename` where Prometheus data and Dashboard localization are stored | **/var/monitoring-persistent** *(default)* |
 | `ilke_features.monitoring.admin.user` | Default Grafana admin user | **administrator** *(default)* |
 | `ilke_features.monitoring.admin.password` | Default grafana admin password | **P@ssw0rd** *(default)* |
 | `ilke_features.reloader.enabled` | Enable Reloader | **False** *(default)* |
