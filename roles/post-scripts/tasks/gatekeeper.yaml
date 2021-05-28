@@ -1,0 +1,3 @@
+---
+- name: Install Gatekeeper
+  command: kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml

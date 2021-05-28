@@ -96,6 +96,9 @@ ilke_features:
     enabled: false
     crontab: "* 2 * * *"
     day_retention: 14
+  gatekeeper:
+    enabled: true
+    release: "3.4"
 
 ilke_populate_etc_hosts: false
 
