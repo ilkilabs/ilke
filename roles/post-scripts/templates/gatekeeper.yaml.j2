@@ -675,7 +675,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: openpolicyagent/gatekeeper:"{{ ilke_features.gatekeeper.release }}"
+        image: openpolicyagent/gatekeeper:{{ ilke_features.gatekeeper.release }}
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -724,7 +724,7 @@ metadata:
   name: gatekeeper-controller-manager
   namespace: gatekeeper-system
 spec:
-  replicas: "{{ ilke_features.gatekeeper.replicas.controller_manager }}"
+  replicas:{{ ilke_features.gatekeeper.replicas.controller_manager }}
   selector:
     matchLabels:
       control-plane: controller-manager
@@ -770,7 +770,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: openpolicyagent/gatekeeper:"{{ ilke_features.gatekeeper.release }}"
+        image: openpolicyagent/gatekeeper:{{ ilke_features.gatekeeper.release }}
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
