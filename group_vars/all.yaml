@@ -98,8 +98,10 @@ ilke_features:
     day_retention: 14
   gatekeeper:
     enabled: true
-    release: "3.4"
-    replicas: 3
+    release: v3.4.0
+    replicas:
+      #audit: 1
+      controller_manager: 3
 
 ilke_populate_etc_hosts: false
 

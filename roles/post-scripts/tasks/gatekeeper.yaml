@@ -1,14 +1,38 @@
 ---
-- name: Install Gatekeeper
-  #command: kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml
-  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml
+#- name: Install Gatekeeper
+#  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-{{ ilke_features.gatekeeper.release }}/deploy/gatekeeper.yaml
+
+- name: Create tempdir
+  tempfile:
+    state: directory
+    suffix: gatekeeper
+  register: gatekeeper_tempdir
+  changed_when: false
+
+- name: Render templates
+  template:
+    dest: "{{ gatekeeper_tempdir.path }}/gatekeeper.yaml"
+    src: "gatekeeper.yaml.j2"
+  changed_when: false
+
+- name: Apply templates
+  command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf apply -f {{ gatekeeper_tempdir.path }}/gatekeeper.yaml
+  register: apply_gatekeeper
+  changed_when: >
+    apply_gatekeeper.stdout is search("created")
+    or apply_gatekeeper.stdout is search("configured")
+
+- name: Cleanup tempdir
+  file:
+    state: absent
+    path: "{{ gatekeeper_tempdir.path }}"
+  changed_when: false
 
 - name: Verify if gatekeeper pods has successfully started
   command: kubectl --kubeconfig {{ pki_path }}/kubeconfigs/admin/admin.conf get deploy -n gatekeeper-system
-  #command: kubectl get deploy -n gatekeeper-system
   changed_when: false
   register: dashboard_deployment
-  until: dashboard_deployment.stdout.find(ilke_features.gatekeeper.replicas | string + "/" + ilke_features.gatekeeper.replicas | string) != -1
+  until: dashboard_deployment.stdout.find(ilke_features.gatekeeper.replicas.controller_manager | string + "/" + ilke_features.gatekeeper.replicas.controller_manager | string) != -1
   retries: 300
   delay: 10
   run_once: true
