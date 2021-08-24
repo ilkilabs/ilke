@@ -302,7 +302,7 @@ ilke_base_components:
           nodename: "master1"
           path: /var/etcd-backup
   kubernetes:
-    release: v1.21.0
+    release: v1.21.4
     upgrade: false
   container:
     engine: containerd
@@ -436,7 +436,7 @@ This section allows you to configure your Kubernetes deployment.
 
 | Parameter | Description | Values |
 | --- | --- | --- |
-| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.21.0** *(default)* |
+| `ilke_base_components.kubernetes.release` | Kubernetes release that will be installed on *Master/Worker/Storage* hosts |  **v1.21.4** *(default)* |
 | `ilke_base_components.kubernetes.upgrade` | Upgrade current Kubernetes release to `ilke_base_components.kubernetes.release` | **False** *(default)* |
 
 ### Container Engine
