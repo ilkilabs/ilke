@@ -27,7 +27,7 @@ This is a list of points that will be explained in this Readme file for the IKE 
 
 ILKE is an easy-to-use, stable Kubernetes distribution (Kubernetes v1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21).
 
-By its symplicity, ILKE provide a good way to deploy and manage K8S Clusters.
+By its simplicity, ILKE provide a good way to deploy and manage K8S Clusters.
 
 ILKE is based on Ansible scripts that install and configure Kubernetes components (control plane and data plane) quickly on bare-metal / VMs / Cloud Instances, as systemd services.
 
@@ -85,7 +85,7 @@ In SPDX terms, everything here is licensed under APACHE 2.0;
 if it's not executable, including the text when extracted from code, it's
 "(APACHE 2.0)".
 
-Lilke almost all software today, this software depends on many
+Like almost all software today, this software depends on many
 other components with their own licenses.
 Not all components we depend on are APACHE 2.0-licensed, but all
 *required* components are FLOSS. We prevent licensing issues
