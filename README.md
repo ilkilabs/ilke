@@ -1,5 +1,5 @@
 # THIS PROJECT HAS BEEN ARCHIVED AND IS NOT UNDER DEVLOPPMENT
-# Please use [Agorakube] instead(https://github.com/ilkilab/agorakube)
+# Please use [Agorakube](https://github.com/ilkilab/agorakube) instead
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
